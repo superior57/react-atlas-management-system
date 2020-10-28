@@ -36,6 +36,14 @@ const navigationConfig = [
 						type: 'item',
 						icon: 'whatshot',
 						url: '/crew/search'
+					},
+					{
+						id: 'crew-edit',
+						title: 'Edit / View',
+						translate: 'EDIT / VIEW',
+						type: 'item',
+						icon: 'whatshot',
+						url: '/crew/edit/1/personal-details'
 					}
 				]
 			},
