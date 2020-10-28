@@ -78,6 +78,17 @@ function BodyContent(props) {
 		only_for_manager: ""
 	});
 
+	const [searchText, setSearchText] = useState('');
+	function handleSearchText(event) {
+		setSearchText(event.target.value);
+	}
+
+	const [testname, setTestname] = useState("");
+
+	const handleChangeText = (e) => {
+		setTestname(e.target.value);
+	};
+
 	const classes = useStyles(props);
 	return <>
 	 	<HeaderContent />
