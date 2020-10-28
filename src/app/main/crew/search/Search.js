@@ -20,11 +20,11 @@ function NewPage(props) {
 					<h4>Search Crew</h4>
 				</div>
 			}
-			contentToolbar={
-				<div className="px-24">
-					<HeaderContent />
-				</div>
-			}
+			// contentToolbar={
+			// 	<div className="w-full px-24">
+			// 		<HeaderContent />
+			// 	</div>
+			// }
 			content={
 				<div className="p-24">
 					<BodyContent />
