@@ -3,11 +3,13 @@ import { Redirect } from 'react-router-dom';
 import FuseUtils from '@fuse/utils';
 
 import { 
-	NewConfig
+	NewConfig,
+	SearchConfig
 } from 'app/main/PageRoutesConfig';
 
 const routeConfigs = [
-	NewConfig
+	NewConfig,
+	SearchConfig
 ];
 
 const routes = [

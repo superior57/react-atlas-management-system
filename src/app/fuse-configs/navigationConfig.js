@@ -24,10 +24,18 @@ const navigationConfig = [
 					{
 						id: 'crew-new',
 						title: 'New',
-						translate: 'New',
+						translate: 'NEW',
 						type: 'item',
 						icon: 'whatshot',
 						url: '/crew/new'
+					},
+					{
+						id: 'crew-search',
+						title: 'Search',
+						translate: 'SEARCH',
+						type: 'item',
+						icon: 'whatshot',
+						url: '/crew/search'
 					}
 				]
 			},
