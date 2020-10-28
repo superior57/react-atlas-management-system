@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React, {
-	useState
+
 } from 'react';
 
 import { 
@@ -12,6 +12,9 @@ import {
 	MenuItem
 } from '@material-ui/core';
 import clsx from "clsx";
+import moment from 'moment';
+import {EditableAvatar} from "app/components/Avatar";
+
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
@@ -22,61 +25,75 @@ const useStyles = makeStyles(theme => ({
 	formControl: {
 		minWidth: 120,
 	},
+	spacingBottom: {
+		marginBottom: "2rem"
+	},
+	dateField: {
+		marginLeft: theme.spacing(1),
+		marginRight: theme.spacing(1),
+		width: 200,
+	},
+	photoUpload: {
+		
+	}
 }));
 
-function BodyContent(props) {
-	const [state, setState] = useState({
-		sex: "",
-		country: "",
-		nearest_port: "",
-		rank: "",
-		nation: "",
-		religion: "",
-		marital_status: "",
-		manning_agent: "",
-		only_for_manager: ""
-	});
+function isEmpty(value) {
+	return value ? value : "";
+}
 
+function BodyContent(props) {
+	const {state, setState} = props;
 	const classes = useStyles(props);
+
+	const handleChange = (e) => {
+		setState({
+			...state,
+			[e.target.name]: e.target.value
+		});
+	}
+
 	return <>
 		<Grid container spacing={2}>
 			<Grid item xs={12} md={6}>
 				<div className="flex mb-20">
 					<TextField
-						required
+						required						
 						label="Last Name"
-						defaultValue=""
-						variant="outlined"		
+						variant="outlined"	
 						className={classes.textField}
-					/>
+						value={isEmpty(state.l_name)}						
+						onChange={handleChange}		
+						name="l_name"				
+					/>	
 					<TextField
 						label="Middle Name"
-						defaultValue=""
 						variant="outlined"		
-						className={classes.textField}		
-					/>
+						className={classes.textField}
+						value={isEmpty(state.m_name)}						
+						onChange={handleChange}
+						name="m_name"
+					/>				
 				</div>
 				<div className="flex mb-20">
 					<TextField
 						required
 						label="First Name"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}
+						value={isEmpty(state.f_name)}						
+						onChange={handleChange}
+						name="f_name"
 					/>
 					<div className="w-full">
 						<FormControl variant="outlined" className={classes.formControl}>
 							<InputLabel id="sex-label">Sex</InputLabel>
 							<Select
-							labelId="sex-label"
-							value={state.sex}
-							onChange={(e) => {
-								setState({
-									...state,
-									sex: e.target.value
-								});
-							}}
-							label="Sex"
+								labelId="sex-label"
+								value={isEmpty(state.sex)}
+								onChange={handleChange}
+								label="Sex"
+								name="sex"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -90,119 +107,158 @@ function BodyContent(props) {
 				<div className="flex mb-20">
 					<TextField						
 						label="Father Name"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}
+						value={isEmpty(state.father_name)}						
+						onChange={handleChange}
+						name="father_name"
 					/>
 					<TextField
 						label="Mother Name"
-						defaultValue=""
 						variant="outlined"		
-						className={classes.textField}		
+						className={classes.textField}	
+						value={isEmpty(state.mother_name)}						
+						onChange={handleChange}
+						name="mother_name"	
 					/>
 				</div>
 				<div className="flex mb-20">
 					<TextField						
 						label="Wife's Name"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}
+						value={isEmpty(state.wife_name)}						
+						onChange={handleChange}
+						name="wife_name"
 					/>
 					<TextField
 						label="No of Childs"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}		
+						type="number"
+						value={isEmpty(state.no_child)}						
+						onChange={handleChange}
+						name="no_child"
 					/>
 				</div>
 				<div className="flex mb-20">
 					<TextField						
 						label="Birth Date"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}
+						type="date"
+						InputLabelProps={{
+							shrink: true,
+						}}
+						value={isEmpty(state.birthday)}
+						onChange={handleChange}
+						name="birthday"
 					/>
 					<TextField
 						label="Birth Place"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}		
+						value={isEmpty(state.birth_place)}						
+						onChange={handleChange}
+						name="birth_place"
 					/>
 				</div>
 				<div className="flex mb-20">
 					<TextField						
 						label="Telephone 1"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}
+						value={isEmpty(state.tel_1)}						
+						onChange={handleChange}
+						name="tel_1"
 					/>
 					<TextField
 						label="Telephone 2"
-						defaultValue=""
 						variant="outlined"		
-						className={classes.textField}		
+						className={classes.textField}
+						value={isEmpty(state.tel_2)}						
+						onChange={handleChange}
+						name="tel_2"		
 					/>
 				</div>
 				<div className="flex mb-20">
 					<TextField						
 						label="Fax"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}
+						value={isEmpty(state.fax)}						
+						onChange={handleChange}
+						name="fax"
 					/>
 					<TextField
 						label="Skype"
-						defaultValue=""
 						variant="outlined"		
-						className={classes.textField}		
+						className={classes.textField}
+						value={isEmpty(state.skype)}						
+						onChange={handleChange}
+						name="skype"	
 					/>
 				</div>
 				<div className="flex mb-20">
 					<TextField						
 						label="Mobile 1"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}
+						value={isEmpty(state.mobile_1)}						
+						onChange={handleChange}
+						name="mobile_1"
 					/>
 					<TextField
 						label="Mobile 2"
-						defaultValue=""
 						variant="outlined"		
-						className={classes.textField}		
+						className={classes.textField}	
+						value={isEmpty(state.mobile_2)}						
+						onChange={handleChange}
+						name="mobile_2"	
 					/>
 				</div>
 				<div className="flex mb-20">
 					<TextField						
 						label="Email 1"
-						defaultValue=""
 						variant="outlined"		
 						className={classes.textField}
+						type="email"
+						value={isEmpty(state.email_1)}						
+						onChange={handleChange}
+						name="email_1"
 					/>
 					<TextField
 						label="Email 2"
-						defaultValue=""
 						variant="outlined"	
-						className={classes.textField}		
+						className={classes.textField}	
+						type="email"	
+						value={isEmpty(state.email_2)}						
+						onChange={handleChange}
+						name="email_2"
 					/>
 				</div>
-				<div className="flex mb-20">
+				<div className="flex mb-20 md:pr-40">
 					<TextField
 						label="Home Address"
 						multiline
 						rows={3}
-						defaultValue=""
 						variant="outlined"
 						className={classes.textField}
+						value={isEmpty(state.home_address)}						
+						onChange={handleChange}
+						name="home_address"
 					/>
 				</div>
-				<div className="flex mb-20">
+				<div className="flex mb-20 md:pr-40">
 					<TextField
 						label="Temporary Address"
 						multiline
 						rows={3}
-						defaultValue=""
 						variant="outlined"
 						className={classes.textField}
+						value={isEmpty(state.temp_address)}						
+						onChange={handleChange}
+						name="temp_address"
 					/>
 				</div>
 				<div className="flex mb-20">
@@ -210,14 +266,10 @@ function BodyContent(props) {
 						<InputLabel id="country-label">Country</InputLabel>
 						<Select
 							labelId="country-label"
-							value={state.country}
-							onChange={(e) => {
-								setState({
-									...state,
-									country: e.target.value
-								});
-							}}
+							value={isEmpty(state.country)}
+							onChange={handleChange}
 							label="Country"
+							name="country"
 						>
 						<MenuItem value="">
 							<em>None</em>
@@ -234,14 +286,10 @@ function BodyContent(props) {
 						<InputLabel id="nearest-port-label">Nearest Port</InputLabel>
 						<Select
 							labelId="nearest-port-label"
-							value={state.nearest_port}
-							onChange={(e) => {
-								setState({
-									...state,
-									nearest_port: e.target.value
-								});
-							}}
+							value={isEmpty(state.nearest_port)}
+							onChange={handleChange}
 							label="Nearest Port"
+							name="nearest_port"
 						>
 						<MenuItem value="">
 							<em>None</em>
@@ -253,27 +301,26 @@ function BodyContent(props) {
 					</FormControl>
 					<TextField
 						label="Nearest Airport"
-						defaultValue=""
 						variant="outlined"	
-						className={classes.textField}		
+						className={classes.textField}
+						value={isEmpty(state.nearest_airport)}						
+						onChange={handleChange}
+						name="nearest_airport"	
 					/>
 				</div>
+			
 			</Grid>
 			<Grid item xs={12} md={6}>
-				<div className="flex">
-					<div className="w-full flex-wrap">
+				<Grid container>
+					<Grid item xs={6} md={7} className="flex flex-wrap md:pr-40">
 						<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")}>
 							<InputLabel id="rank-label">Rank</InputLabel>
 							<Select
 								labelId="rank-label"
-								value={state.rank}
-								onChange={(e) => {
-									setState({
-										...state,
-										rank: e.target.value
-									});
-								}}
+								value={isEmpty(state.rank)}
+								onChange={handleChange}
 								label="Rank"
+								name="rank"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -287,14 +334,10 @@ function BodyContent(props) {
 							<InputLabel id="nation-label">Nation</InputLabel>
 							<Select
 								labelId="nation-label"
-								value={state.nation}
-								onChange={(e) => {
-									setState({
-										...state,
-										nation: e.target.value
-									});
-								}}
+								value={isEmpty(state.nation)}
+								onChange={handleChange}
 								label="Nation"
+								name="nation"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -308,14 +351,10 @@ function BodyContent(props) {
 							<InputLabel id="religion-label">Religion</InputLabel>
 							<Select
 								labelId="religion-label"
-								value={state.religion}
-								onChange={(e) => {
-									setState({
-										...state,
-										religion: e.target.value
-									});
-								}}
+								value={isEmpty(state.religion)}
+								onChange={handleChange}
 								label="Religion"
+								name="religion"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -329,14 +368,10 @@ function BodyContent(props) {
 							<InputLabel id="nearest-port-label">Marital Status</InputLabel>
 							<Select
 								labelId="nearest-port-label"
-								value={state.marital_status}
-								onChange={(e) => {
-									setState({
-										...state,
-										marital_status: e.target.value
-									});
-								}}
+								value={isEmpty(state.marital_status)}
+								onChange={handleChange}
 								label="Marital Status"
+								name="marital_status"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -345,14 +380,203 @@ function BodyContent(props) {
 							<MenuItem value={2}>Not yet</MenuItem>
 							</Select>
 						</FormControl>
-					</div>
-					<div className="w-full flex px-20 pb-20 mx-20">
-						<div className="bg-white h-100 w-50">
-
+					</Grid>
+					<Grid item xs={6} md={5} className="md:pr-40 pb-20">
+							Photo
+						<div className="flex bg-white border border-gray-400 relative" style={{
+							width: "20rem",
+							height: "22rem"
+						}}>
+							<EditableAvatar />
 						</div>
-					</div>
-				</div>
+					</Grid>
+					<Grid item xs={7} className="flex">
+						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")}>
+							<InputLabel id="manning-agent-label">Manning Agent</InputLabel>
+							<Select
+								labelId="manning-agent-label"
+								value={isEmpty(state.manning_agent)}
+								onChange={handleChange}
+								label="Manning Agent"
+								name="manning_agent"
+							>
+							<MenuItem value="">
+								<em>None</em>
+							</MenuItem>
+							<MenuItem value={1}>Agent 1</MenuItem>
+							<MenuItem value={2}>Agent 2</MenuItem>
+							</Select>
+						</FormControl>	
+					</Grid>	
+					<Grid item xs={7} className="flex">
+						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")}>
+							<InputLabel id="only-for-manager-label">Only for Manager</InputLabel>
+							<Select
+								labelId="only-for-manager-label"
+								value={isEmpty(state.only_for_manager)}
+								onChange={handleChange}
+								label="Only for Manager"
+								name="only_for_manager"
+							>
+							<MenuItem value="">
+								<em>None</em>
+							</MenuItem>
+							<MenuItem value={1}>Manager 1</MenuItem>
+							<MenuItem value={2}>Manager 2</MenuItem>
+							</Select>
+						</FormControl>	
+					</Grid>
+					<TextField
+						label="Notes"
+						multiline
+						rows={3}
+						variant="outlined"
+						className={clsx(classes.textField, classes.spacingBottom)}
+						value={isEmpty(state.notes)}						
+						onChange={handleChange}
+						name="notes"
+					/>	
+					<TextField
+						label="Bank Account"
+						multiline
+						rows={3}
+						variant="outlined"
+						className={clsx(classes.textField, classes.spacingBottom)}
+						value={isEmpty(state.bank_acc)}						
+						onChange={handleChange}
+						name="bank_acc"
+					/>
+					<Grid container spacing={1} className={clsx(classes.spacingBottom)}>
+						<Grid item xs={4}>
+							<TextField
+								label="Availability Period"
+								// defaultValue={moment().format("yyyy-MM-DD")}
+								variant="outlined"	
+								className={classes.textField}
+								type="date"
+								value={isEmpty(state.avail_date_from)}						
+								onChange={handleChange}
+								name="avail_date_from"
+								InputLabelProps={{
+									shrink: true
+								}}
+							/>
+						</Grid>
+						<Grid item xs={4}>
+							<TextField
+								label=""
+								// defaultValue={moment().format("yyyy-MM-DD")}
+								variant="outlined"	
+								className={classes.textField}
+								type="date"
+								value={isEmpty(state.avail_date_to)}						
+								onChange={handleChange}
+								name="avail_date_to"
+								InputLabelProps={{
+									shrink: true
+								}}
+							/>
+						</Grid>
+					</Grid>		
+					<Grid container spacing={1} className={clsx(classes.spacingBottom)}>
+						<Grid item xs={4}>						
+							<TextField
+								label="Last Application Date"
+								// defaultValue={moment().format("yyyy-MM-DD")}
+								variant="outlined"	
+								className={classes.textField}
+								type="date"
+								value={isEmpty(state.last_app_date)}						
+								onChange={handleChange}
+								name="last_app_date"
+								InputLabelProps={{
+									shrink: true
+								}}
+							/>
+						</Grid>
+						<Grid item xs={4}>						
+							<TextField
+								label="Last Contacted Date"
+								// defaultValue={moment().format("yyyy-MM-DD")}
+								variant="outlined"	
+								className={classes.textField}
+								type="date"
+								value={isEmpty(state.last_contacted_date)}						
+								onChange={handleChange}
+								name="last_contacted_date"
+								InputLabelProps={{
+									shrink: true
+								}}
+							/>
+						</Grid>
+					</Grid>	
+					<Grid container spacing={1} className={clsx(classes.spacingBottom)}>
+						<Grid item xs={4}>
+							<TextField
+								label="Height"
+								variant="outlined"	
+								className={classes.textField}
+								value={isEmpty(state.height)}						
+								onChange={handleChange}
+								name="height"
+							/>
+						</Grid>
+						<Grid item xs={4}>
+							<TextField
+								label="Weight"
+								variant="outlined"	
+								className={classes.textField}
+								value={isEmpty(state.weigth)}						
+								onChange={handleChange}
+								name="weigth"
+							/>
+						</Grid>
+						<Grid item xs={4}>
+							<TextField
+								label="Shoes Size"
+								variant="outlined"	
+								className={classes.textField}
+								value={isEmpty(state.shoes_size)}						
+								onChange={handleChange}
+								name="shoes_size"
+							/>
+						</Grid>
+					</Grid>
+					<Grid container spacing={1} className={clsx(classes.spacingBottom)}>
+						<Grid item xs={4}>
+							<TextField
+								label="Eye Color"
+								variant="outlined"	
+								className={classes.textField}
+								value={isEmpty(state.eye_color)}						
+								onChange={handleChange}
+								name="eye_color"
+							/>
+						</Grid>
+						<Grid item xs={4}>
+							<TextField
+								label="Hair Color"
+								variant="outlined"	
+								className={classes.textField}
+								value={isEmpty(state.hair_color)}						
+								onChange={handleChange}
+								name="hair_color"
+							/>
+						</Grid>
+						<Grid item xs={4}>
+							<TextField
+								label="Working Clothes Size"
+								variant="outlined"	
+								className={classes.textField}
+								value={isEmpty(state.working_clothes)}						
+								onChange={handleChange}
+								name="working_clothes"
+							/>
+						</Grid>
+					</Grid>
+				</Grid>
 			</Grid>
+		
 		</Grid>
 	</>;
 }
