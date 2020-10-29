@@ -31,11 +31,11 @@ function CertificatesPage(props) {
 					<h5>Certificates</h5>
 				</div>
 			}
-			contentToolbar={
-				<div className="px-24">
-					<HeaderContent handleSave={handleSave} />
-				</div>
-			}
+			// contentToolbar={
+			// 	<div className="px-24">
+			// 		<HeaderContent handleSave={handleSave} />
+			// 	</div>
+			// }
 			content={
 				<div className="p-24">
 					<BodyContent state={state} setState={setState}/>

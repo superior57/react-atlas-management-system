@@ -1,14 +1,14 @@
 import SearchPage from './crew/search';
 import PersonalDetails from './crew/edit/personal-details';
-import OtherDetailsPage from './crew/edit/other-detials';
+import OtherDetailsPage from './crew/edit/other-details';
 import PreviousServicesPage from './crew/edit/previous-services';
-import CertificatesPage from './crew/edit/certificates';
 import NewPage from './crew/new';
 import CompanyPreviousServicesPage from './crew/edit/company-previous-services';
 import AppraisalsPage from './crew/edit/appraisals';
 import NOKPage from './crew/edit/nok';
 import AllotteesPage from './crew/edit/allottees';
 import TrainingPage from './crew/edit/training';
+import CertificatesPage from './crew/edit/certificates';
 
 const PagesRouteConfig = {
 	routes: [
@@ -56,6 +56,10 @@ const PagesRouteConfig = {
 			path: '/crew/edit/:crewId/trainings',
 			component: TrainingPage
 		},
+		{
+			path: '/crew/edit/:crewId/certificates',
+			component: CertificatesPage
+		}
 	]
 };
 
