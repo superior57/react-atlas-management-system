@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
 }));
 
-function OtherDetailsPage(props) {
+function CertificatesPage(props) {
 	console.log(props);
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
@@ -28,14 +28,14 @@ function OtherDetailsPage(props) {
 			header={
 				<div className="p-24">
 					<h4>Edit / View Crew</h4>
-					<h5>Other Details</h5>
+					<h5>Certificates</h5>
 				</div>
 			}
-			contentToolbar={
-				<div className="px-24">
-					<HeaderContent handleSave={handleSave} />
-				</div>
-			}
+			// contentToolbar={
+			// 	<div className="px-24">
+			// 		<HeaderContent handleSave={handleSave} />
+			// 	</div>
+			// }
 			content={
 				<div className="p-24">
 					<BodyContent state={state} setState={setState}/>
@@ -46,4 +46,4 @@ function OtherDetailsPage(props) {
 	);
 }
 
-export default OtherDetailsPage;
+export default CertificatesPage;

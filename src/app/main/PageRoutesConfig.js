@@ -1,7 +1,7 @@
 import New from './crew/new';
 import Search from './crew/search/Search';
 import PersonalDetails from './crew/edit/personal-details';
-import OtherDetails from './crew/edit/other-detials';
+import CertificatesPage from './crew/edit/certificates';
 
 const PagesRouteConfig = {
 	routes: [
@@ -18,8 +18,8 @@ const PagesRouteConfig = {
 			component: PersonalDetails
 		},
 		{
-			path: '/crew/edit/:crewId/other-details',
-			component: OtherDetails
+			path: '/crew/edit/:crewId/certificates',
+			component: CertificatesPage
 		}
 	]
 };
