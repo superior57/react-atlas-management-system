@@ -25,15 +25,15 @@ const LeftSidebarConfig = [
     },
     {
         title: "Next of KIN",
-        handle: 'next-kin'
+        handle: 'next-of-kin'
     },
     {
         title: "Allottees",
         handle: 'allottees'
     },
     {
-        title: "Training",
-        handle: 'training'
+        title: "Trainings",
+        handle: 'trainings'
     }
 ];
 

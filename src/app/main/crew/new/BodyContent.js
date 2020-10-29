@@ -54,7 +54,8 @@ function BodyContent(props) {
 	}
 
 	return <>
-		<Grid container spacing={2}>
+		{
+			state && <Grid container spacing={2}>
 			<Grid item xs={12} md={6}>
 				<div className="flex mb-20">
 					<TextField
@@ -62,9 +63,10 @@ function BodyContent(props) {
 						label="Last Name"
 						variant="outlined"	
 						className={classes.textField}
-						value={isEmpty(state.l_name)}						
+						value={isEmpty(state.l_name)}					
 						onChange={handleChange}		
-						name="l_name"				
+						name="l_name"
+						size="small"			
 					/>	
 					<TextField
 						label="Middle Name"
@@ -73,6 +75,7 @@ function BodyContent(props) {
 						value={isEmpty(state.m_name)}						
 						onChange={handleChange}
 						name="m_name"
+						size="small"
 					/>				
 				</div>
 				<div className="flex mb-20">
@@ -84,9 +87,10 @@ function BodyContent(props) {
 						value={isEmpty(state.f_name)}						
 						onChange={handleChange}
 						name="f_name"
+						size="small"
 					/>
 					<div className="w-full">
-						<FormControl variant="outlined" className={classes.formControl}>
+						<FormControl variant="outlined" className={classes.formControl} size="small">
 							<InputLabel id="sex-label">Sex</InputLabel>
 							<Select
 								labelId="sex-label"
@@ -112,6 +116,7 @@ function BodyContent(props) {
 						value={isEmpty(state.father_name)}						
 						onChange={handleChange}
 						name="father_name"
+						size="small"
 					/>
 					<TextField
 						label="Mother Name"
@@ -120,6 +125,7 @@ function BodyContent(props) {
 						value={isEmpty(state.mother_name)}						
 						onChange={handleChange}
 						name="mother_name"	
+						size="small"
 					/>
 				</div>
 				<div className="flex mb-20">
@@ -130,6 +136,7 @@ function BodyContent(props) {
 						value={isEmpty(state.wife_name)}						
 						onChange={handleChange}
 						name="wife_name"
+						size="small"
 					/>
 					<TextField
 						label="No of Childs"
@@ -139,6 +146,7 @@ function BodyContent(props) {
 						value={isEmpty(state.no_child)}						
 						onChange={handleChange}
 						name="no_child"
+						size="small"
 					/>
 				</div>
 				<div className="flex mb-20">
@@ -153,6 +161,7 @@ function BodyContent(props) {
 						value={isEmpty(state.birthday)}
 						onChange={handleChange}
 						name="birthday"
+						size="small"
 					/>
 					<TextField
 						label="Birth Place"
@@ -161,6 +170,7 @@ function BodyContent(props) {
 						value={isEmpty(state.birth_place)}						
 						onChange={handleChange}
 						name="birth_place"
+						size="small"
 					/>
 				</div>
 				<div className="flex mb-20">
@@ -171,6 +181,7 @@ function BodyContent(props) {
 						value={isEmpty(state.tel_1)}						
 						onChange={handleChange}
 						name="tel_1"
+						size="small"
 					/>
 					<TextField
 						label="Telephone 2"
@@ -178,7 +189,8 @@ function BodyContent(props) {
 						className={classes.textField}
 						value={isEmpty(state.tel_2)}						
 						onChange={handleChange}
-						name="tel_2"		
+						name="tel_2"	
+						size="small"	
 					/>
 				</div>
 				<div className="flex mb-20">
@@ -189,6 +201,7 @@ function BodyContent(props) {
 						value={isEmpty(state.fax)}						
 						onChange={handleChange}
 						name="fax"
+						size="small"
 					/>
 					<TextField
 						label="Skype"
@@ -197,6 +210,7 @@ function BodyContent(props) {
 						value={isEmpty(state.skype)}						
 						onChange={handleChange}
 						name="skype"	
+						size="small"
 					/>
 				</div>
 				<div className="flex mb-20">
@@ -207,6 +221,7 @@ function BodyContent(props) {
 						value={isEmpty(state.mobile_1)}						
 						onChange={handleChange}
 						name="mobile_1"
+						size="small"
 					/>
 					<TextField
 						label="Mobile 2"
@@ -215,6 +230,7 @@ function BodyContent(props) {
 						value={isEmpty(state.mobile_2)}						
 						onChange={handleChange}
 						name="mobile_2"	
+						size="small"
 					/>
 				</div>
 				<div className="flex mb-20">
@@ -226,6 +242,7 @@ function BodyContent(props) {
 						value={isEmpty(state.email_1)}						
 						onChange={handleChange}
 						name="email_1"
+						size="small"
 					/>
 					<TextField
 						label="Email 2"
@@ -235,6 +252,7 @@ function BodyContent(props) {
 						value={isEmpty(state.email_2)}						
 						onChange={handleChange}
 						name="email_2"
+						size="small"
 					/>
 				</div>
 				<div className="flex mb-20 md:pr-40">
@@ -247,6 +265,7 @@ function BodyContent(props) {
 						value={isEmpty(state.home_address)}						
 						onChange={handleChange}
 						name="home_address"
+						size="small"
 					/>
 				</div>
 				<div className="flex mb-20 md:pr-40">
@@ -259,10 +278,11 @@ function BodyContent(props) {
 						value={isEmpty(state.temp_address)}						
 						onChange={handleChange}
 						name="temp_address"
+						size="small"
 					/>
 				</div>
 				<div className="flex mb-20">
-					<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5")}>
+					<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size="small">
 						<InputLabel id="country-label">Country</InputLabel>
 						<Select
 							labelId="country-label"
@@ -282,7 +302,7 @@ function BodyContent(props) {
 					<div className="w-full mr-5"></div>
 				</div>
 				<div className="flex mb-20">
-					<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5")}>
+					<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size="small">
 						<InputLabel id="nearest-port-label">Nearest Port</InputLabel>
 						<Select
 							labelId="nearest-port-label"
@@ -306,6 +326,7 @@ function BodyContent(props) {
 						value={isEmpty(state.nearest_airport)}						
 						onChange={handleChange}
 						name="nearest_airport"	
+						size="small"
 					/>
 				</div>
 			
@@ -313,7 +334,7 @@ function BodyContent(props) {
 			<Grid item xs={12} md={6}>
 				<Grid container>
 					<Grid item xs={6} md={7} className="flex flex-wrap md:pr-40">
-						<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")}>
+						<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
 							<InputLabel id="rank-label">Rank</InputLabel>
 							<Select
 								labelId="rank-label"
@@ -330,7 +351,7 @@ function BodyContent(props) {
 							<MenuItem value={3}>Rank 3</MenuItem>
 							</Select>
 						</FormControl>
-						<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")}>
+						<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
 							<InputLabel id="nation-label">Nation</InputLabel>
 							<Select
 								labelId="nation-label"
@@ -347,7 +368,7 @@ function BodyContent(props) {
 							<MenuItem value={3}>Nation 3</MenuItem>
 							</Select>
 						</FormControl>
-						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")}>
+						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
 							<InputLabel id="religion-label">Religion</InputLabel>
 							<Select
 								labelId="religion-label"
@@ -364,7 +385,7 @@ function BodyContent(props) {
 							<MenuItem value={3}>Religion 3</MenuItem>
 							</Select>
 						</FormControl>
-						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")}>
+						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
 							<InputLabel id="nearest-port-label">Marital Status</InputLabel>
 							<Select
 								labelId="nearest-port-label"
@@ -391,7 +412,7 @@ function BodyContent(props) {
 						</div>
 					</Grid>
 					<Grid item xs={7} className="flex">
-						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")}>
+						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
 							<InputLabel id="manning-agent-label">Manning Agent</InputLabel>
 							<Select
 								labelId="manning-agent-label"
@@ -409,7 +430,7 @@ function BodyContent(props) {
 						</FormControl>	
 					</Grid>	
 					<Grid item xs={7} className="flex">
-						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")}>
+						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
 							<InputLabel id="only-for-manager-label">Only for Manager</InputLabel>
 							<Select
 								labelId="only-for-manager-label"
@@ -435,6 +456,7 @@ function BodyContent(props) {
 						value={isEmpty(state.notes)}						
 						onChange={handleChange}
 						name="notes"
+						size="small"
 					/>	
 					<TextField
 						label="Bank Account"
@@ -445,6 +467,7 @@ function BodyContent(props) {
 						value={isEmpty(state.bank_acc)}						
 						onChange={handleChange}
 						name="bank_acc"
+						size="small"
 					/>
 					<Grid container spacing={1} className={clsx(classes.spacingBottom)}>
 						<Grid item xs={4}>
@@ -460,6 +483,7 @@ function BodyContent(props) {
 								InputLabelProps={{
 									shrink: true
 								}}
+								size="small"
 							/>
 						</Grid>
 						<Grid item xs={4}>
@@ -475,6 +499,7 @@ function BodyContent(props) {
 								InputLabelProps={{
 									shrink: true
 								}}
+								size="small"
 							/>
 						</Grid>
 					</Grid>		
@@ -492,6 +517,7 @@ function BodyContent(props) {
 								InputLabelProps={{
 									shrink: true
 								}}
+								size="small"
 							/>
 						</Grid>
 						<Grid item xs={4}>						
@@ -507,6 +533,7 @@ function BodyContent(props) {
 								InputLabelProps={{
 									shrink: true
 								}}
+								size="small"
 							/>
 						</Grid>
 					</Grid>	
@@ -519,6 +546,7 @@ function BodyContent(props) {
 								value={isEmpty(state.height)}						
 								onChange={handleChange}
 								name="height"
+								size="small"
 							/>
 						</Grid>
 						<Grid item xs={4}>
@@ -529,6 +557,7 @@ function BodyContent(props) {
 								value={isEmpty(state.weigth)}						
 								onChange={handleChange}
 								name="weigth"
+								size="small"
 							/>
 						</Grid>
 						<Grid item xs={4}>
@@ -539,6 +568,7 @@ function BodyContent(props) {
 								value={isEmpty(state.shoes_size)}						
 								onChange={handleChange}
 								name="shoes_size"
+								size="small"
 							/>
 						</Grid>
 					</Grid>
@@ -551,6 +581,7 @@ function BodyContent(props) {
 								value={isEmpty(state.eye_color)}						
 								onChange={handleChange}
 								name="eye_color"
+								size="small"
 							/>
 						</Grid>
 						<Grid item xs={4}>
@@ -561,6 +592,7 @@ function BodyContent(props) {
 								value={isEmpty(state.hair_color)}						
 								onChange={handleChange}
 								name="hair_color"
+								size="small"
 							/>
 						</Grid>
 						<Grid item xs={4}>
@@ -571,6 +603,7 @@ function BodyContent(props) {
 								value={isEmpty(state.working_clothes)}						
 								onChange={handleChange}
 								name="working_clothes"
+								size="small"
 							/>
 						</Grid>
 					</Grid>
@@ -578,7 +611,9 @@ function BodyContent(props) {
 			</Grid>
 		
 		</Grid>
-	</>;
+	
+		}
+		</>;
 }
 
 export default BodyContent;

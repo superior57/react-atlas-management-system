@@ -1,13 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuList from '@material-ui/core/MenuList';
 import SplitButton from './SplitButton'
 
 
@@ -24,7 +15,6 @@ import {
 	MenuItem
 } from '@material-ui/core';
 import clsx from "clsx";
-import { ClassSharp } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
@@ -53,39 +43,36 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-
+function isEmpty(value) {
+	return value ? value : "";
+}
 
 function HeaderContent(props) {
-	const [state, setState] = useState({
-		sex: "",
-		country: "",
-		nearest_port: "",
-		rank: "",
-		nation: "",
-		religion: "",
-		marital_status: "",
-		manning_agent: "",
-		only_for_manager: "",
-		has_appraisal_as:"",
-		prserv_with:"",
-		nation:"",
-		onlyformanaget:"",
-		overalevaluation:"",
-		onb_ofb_with:""
-	});
+	console.log(props);
+	const [state, setState] = useState({});
 
 	const classes = useStyles(props);
+
+	const handleChange = (e) => {
+		setState({
+			...state,
+			[e.target.name]: e.target.value
+		});
+	}
+
 	return <>
 	 	<Grid container spacing={2} className={clsx(classes.spacingBottom)}>
 			<Grid item xs={12} md={9}>
-				<Grid container spacing={1} className="px-10 py-5 bg-white border border-gray-400">
+				<Grid container spacing={2} className="px-10 py-10 bg-white border border-gray-400">
 					<Grid item xs={12} md={6}>
 						<TextField							
 							label="Name"
-							defaultValue=""
 							variant="outlined"		
 							className={clsx(classes.textField, classes.spacingBottom)} 
 							size='small'
+							value={isEmpty(state.name)}
+							name="name"
+							onChange={handleChange}
 						/>
 						<Grid container spacing={1}>
 							<Grid item xs={12} md={6} >
@@ -94,15 +81,10 @@ function HeaderContent(props) {
 										<InputLabel id="rank-label">Rank</InputLabel>
 										<Select
 											labelId="rank-label"
-											value={state.rank}
-											onChange={(e) => {
-												setState({
-													...state,
-													rank: e.target.value
-												});
-											}}
 											label="Rank"
-											
+											value={isEmpty(state.rank)}
+											name="rank"
+											onChange={handleChange}											
 										>
 										<MenuItem value="">
 											<em>None</em>
@@ -120,14 +102,10 @@ function HeaderContent(props) {
 										<InputLabel id="nation">Nation</InputLabel>
 										<Select
 											labelId="nation"
-											value={state.nation}
-											onChange={(e) => {
-												setState({
-													...state,
-													nation: e.target.value
-												});
-											}}
 											label="Nation"
+											value={isEmpty(state.nation)}
+											name="nation"
+											onChange={handleChange}
 										>
 										<MenuItem value="">
 											<em>None</em>
@@ -150,14 +128,10 @@ function HeaderContent(props) {
 										<InputLabel id="onlyformanager">Only for Manager</InputLabel>
 										<Select
 											labelId="onlyformanager"
-											value={state.onlyformanager}
-											onChange={(e) => {
-												setState({
-													...state,
-													onlyformanager: e.target.value
-												});
-											}}
-											label="Only for Manager"
+											label="Only for Manager"											
+											value={isEmpty(state.onlyformanager)}
+											name="onlyformanager"
+											onChange={handleChange}
 											
 										>
 										<MenuItem value="">
@@ -178,15 +152,10 @@ function HeaderContent(props) {
 								<InputLabel id="currentstatus">Current Status</InputLabel>
 								<Select
 									labelId="currentstatus"
-									value={state.currentstatus}
-									onChange={(e) => {
-										setState({
-											...state,
-											currentstatus: e.target.value
-										});
-									}}
+									value={isEmpty(state.currentstatus)}
+									onChange={handleChange}
 									label="Current Status"
-									
+									name="current_status"									
 								>
 								<MenuItem value="">
 									<em>None</em>
@@ -198,26 +167,23 @@ function HeaderContent(props) {
 							</FormControl>
 						</div>
 						<TextField							
-							label="Name"
-							defaultValue=""
+							label="SGULL Id"
 							variant="outlined"		
 							className={clsx(classes.textField, classes.spacingBottom)} 
 							size='small'
+							value={isEmpty(state.sgull_id)}
+							name="sgull_id"
+							onChange={handleChange}
 						/>
 						<div className="w-full">
 							<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5",classes.spacingBottom)} size='small'>
 								<InputLabel id="overalevaluation">Overal Evaluation</InputLabel>
 								<Select
 									labelId="overalevaluation"
-									value={state.overalevaluation}
-									onChange={(e) => {
-										setState({
-											...state,
-											overalevaluation: e.target.value
-										});
-									}}
+									value={isEmpty(state.overalevaluation)}
+									onChange={handleChange}
 									label="Overal Evaluation"
-									
+									name="overalevaluation"									
 								>
 								<MenuItem value="">
 									<em>None</em>
@@ -235,14 +201,10 @@ function HeaderContent(props) {
 								<InputLabel id="onb_ofb_with">ONB/OFB with</InputLabel>
 								<Select
 									labelId="onb_ofb_with"
-									value={state.onb_ofb_with}
-									onChange={(e) => {
-										setState({
-											...state,
-											onb_ofb_with: e.target.value
-										});
-									}}
-									label="ONB/OFB with"
+									label="ONB/OFB with"									
+									value={isEmpty(state.onb_ofb_with)}
+									name="onb_ofb_with"
+									onChange={handleChange}
 									
 								>
 								<MenuItem value="">
@@ -259,14 +221,10 @@ function HeaderContent(props) {
 								<InputLabel id="prserv_with">Prserv with</InputLabel>
 								<Select
 									labelId="prserv_with"
-									value={state.prserv_with}
-									onChange={(e) => {
-										setState({
-											...state,
-											prserv_with: e.target.value
-										});
-									}}
-									label="Prserv with"
+									label="Prserv with"									
+									value={isEmpty(state.prserv_with)}
+									name="prserv_with"
+									onChange={handleChange}
 									
 								>
 								<MenuItem value="">
@@ -283,14 +241,10 @@ function HeaderContent(props) {
 								<InputLabel id="has_appraisal_as">Has Appraisal as</InputLabel>
 								<Select
 									labelId="has_appraisal_as"
-									value={state.has_appraisal_as}
-									onChange={(e) => {
-										setState({
-											...state,
-											has_appraisal_as: e.target.value
-										});
-									}}
-									label="Has Appraisal as"
+									label="Has Appraisal as"									
+									value={isEmpty(state.has_appraisal_as)}
+									name="has_appraisal_as"
+									onChange={handleChange}
 									
 								>
 								<MenuItem value="">
