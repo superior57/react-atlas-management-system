@@ -115,8 +115,8 @@ function BodyContent(props) {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{rows.map((row) => (
-						<TableRow key={row.name}>
+					{rows.map((row, i) => (
+						<TableRow key={i}>
 							<TableCell>{row.id}</TableCell>
 							<TableCell>{row.m}</TableCell>
 							<TableCell>{row.lastname}</TableCell>

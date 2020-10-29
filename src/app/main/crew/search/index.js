@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
 }));
 
-function NewPage(props) {
+function SearchPage(props) {
 	const classes = useStyles(props);
 	return (
 		<FusePageSimple
@@ -34,4 +34,4 @@ function NewPage(props) {
 	);
 }
 
-export default NewPage;
+export default SearchPage;

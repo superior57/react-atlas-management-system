@@ -78,7 +78,7 @@ function HeaderContent(props) {
 	return <>
 	 	<Grid container spacing={2} className={clsx(classes.spacingBottom)}>
 			<Grid item xs={12} md={9}>
-				<Grid container spacing="1" className="px-10 py-5 bg-white border border-gray-400">
+				<Grid container spacing={1} className="px-10 py-5 bg-white border border-gray-400">
 					<Grid item xs={12} md={6}>
 						<TextField							
 							label="Name"
@@ -87,7 +87,7 @@ function HeaderContent(props) {
 							className={clsx(classes.textField, classes.spacingBottom)} 
 							size='small'
 						/>
-						<Grid container spacing='1'>
+						<Grid container spacing={1}>
 							<Grid item xs={12} md={6} >
 								<div>
 									<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size='small'>
@@ -140,7 +140,7 @@ function HeaderContent(props) {
 								</div>
 							</Grid>
 						</Grid>
-						<Grid container spacing='1'>
+						<Grid container spacing={1}>
 							<Grid item xs={12} md={6}>
 								
 							</Grid>

@@ -1,5 +1,5 @@
 import New from './crew/new';
-import Search from './crew/search/Search';
+import Search from './crew/search';
 import PersonalDetails from './crew/edit/personal-details';
 import OtherDetails from './crew/edit/other-detials';
 
