@@ -9,6 +9,11 @@ import {
 import { makeStyles, withStyles, createMuiTheme } from '@material-ui/core/styles';
 import clsx from "clsx";
 
+import { 
+	Refresh,
+	Print,
+} from "@material-ui/icons";
+
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
 	textField: {
@@ -43,12 +48,23 @@ const ButtonDanger = withStyles((theme) => ({
 function HeaderContent(props) {
 	const classes = useStyles(props);
 	return <>
-	 	<ButtonSuccess variant="contained" className="mr-5 text-white" onClick={props.handleSave}>
-			 Save
-		</ButtonSuccess>
-		<ButtonDanger variant="contained" >
-			 Close
-		</ButtonDanger>
+		<div className=" mb-32">
+			<ButtonSuccess variant="contained" className="mr-5 mb-8 text-white" onClick={props.handleSave}>
+				Save
+			</ButtonSuccess>
+			<ButtonDanger variant="contained" className="mr-5 mb-8" >
+				Cancel
+			</ButtonDanger>
+			<Button variant="outlined" className="mr-5 mb-8">
+				<Refresh />
+			</Button>		
+			<Button variant="outlined" className="mr-5 mb-8">
+				<Print />Print
+			</Button>
+			<Button variant="outlined" className="mr-5 mb-8">
+				Close
+			</Button>	
+		</div> 	
 	</>;
 }
 

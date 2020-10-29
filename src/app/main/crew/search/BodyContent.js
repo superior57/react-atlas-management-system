@@ -9,8 +9,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import React, {
-	useState
+	useState	
 } from 'react';
+import { useHistory } from "react-router-dom";
 
 import { 
 	Grid,
@@ -77,17 +78,17 @@ function BodyContent(props) {
 		manning_agent: "",
 		only_for_manager: ""
 	});
+	const history = useHistory();
 
 	const [searchText, setSearchText] = useState('');
 	function handleSearchText(event) {
 		setSearchText(event.target.value);
 	}
 
-	const [testname, setTestname] = useState("");
-
-	const handleChangeText = (e) => {
-		setTestname(e.target.value);
-	};
+	function handleClick(item) {
+		console.log(props);
+		history.push(`/crew/edit/${item.id}/personal-details`);
+	}
 
 	const classes = useStyles(props);
 	return <>
@@ -115,8 +116,12 @@ function BodyContent(props) {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{rows.map((row) => (
-						<TableRow key={row.name}>
+					{rows.map((row, i) => (
+						<TableRow 
+							key={i}
+							onClick={event => handleClick(row)}	
+							hover					
+						>
 							<TableCell>{row.id}</TableCell>
 							<TableCell>{row.m}</TableCell>
 							<TableCell>{row.lastname}</TableCell>

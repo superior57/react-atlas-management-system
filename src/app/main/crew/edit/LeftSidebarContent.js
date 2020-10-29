@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 // import { selectFilters } from './store/filtersSlice';
 // import { selectFolders } from './store/foldersSlice';
 // import { selectLabels } from './store/labelsSlice';
+import LeftSidebarConfig from "./LeftSidebarConfig";
 
 const useStyles = makeStyles(theme => ({
 	listItem: {
@@ -44,44 +45,6 @@ const useStyles = makeStyles(theme => ({
 
 function LeftSidebarContent(props) {
 	const crewId = 1;
-	const labels = [
-		{
-			title: "Personal Details",
-			handle: 'personal-details'
-		},
-		{
-			title: "Other Details",
-			handle: 'other-details'
-		},
-		{
-			title: "Certificates",
-			handle: 'certificates'
-		},
-		{
-			title: "Previous Services",
-			handle: 'previous-services'
-		},
-		{
-			title: "Company Previous Services",
-			handle: 'company-previous-services'
-		},
-		{
-			title: "Appraisals",
-			handle: 'appraisals'
-		},
-		{
-			title: "Next of KIN",
-			handle: 'next-kin'
-		},
-		{
-			title: "Allottees",
-			handle: 'allottees'
-		},
-		{
-			title: "Training",
-			handle: 'training'
-		}
-	];
 
 	const classes = useStyles();
 	return (
@@ -89,8 +52,8 @@ function LeftSidebarContent(props) {
 			<div className="flex-auto border-l-1">
 				<div>
 					<List>
-						{labels &&
-							labels.map((label, index) => (
+						{LeftSidebarConfig &&
+							LeftSidebarConfig.map((label, index) => (
 								<ListItem
 									button
 									component={NavLinkAdapter}
