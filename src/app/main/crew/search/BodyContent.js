@@ -1,49 +1,45 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { DataGrid} from "@material-ui/data-grid";
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-
-import React, {
-	useState	
-} from 'react';
+import React, {  } from 'react';
 import { useHistory } from "react-router-dom";
-
-import { 
-	Grid,
-	TextField,
-	FormControl,
-	InputLabel,
-	Select,
-	MenuItem
-} from '@material-ui/core';
-import clsx from "clsx";
 import HeaderContent from './HeaderContent';
 
-const useStyles = makeStyles(theme => ({
-	layoutRoot: {},
-	textField: {
-		width: "100%",
-		marginRight: ".5rem",
-	},
-	formControl: {
-		minWidth: 120,
-	},
-	table: {
-		minWidth: 650,
-	},
-	marginLeft: {
-		marginLeft: '-4px'
-	}
-}));
   
-function createData( id, m, lastname, firstname, father, mother, age, licrank, nationality, birthdate, avfrom, avto, lastrank, vessel, status ) {
-	return { id, m, lastname, firstname, father, mother, age, licrank, nationality, birthdate, avfrom, avto, lastrank, vessel, status };
+function createData( id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action ) {
+	return { id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action };
 }
+
+const columns = [
+	{ field: 'id', headerName: 'ID' },
+	{ field: 'm', headerName: 'M' },
+	{ field: 'last_name', headerName: 'Last name', width: 130 },
+	{ field: 'fist_name', headerName: 'First name', width: 130 },
+	{ field: 'father', headerName: 'Father', width: 130 },
+	{ field: 'mother', headerName: 'Mother', width: 130 },
+	{ field: 'age', headerName: 'Age', width: 130 },
+	{ field: 'lic_rank', headerName: 'Lic Rank', width: 130 },
+	{ field: 'nationality', headerName: 'Nationality', width: 130 },
+	{ field: 'birthdate', headerName: 'Birthdate', width: 130 },
+	{ field: 'av_from', headerName: 'Av.From', width: 130 },
+	{ field: 'av_to', headerName: 'Av.to', width: 130 },
+	{ field: 'last_rank', headerName: 'Last Rank', width: 130 },
+	{ field: 'vessel', headerName: 'Vessel', width: 130 },
+	{ field: 'status', headerName: 'Status', width: 130 },
+	// {
+	// 	field: "",
+	// 	headerName: "Action",
+	// 	disableClickEventBubbling: true,
+	// 	renderCell: (params) => {
+	// 	  const onClick = (e) => {
+	// 		  console.log(e);
+
+	// 	  };
+	
+	// 	  return <Button variant="contained" onClick={event=>onClick(event)}>Edit</Button>;
+	// 	}
+	// }
+
+  ];
   
 const rows = [
 	createData('100001', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
@@ -67,81 +63,22 @@ const rows = [
 ];
 
 function BodyContent(props) {
-	const [state, setState] = useState({
-		sex: "",
-		country: "",
-		nearest_port: "",
-		rank: "",
-		nation: "",
-		religion: "",
-		marital_status: "",
-		manning_agent: "",
-		only_for_manager: ""
-	});
 	const history = useHistory();
 
-	const [searchText, setSearchText] = useState('');
-	function handleSearchText(event) {
-		setSearchText(event.target.value);
+	function handleClick(row) {
+		// console.log(row);
+		history.push(`/crew/edit/${row.id}/personal-details`);
 	}
-
-	function handleClick(item) {
-		console.log(props);
-		history.push(`/crew/edit/${item.id}/personal-details`);
-	}
-
-	const classes = useStyles(props);
 	return <>
 	 	<HeaderContent />
-
-		<TableContainer component={Paper} className={classes.marginLeft}>
-			<Table className={classes.table} size="small" aria-label="a dense table">
-				<TableHead>
-					<TableRow>
-						<TableCell>ID</TableCell>
-						<TableCell>M</TableCell>
-						<TableCell>Lastname</TableCell>
-						<TableCell>Firstname</TableCell>
-						<TableCell>Father</TableCell>
-						<TableCell>Mother</TableCell>
-						<TableCell>Age</TableCell>
-						<TableCell>Lic Rank</TableCell>
-						<TableCell>Nationality</TableCell>
-						<TableCell>Birthdate</TableCell>
-						<TableCell>Av.From</TableCell>
-						<TableCell>Av.to</TableCell>
-						<TableCell>Last Rank</TableCell>
-						<TableCell>Vessel</TableCell>
-						<TableCell>Status</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{rows.map((row, i) => (
-						<TableRow 
-							key={i}
-							onClick={event => handleClick(row)}	
-							hover					
-						>
-							<TableCell>{row.id}</TableCell>
-							<TableCell>{row.m}</TableCell>
-							<TableCell>{row.lastname}</TableCell>
-							<TableCell>{row.firstname}</TableCell>
-							<TableCell>{row.father}</TableCell>
-							<TableCell>{row.mother}</TableCell>
-							<TableCell>{row.age}</TableCell>
-							<TableCell>{row.licrank}</TableCell>
-							<TableCell>{row.nationality}</TableCell>
-							<TableCell>{row.birthdate}</TableCell>
-							<TableCell>{row.avfrom}</TableCell>
-							<TableCell>{row.avto}</TableCell>
-							<TableCell>{row.lastrank}</TableCell>
-							<TableCell>{row.vessel}</TableCell>
-							<TableCell>{row.status}</TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		</TableContainer>
+		 <div style={{width: '100%', height: 600}}>
+			<DataGrid 
+				rows={rows} 
+				columns={columns} 
+				onRowClick={event => handleClick(event.rowModel)} 
+				rowHeight={25}		
+			/>
+		</div>
 	</>;
 }
 

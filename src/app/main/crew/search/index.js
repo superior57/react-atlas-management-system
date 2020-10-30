@@ -26,7 +26,7 @@ function SearchPage(props) {
 			// 	</div>
 			// }
 			content={
-				<div className="p-24">
+				<div className="p-24 h-full">
 					<BodyContent />
 				</div>
 			}

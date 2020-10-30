@@ -37,7 +37,7 @@ function CertificatesPage(props) {
 			// 	</div>
 			// }
 			content={
-				<div className="p-24">
+				<div className="p-24 h-full">
 					<BodyContent state={state} setState={setState}/>
 				</div>
 			}

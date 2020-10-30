@@ -63,7 +63,7 @@ function HeaderContent(props) {
 	return <>
 	 	<Grid container spacing={2} className={clsx(classes.spacingBottom)}>
 			<Grid item xs={12} md={9}>
-				<Grid container spacing={2} className="px-10 py-10 bg-white border border-gray-400">
+				<Grid container spacing={2} className="px-10 py-10 bg-white border border-gray-400 rounded shadow-2xl">
 					<Grid item xs={12} md={6}>
 						<TextField							
 							label="Name"
@@ -75,7 +75,7 @@ function HeaderContent(props) {
 							onChange={handleChange}
 						/>
 						<Grid container spacing={1}>
-							<Grid item xs={12} md={6} >
+							<Grid item xs={6} md={6} >
 								<div>
 									<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size='small'>
 										<InputLabel id="rank-label">Rank</InputLabel>
@@ -96,7 +96,7 @@ function HeaderContent(props) {
 									</FormControl>
 								</div>
 							</Grid>
-							<Grid item xs={12} md={6}>
+							<Grid item xs={6} md={6}>
 								<div>
 									<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5",classes.spacingBottomSmall)} size='small'>
 										<InputLabel id="nation">Nation</InputLabel>
@@ -119,10 +119,10 @@ function HeaderContent(props) {
 							</Grid>
 						</Grid>
 						<Grid container spacing={1}>
-							<Grid item xs={12} md={6}>
+							<Grid item xs={6} md={6}>
 								
 							</Grid>
-							<Grid item xs={12} md={6}>
+							<Grid item xs={6} md={6}>
 								<div>
 									<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size='small'>
 										<InputLabel id="onlyformanager">Only for Manager</InputLabel>
@@ -146,7 +146,7 @@ function HeaderContent(props) {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid item xs={12} md={3}>
+					<Grid item xs={12} md={3} >
 						<div className="w-full">
 							<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5",classes.spacingBottom)} size='small'>
 								<InputLabel id="currentstatus">Current Status</InputLabel>
