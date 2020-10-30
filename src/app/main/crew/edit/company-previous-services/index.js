@@ -31,11 +31,6 @@ function CompanyPreviousServicesPage(props) {
 					<h5>Company Previous Services</h5>
 				</div>
 			}
-			contentToolbar={
-				<div className="px-24">
-					<HeaderContent handleSave={handleSave} />
-				</div>
-			}
 			content={
 				<div className="p-24">
 					<BodyContent state={state} setState={setState}/>

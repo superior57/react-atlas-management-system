@@ -7,7 +7,11 @@ import BodyContent from './BodyContent';
 import LeftSidebarContent from './../LeftSidebarContent';
 
 const useStyles = makeStyles(theme => ({
-	layoutRoot: {}
+	layoutRoot: {
+		header: {
+			height: '5rem'
+		}
+	}
 }));
 
 function PersonalDetailsPage(props) {
@@ -33,7 +37,7 @@ function PersonalDetailsPage(props) {
 					<BodyContent state={state} setState={setState}/>
 				</div>
 			}
-			leftSidebarContent={<LeftSidebarContent />}			
+			leftSidebarContent={<LeftSidebarContent />}	
 		/>
 	);
 }
