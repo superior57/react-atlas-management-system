@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, {} from 'react';
 // import { Table, TableRow } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
-
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
@@ -42,9 +42,22 @@ const columns = [
 	  valueGetter: (params) =>
 		`${params.getValue('firstName') || ''} ${params.getValue('lastName') || ''}`,
 	},
+	{
+		field: 'edit',
+		headerName: "Edit",
+		width: 130,
+		renderCell: (param)=>(
+			<Button 
+				variant="outlined"
+				onClick={() => { console.log('onClick'); }}
+			>
+				Edit
+			</Button>
+		)
+	}
   ];
   
-  const rows = [
+const rows = [
 	{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
 	{ id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
 	{ id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
@@ -54,15 +67,15 @@ const columns = [
 	{ id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
 	{ id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
 	{ id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
-  
+];
+
 
 function BodyContent(props) {
 	const classes = useStyles(props);
 
 	return <>
 		<div style={{ height: '100%', width: '100%' }}>
-			<DataGrid rows={rows} columns={columns} checkboxSelection />
+			<DataGrid rows={rows} columns={columns} rowHeight={25}/>
 		</div>
 	</>;
 }
