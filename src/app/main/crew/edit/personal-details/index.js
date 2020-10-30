@@ -28,11 +28,6 @@ function PersonalDetailsPage(props) {
 					<h5>Personal Details</h5>
 				</div>
 			}
-			// contentToolbar={
-			// 	<div className="px-24">
-			// 		<HeaderContent handleSave={handleSave} />
-			// 	</div>
-			// }
 			content={
 				<div className="p-24">
 					<BodyContent state={state} setState={setState}/>

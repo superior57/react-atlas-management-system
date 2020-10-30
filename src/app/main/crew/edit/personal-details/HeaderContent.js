@@ -47,9 +47,8 @@ const ButtonDanger = withStyles((theme) => ({
 
 function HeaderContent(props) {
 	const classes = useStyles(props);
-	return <>
-		<div className=" mb-32">
-			<ButtonSuccess variant="contained" className="mr-5 mb-8 text-white" onClick={props.handleSave}>
+	return <React.Fragment>
+		<ButtonSuccess variant="contained" className="mr-5 mb-8 text-white" onClick={props.handleSave}>
 				Save
 			</ButtonSuccess>
 			<ButtonDanger variant="contained" className="mr-5 mb-8" >
@@ -64,8 +63,7 @@ function HeaderContent(props) {
 			<Button variant="outlined" className="mr-5 mb-8">
 				Close
 			</Button>	
-		</div> 	
-	</>;
+	</React.Fragment>;
 }
 
 export default HeaderContent;

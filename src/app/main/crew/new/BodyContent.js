@@ -9,11 +9,14 @@ import {
 	FormControl,
 	InputLabel,
 	Select,
-	MenuItem
+	MenuItem,
+	Container,
+	Paper
 } from '@material-ui/core';
 import clsx from "clsx";
 import moment from 'moment';
 import {EditableAvatar} from "app/components/Avatar";
+import HeaderContent from './HeaderContent';
 
 
 const useStyles = makeStyles(theme => ({
@@ -53,285 +56,293 @@ function BodyContent(props) {
 		});
 	}
 
-	return <>
+	return <Grid container spacing={2}>
+		<Grid item xs={12}>
+			<Container component={Paper} className="p-16">
+				<HeaderContent />
+			</Container>
+		</Grid>		
+		<Grid item xs={12}>
 		{
-			state && <Grid container spacing={2}>
-			<Grid item xs={12} md={6}>
-				<div className="flex mb-20">
-					<TextField
-						required						
-						label="Last Name"
-						variant="outlined"	
-						className={classes.textField}
-						value={isEmpty(state.l_name)}					
-						onChange={handleChange}		
-						name="l_name"
-						size="small"			
-					/>	
-					<TextField
-						label="Middle Name"
-						variant="outlined"		
-						className={classes.textField}
-						value={isEmpty(state.m_name)}						
-						onChange={handleChange}
-						name="m_name"
-						size="small"
-					/>				
-				</div>
-				<div className="flex mb-20">
-					<TextField
-						required
-						label="First Name"
-						variant="outlined"		
-						className={classes.textField}
-						value={isEmpty(state.f_name)}						
-						onChange={handleChange}
-						name="f_name"
-						size="small"
-					/>
-					<div className="w-full">
-						<FormControl variant="outlined" className={classes.formControl} size="small">
-							<InputLabel id="sex-label">Sex</InputLabel>
+			state && 
+			<Container component={Paper} className="p-16">
+				<Grid container spacing={2}>
+				<Grid item xs={12} md={6}>
+					<div className="flex mb-20">
+						<TextField
+							required						
+							label="Last Name"
+							variant="outlined"	
+							className={classes.textField}
+							value={isEmpty(state.l_name)}					
+							onChange={handleChange}		
+							name="l_name"
+							size="small"			
+						/>	
+						<TextField
+							label="Middle Name"
+							variant="outlined"		
+							className={classes.textField}
+							value={isEmpty(state.m_name)}						
+							onChange={handleChange}
+							name="m_name"
+							size="small"
+						/>				
+					</div>
+					<div className="flex mb-20">
+						<TextField
+							required
+							label="First Name"
+							variant="outlined"		
+							className={classes.textField}
+							value={isEmpty(state.f_name)}						
+							onChange={handleChange}
+							name="f_name"
+							size="small"
+						/>
+						<div className="w-full">
+							<FormControl variant="outlined" className={classes.formControl} size="small">
+								<InputLabel id="sex-label">Sex</InputLabel>
+								<Select
+									labelId="sex-label"
+									value={isEmpty(state.sex)}
+									onChange={handleChange}
+									label="Sex"
+									name="sex"
+								>
+								<MenuItem value="">
+									<em>None</em>
+								</MenuItem>
+								<MenuItem value={1}>Man</MenuItem>
+								<MenuItem value={2}>Woman</MenuItem>
+								</Select>
+							</FormControl>
+						</div>
+					</div>
+					<div className="flex mb-20">
+						<TextField						
+							label="Father Name"
+							variant="outlined"		
+							className={classes.textField}
+							value={isEmpty(state.father_name)}						
+							onChange={handleChange}
+							name="father_name"
+							size="small"
+						/>
+						<TextField
+							label="Mother Name"
+							variant="outlined"		
+							className={classes.textField}	
+							value={isEmpty(state.mother_name)}						
+							onChange={handleChange}
+							name="mother_name"	
+							size="small"
+						/>
+					</div>
+					<div className="flex mb-20">
+						<TextField						
+							label="Wife's Name"
+							variant="outlined"		
+							className={classes.textField}
+							value={isEmpty(state.wife_name)}						
+							onChange={handleChange}
+							name="wife_name"
+							size="small"
+						/>
+						<TextField
+							label="No of Childs"
+							variant="outlined"		
+							className={classes.textField}		
+							type="number"
+							value={isEmpty(state.no_child)}						
+							onChange={handleChange}
+							name="no_child"
+							size="small"
+						/>
+					</div>
+					<div className="flex mb-20">
+						<TextField						
+							label="Birth Date"
+							variant="outlined"		
+							className={classes.textField}
+							type="date"
+							InputLabelProps={{
+								shrink: true,
+							}}
+							value={isEmpty(state.birthday)}
+							onChange={handleChange}
+							name="birthday"
+							size="small"
+						/>
+						<TextField
+							label="Birth Place"
+							variant="outlined"		
+							className={classes.textField}		
+							value={isEmpty(state.birth_place)}						
+							onChange={handleChange}
+							name="birth_place"
+							size="small"
+						/>
+					</div>
+					<div className="flex mb-20">
+						<TextField						
+							label="Telephone 1"
+							variant="outlined"		
+							className={classes.textField}
+							value={isEmpty(state.tel_1)}						
+							onChange={handleChange}
+							name="tel_1"
+							size="small"
+						/>
+						<TextField
+							label="Telephone 2"
+							variant="outlined"		
+							className={classes.textField}
+							value={isEmpty(state.tel_2)}						
+							onChange={handleChange}
+							name="tel_2"	
+							size="small"	
+						/>
+					</div>
+					<div className="flex mb-20">
+						<TextField						
+							label="Fax"
+							variant="outlined"		
+							className={classes.textField}
+							value={isEmpty(state.fax)}						
+							onChange={handleChange}
+							name="fax"
+							size="small"
+						/>
+						<TextField
+							label="Skype"
+							variant="outlined"		
+							className={classes.textField}
+							value={isEmpty(state.skype)}						
+							onChange={handleChange}
+							name="skype"	
+							size="small"
+						/>
+					</div>
+					<div className="flex mb-20">
+						<TextField						
+							label="Mobile 1"
+							variant="outlined"		
+							className={classes.textField}
+							value={isEmpty(state.mobile_1)}						
+							onChange={handleChange}
+							name="mobile_1"
+							size="small"
+						/>
+						<TextField
+							label="Mobile 2"
+							variant="outlined"		
+							className={classes.textField}	
+							value={isEmpty(state.mobile_2)}						
+							onChange={handleChange}
+							name="mobile_2"	
+							size="small"
+						/>
+					</div>
+					<div className="flex mb-20">
+						<TextField						
+							label="Email 1"
+							variant="outlined"		
+							className={classes.textField}
+							type="email"
+							value={isEmpty(state.email_1)}						
+							onChange={handleChange}
+							name="email_1"
+							size="small"
+						/>
+						<TextField
+							label="Email 2"
+							variant="outlined"	
+							className={classes.textField}	
+							type="email"	
+							value={isEmpty(state.email_2)}						
+							onChange={handleChange}
+							name="email_2"
+							size="small"
+						/>
+					</div>
+					<div className="flex mb-20 md:pr-40">
+						<TextField
+							label="Home Address"
+							multiline
+							rows={3}
+							variant="outlined"
+							className={classes.textField}
+							value={isEmpty(state.home_address)}						
+							onChange={handleChange}
+							name="home_address"
+							size="small"
+						/>
+					</div>
+					<div className="flex mb-20 md:pr-40">
+						<TextField
+							label="Temporary Address"
+							multiline
+							rows={3}
+							variant="outlined"
+							className={classes.textField}
+							value={isEmpty(state.temp_address)}						
+							onChange={handleChange}
+							name="temp_address"
+							size="small"
+						/>
+					</div>
+					<div className="flex mb-20">
+						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size="small">
+							<InputLabel id="country-label">Country</InputLabel>
 							<Select
-								labelId="sex-label"
-								value={isEmpty(state.sex)}
+								labelId="country-label"
+								value={isEmpty(state.country)}
 								onChange={handleChange}
-								label="Sex"
-								name="sex"
+								label="Country"
+								name="country"
 							>
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={1}>Man</MenuItem>
-							<MenuItem value={2}>Woman</MenuItem>
+							<MenuItem value={1}>United States</MenuItem>
+							<MenuItem value={2}>China</MenuItem>
+							<MenuItem value={3}>Greece</MenuItem>
 							</Select>
 						</FormControl>
+						<div className="w-full mr-5"></div>
 					</div>
-				</div>
-				<div className="flex mb-20">
-					<TextField						
-						label="Father Name"
-						variant="outlined"		
-						className={classes.textField}
-						value={isEmpty(state.father_name)}						
-						onChange={handleChange}
-						name="father_name"
-						size="small"
-					/>
-					<TextField
-						label="Mother Name"
-						variant="outlined"		
-						className={classes.textField}	
-						value={isEmpty(state.mother_name)}						
-						onChange={handleChange}
-						name="mother_name"	
-						size="small"
-					/>
-				</div>
-				<div className="flex mb-20">
-					<TextField						
-						label="Wife's Name"
-						variant="outlined"		
-						className={classes.textField}
-						value={isEmpty(state.wife_name)}						
-						onChange={handleChange}
-						name="wife_name"
-						size="small"
-					/>
-					<TextField
-						label="No of Childs"
-						variant="outlined"		
-						className={classes.textField}		
-						type="number"
-						value={isEmpty(state.no_child)}						
-						onChange={handleChange}
-						name="no_child"
-						size="small"
-					/>
-				</div>
-				<div className="flex mb-20">
-					<TextField						
-						label="Birth Date"
-						variant="outlined"		
-						className={classes.textField}
-						type="date"
-						InputLabelProps={{
-							shrink: true,
-						}}
-						value={isEmpty(state.birthday)}
-						onChange={handleChange}
-						name="birthday"
-						size="small"
-					/>
-					<TextField
-						label="Birth Place"
-						variant="outlined"		
-						className={classes.textField}		
-						value={isEmpty(state.birth_place)}						
-						onChange={handleChange}
-						name="birth_place"
-						size="small"
-					/>
-				</div>
-				<div className="flex mb-20">
-					<TextField						
-						label="Telephone 1"
-						variant="outlined"		
-						className={classes.textField}
-						value={isEmpty(state.tel_1)}						
-						onChange={handleChange}
-						name="tel_1"
-						size="small"
-					/>
-					<TextField
-						label="Telephone 2"
-						variant="outlined"		
-						className={classes.textField}
-						value={isEmpty(state.tel_2)}						
-						onChange={handleChange}
-						name="tel_2"	
-						size="small"	
-					/>
-				</div>
-				<div className="flex mb-20">
-					<TextField						
-						label="Fax"
-						variant="outlined"		
-						className={classes.textField}
-						value={isEmpty(state.fax)}						
-						onChange={handleChange}
-						name="fax"
-						size="small"
-					/>
-					<TextField
-						label="Skype"
-						variant="outlined"		
-						className={classes.textField}
-						value={isEmpty(state.skype)}						
-						onChange={handleChange}
-						name="skype"	
-						size="small"
-					/>
-				</div>
-				<div className="flex mb-20">
-					<TextField						
-						label="Mobile 1"
-						variant="outlined"		
-						className={classes.textField}
-						value={isEmpty(state.mobile_1)}						
-						onChange={handleChange}
-						name="mobile_1"
-						size="small"
-					/>
-					<TextField
-						label="Mobile 2"
-						variant="outlined"		
-						className={classes.textField}	
-						value={isEmpty(state.mobile_2)}						
-						onChange={handleChange}
-						name="mobile_2"	
-						size="small"
-					/>
-				</div>
-				<div className="flex mb-20">
-					<TextField						
-						label="Email 1"
-						variant="outlined"		
-						className={classes.textField}
-						type="email"
-						value={isEmpty(state.email_1)}						
-						onChange={handleChange}
-						name="email_1"
-						size="small"
-					/>
-					<TextField
-						label="Email 2"
-						variant="outlined"	
-						className={classes.textField}	
-						type="email"	
-						value={isEmpty(state.email_2)}						
-						onChange={handleChange}
-						name="email_2"
-						size="small"
-					/>
-				</div>
-				<div className="flex mb-20 md:pr-40">
-					<TextField
-						label="Home Address"
-						multiline
-						rows={3}
-						variant="outlined"
-						className={classes.textField}
-						value={isEmpty(state.home_address)}						
-						onChange={handleChange}
-						name="home_address"
-						size="small"
-					/>
-				</div>
-				<div className="flex mb-20 md:pr-40">
-					<TextField
-						label="Temporary Address"
-						multiline
-						rows={3}
-						variant="outlined"
-						className={classes.textField}
-						value={isEmpty(state.temp_address)}						
-						onChange={handleChange}
-						name="temp_address"
-						size="small"
-					/>
-				</div>
-				<div className="flex mb-20">
-					<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size="small">
-						<InputLabel id="country-label">Country</InputLabel>
-						<Select
-							labelId="country-label"
-							value={isEmpty(state.country)}
+					<div className="flex mb-20">
+						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size="small">
+							<InputLabel id="nearest-port-label">Nearest Port</InputLabel>
+							<Select
+								labelId="nearest-port-label"
+								value={isEmpty(state.nearest_port)}
+								onChange={handleChange}
+								label="Nearest Port"
+								name="nearest_port"
+							>
+							<MenuItem value="">
+								<em>None</em>
+							</MenuItem>
+							<MenuItem value={1}>Port 1</MenuItem>
+							<MenuItem value={2}>Port 2</MenuItem>
+							<MenuItem value={3}>Port 3</MenuItem>
+							</Select>
+						</FormControl>
+						<TextField
+							label="Nearest Airport"
+							variant="outlined"	
+							className={classes.textField}
+							value={isEmpty(state.nearest_airport)}						
 							onChange={handleChange}
-							label="Country"
-							name="country"
-						>
-						<MenuItem value="">
-							<em>None</em>
-						</MenuItem>
-						<MenuItem value={1}>United States</MenuItem>
-						<MenuItem value={2}>China</MenuItem>
-						<MenuItem value={3}>Greece</MenuItem>
-						</Select>
-					</FormControl>
-					<div className="w-full mr-5"></div>
-				</div>
-				<div className="flex mb-20">
-					<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size="small">
-						<InputLabel id="nearest-port-label">Nearest Port</InputLabel>
-						<Select
-							labelId="nearest-port-label"
-							value={isEmpty(state.nearest_port)}
-							onChange={handleChange}
-							label="Nearest Port"
-							name="nearest_port"
-						>
-						<MenuItem value="">
-							<em>None</em>
-						</MenuItem>
-						<MenuItem value={1}>Port 1</MenuItem>
-						<MenuItem value={2}>Port 2</MenuItem>
-						<MenuItem value={3}>Port 3</MenuItem>
-						</Select>
-					</FormControl>
-					<TextField
-						label="Nearest Airport"
-						variant="outlined"	
-						className={classes.textField}
-						value={isEmpty(state.nearest_airport)}						
-						onChange={handleChange}
-						name="nearest_airport"	
-						size="small"
-					/>
-				</div>
-			
-			</Grid>
-			<Grid item xs={12} md={6}>
+							name="nearest_airport"	
+							size="small"
+						/>
+					</div>
+				
+				</Grid>
+				<Grid item xs={12} md={6}>
 				<Grid container>
 					<Grid item xs={6} md={7} className="flex flex-wrap md:pr-40">
 						<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
@@ -608,12 +619,12 @@ function BodyContent(props) {
 						</Grid>
 					</Grid>
 				</Grid>
+				</Grid>
 			</Grid>
-		
-		</Grid>
-	
+			</Container>	
 		}
-		</>;
+		</Grid>
+	</Grid>
 }
 
 export default BodyContent;

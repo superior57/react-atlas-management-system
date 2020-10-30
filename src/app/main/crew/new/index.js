@@ -2,7 +2,7 @@ import FusePageSimple from '@fuse/core/FusePageSimple';
 import { makeStyles } from '@material-ui/core/styles';
 import React,{ useState } from 'react';
 import BodyContent from './BodyContent';
-import HeaderContent from './HeaderContent';
+
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
@@ -27,11 +27,11 @@ function NewPage(props) {
 					<h4>New Crew</h4>
 				</div>
 			}
-			contentToolbar={
-				<div className="px-24">
-					<HeaderContent handleSave={handleSave} />
-				</div>
-			}
+			// contentToolbar={
+			// 	<div className="px-24">
+			// 		<HeaderContent handleSave={handleSave} />
+			// 	</div>
+			// }
 			content={
 				<div className="p-24">
 					<BodyContent state={state} setState={setState}/>

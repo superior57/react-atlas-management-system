@@ -4,6 +4,8 @@ import React, {  } from 'react';
 import { useHistory } from "react-router-dom";
 import HeaderContent from './HeaderContent';
 import Paper from '@material-ui/core/Paper';
+import TableContainer from '@material-ui/core/TableContainer';
+
 
   
 function createData( id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action ) {
@@ -71,16 +73,18 @@ function BodyContent(props) {
 		history.push(`/crew/edit/${row.id}/personal-details`);
 	}
 	return <>
-	 	<HeaderContent />
-		 <div style={{width: '100%', height: 600}}>
-			<DataGrid 
-				rows={rows} 
-				columns={columns} 
-				onRowClick={event => handleClick(event.rowModel)} 
-				rowHeight={25}		
-			/>
-		</div>
-		
+	 	<HeaderContent />		 
+		<TableContainer component={Paper}>
+			<div style={{width: '100%', height: 600}}>
+				<DataGrid 
+					rows={rows} 
+					columns={columns} 
+					onRowClick={event => handleClick(event.rowModel)} 
+					rowHeight={25}
+					className="shadow-2xl"
+				/>
+			</div>
+		</TableContainer>		
 	</>;
 }
 

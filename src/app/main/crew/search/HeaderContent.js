@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import SplitButton from './SplitButton'
-
+import SplitButton from './SplitButton';
+import { Container, Paper } from '@material-ui/core';
 
 import React, {
 	useState
@@ -61,9 +61,10 @@ function HeaderContent(props) {
 	}
 
 	return <>
-	 	<Grid container spacing={2} className={clsx(classes.spacingBottom)}>
+		<Grid container spacing={2} className={clsx(classes.spacingBottom)}>
 			<Grid item xs={12} md={9}>
-				<Grid container spacing={2} className="px-10 py-10 bg-white rounded shadow-2xl">
+				<Container component={Paper}>
+				<Grid container spacing={2} className="px-10 py-10">
 					<Grid item xs={12} md={6}>
 						<TextField							
 							label="Name"
@@ -256,13 +257,14 @@ function HeaderContent(props) {
 								</Select>
 							</FormControl>
 						</div>
-					</Grid>
-					
+					</Grid>					
 				</Grid>
+				</Container>
 			</Grid>
 			<Grid item xs={12} md={3}>
-				<SplitButton/>
-				
+				<Container component={Paper} className="py-16">
+				<SplitButton/>				
+				</Container>
 			</Grid>
 		</Grid>
 	</>;

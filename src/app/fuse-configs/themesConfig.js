@@ -170,6 +170,11 @@ const themesConfig = {
 				dark: '#00B2FC',
 				contrastText: '#1E1F23'
 			},
+			danger: {
+				light: '#C2C7F1',
+				main: '#3543D0',
+				dark: '#161EB3'
+			},
 			background: {
 				paper: '#FFFFFF',
 				default: '#F7FAFF'
