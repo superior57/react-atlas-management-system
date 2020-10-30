@@ -63,7 +63,7 @@ function HeaderContent(props) {
 	return <>
 	 	<Grid container spacing={2} className={clsx(classes.spacingBottom)}>
 			<Grid item xs={12} md={9}>
-				<Grid container spacing={2} className="px-10 py-10 bg-white border border-gray-400 rounded shadow-2xl">
+				<Grid container spacing={2} className="px-10 py-10 bg-white rounded shadow-2xl">
 					<Grid item xs={12} md={6}>
 						<TextField							
 							label="Name"

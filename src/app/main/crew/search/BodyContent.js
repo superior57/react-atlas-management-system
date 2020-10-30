@@ -3,6 +3,7 @@ import { DataGrid} from "@material-ui/data-grid";
 import React, {  } from 'react';
 import { useHistory } from "react-router-dom";
 import HeaderContent from './HeaderContent';
+import Paper from '@material-ui/core/Paper';
 
   
 function createData( id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action ) {
@@ -79,6 +80,7 @@ function BodyContent(props) {
 				rowHeight={25}		
 			/>
 		</div>
+		
 	</>;
 }
 

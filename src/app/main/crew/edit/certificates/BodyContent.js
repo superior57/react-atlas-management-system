@@ -73,21 +73,23 @@ const rows = [
 
 function BodyContent(props) {
 	const classes = useStyles(props);
+	const cellAlign = "left";
 
 	return <>
 		<TableContainer component={Paper} >
 			<Table className={classes.table} size="small">
 				<TableHead>
 					<TableRow>
-						<TableCell align="center" colSpan={2}>
+						<TableCell ></TableCell>
+						<TableCell align={cellAlign}>
 							Certification
 						</TableCell>
-						<TableCell align="center">S</TableCell>
-						<TableCell align='center'>Number</TableCell>
-						<TableCell align="center">Issued</TableCell>
-						<TableCell align='center'>Expired</TableCell>
-						<TableCell align="center">Issue Country</TableCell>
-						<TableCell align='center'>OnVSL</TableCell>
+						<TableCell align={cellAlign}>S</TableCell>
+						<TableCell align={cellAlign}>Number</TableCell>
+						<TableCell align={cellAlign}>Issued</TableCell>
+						<TableCell align={cellAlign}>Expired</TableCell>
+						<TableCell align={cellAlign}>Issue Country</TableCell>
+						<TableCell align={cellAlign}>OnVSL</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -100,14 +102,15 @@ function BodyContent(props) {
 							{
 								row.data.map((d, i) =>
 									<TableRow key={i}>
-										{i == 0 && <TableCell rowSpan={row.data.length}></TableCell>}
-										<TableCell>Passport</TableCell>
-										<TableCell>Y</TableCell>
-										<TableCell>566359</TableCell>
-										<TableCell>16/03/2004</TableCell>
-										<TableCell>11/01/2014</TableCell>
-										<TableCell>Myanmar</TableCell>
-										<TableCell><Checkbox /> </TableCell>
+										{i == 0 && 
+										<TableCell rowSpan={row.data.length} align={cellAlign} ></TableCell>}
+										<TableCell align={cellAlign}>{d.certificate}</TableCell>
+										<TableCell align={cellAlign}>{d.s}</TableCell>
+										<TableCell align={cellAlign}>{d.number}</TableCell>
+										<TableCell align={cellAlign}>{d.issued}</TableCell>
+										<TableCell align={cellAlign}>{d.expired}</TableCell>
+										<TableCell align={cellAlign}>{d.issue_country}</TableCell>
+										<TableCell align={cellAlign}><Checkbox size="small" /> </TableCell>
 									</TableRow>)
 							}
 						</React.Fragment>)
