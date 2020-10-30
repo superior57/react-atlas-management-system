@@ -74,7 +74,7 @@ function BodyContent(props) {
 	}
 	return <>
 	 	<HeaderContent />		 
-		<TableContainer component={Paper}>
+		<TableContainer component={Paper} className="overflow-hidden overflow-x-auto">
 			<div style={{width: '100%', height: 600}}>
 				<DataGrid 
 					rows={rows} 
