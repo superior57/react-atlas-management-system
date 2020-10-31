@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 function HeaderContent(props) {
 	const classes = useStyles(props);
 	return <>
-		<h3>Header ...</h3>
+		{/* <h3>Header ...</h3> */}
 	</>;
 }
 

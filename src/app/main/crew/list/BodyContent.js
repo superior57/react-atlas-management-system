@@ -51,7 +51,7 @@ function BodyContent(props) {
 					<DataGrid 
 						rows={rows} 
 						columns={columns} 
-						onRowClick={event => handleClick(event.rowModel)} 
+						// onRowClick={event => handleClick(event.rowModel)} 
 						rowHeight={25}
 						className="shadow-2xl"
 					/>

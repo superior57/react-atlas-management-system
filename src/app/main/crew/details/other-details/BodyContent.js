@@ -39,7 +39,7 @@ function BodyContent(props) {
 	const classes = useStyles(props);
 
 	return <>
-		<h3>body ...</h3>
+		{/* <h3>body ...</h3> */}
 	</>;
 }
 

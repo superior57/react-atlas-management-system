@@ -52,6 +52,14 @@ const navigationConfig = [
 						type: 'item',
 						icon: 'whatshot',
 						url: '/crew/list'
+					},
+					{
+						id: 'crew-retention-rate',
+						title: 'Retention Rate',
+						translate: 'RETENTION RATE',
+						type: 'item',
+						icon: 'whatshot',
+						url: '/crew/retention-rate'
 					}
 				]
 			},

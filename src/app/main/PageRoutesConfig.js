@@ -10,6 +10,7 @@ import AllotteesPage from './crew/details/allottees';
 import TrainingPage from './crew/details/training';
 import CertificatesPage from './crew/details/certificates';
 import List from "./crew/list";
+import RetentionRatePage from './crew/retention-rate';
 
 const PagesRouteConfig = {
 	routes: [
@@ -64,6 +65,10 @@ const PagesRouteConfig = {
 		{
 			path: '/crew/list',
 			component: List
+		},
+		{
+			path: '/crew/retention-rate',
+			component: RetentionRatePage
 		}
 	]
 };
