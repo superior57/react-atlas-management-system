@@ -43,7 +43,7 @@ const navigationConfig = [
 						translate: 'EDIT / VIEW',
 						type: 'item',
 						icon: 'whatshot',
-						url: '/crew/edit/1/personal-details'
+						url: '/crew/details/1/personal-details'
 					}
 				]
 			},

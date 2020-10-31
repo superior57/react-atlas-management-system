@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
 }));
 
-function NOKPage(props) {
+function AppraisalsPage(props) {
 	console.log(props);
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
@@ -28,16 +28,11 @@ function NOKPage(props) {
 			header={
 				<div className="p-24">
 					<h4>Edit / View Crew</h4>
-					<h5>Next of KIN</h5>
-				</div>
-			}
-			contentToolbar={
-				<div className="px-24">
-					<HeaderContent handleSave={handleSave} />
+					<h5>Appraisals</h5>
 				</div>
 			}
 			content={
-				<div className="p-24">
+				<div className="p-24 h-full">
 					<BodyContent state={state} setState={setState}/>
 				</div>
 			}
@@ -46,4 +41,4 @@ function NOKPage(props) {
 	);
 }
 
-export default NOKPage;
+export default AppraisalsPage;

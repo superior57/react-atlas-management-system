@@ -57,7 +57,7 @@ function LeftSidebarContent(props) {
 								<ListItem
 									button
 									component={NavLinkAdapter}
-									to={`/crew/edit/${crewId}/${label.handle}`}
+									to={`/crew/details/${crewId}/${label.handle}`}
 									key={index}
 									className={classes.listItem}
 								>

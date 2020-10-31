@@ -7,6 +7,7 @@ function FuseDialog(props) {
 	const dispatch = useDispatch();
 	const state = useSelector(({ fuse }) => fuse.dialog.state);
 	const options = useSelector(({ fuse }) => fuse.dialog.options);
+	console.log(options);
 
 	return (
 		<Dialog

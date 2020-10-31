@@ -31,13 +31,8 @@ function AllotteesPage(props) {
 					<h5>Allottees</h5>
 				</div>
 			}
-			contentToolbar={
-				<div className="px-24">
-					<HeaderContent handleSave={handleSave} />
-				</div>
-			}
 			content={
-				<div className="p-24">
+				<div className="p-24 h-full">
 					<BodyContent state={state} setState={setState}/>
 				</div>
 			}

@@ -1,14 +1,14 @@
 import SearchPage from './crew/search';
-import PersonalDetails from './crew/edit/personal-details';
-import OtherDetailsPage from './crew/edit/other-details';
-import PreviousServicesPage from './crew/edit/previous-services';
+import PersonalDetails from './crew/details/personal-details';
+import OtherDetailsPage from './crew/details/other-details';
+import PreviousServicesPage from './crew/details/previous-services';
 import NewPage from './crew/new';
-import CompanyPreviousServicesPage from './crew/edit/company-previous-services';
-import AppraisalsPage from './crew/edit/appraisals';
-import NOKPage from './crew/edit/nok';
-import AllotteesPage from './crew/edit/allottees';
-import TrainingPage from './crew/edit/training';
-import CertificatesPage from './crew/edit/certificates';
+import CompanyPreviousServicesPage from './crew/details/company-previous-services';
+import AppraisalsPage from './crew/details/appraisals';
+import NOKPage from './crew/details/nok';
+import AllotteesPage from './crew/details/allottees';
+import TrainingPage from './crew/details/training';
+import CertificatesPage from './crew/details/certificates';
 
 const PagesRouteConfig = {
 	routes: [
@@ -21,43 +21,43 @@ const PagesRouteConfig = {
 			component: SearchPage
 		},
 		{
-			path: '/crew/edit/:crewId/personal-details',
+			path: '/crew/details/:crewId/personal-details',
 			component: PersonalDetails
 		},
 		{
-			path: '/crew/edit/:crewId/other-details',
+			path: '/crew/details/:crewId/other-details',
 			component: OtherDetailsPage
 		},
 		{
-			path: '/crew/edit/:crewId/certificates',
+			path: '/crew/details/:crewId/certificates',
 			component: CertificatesPage
 		},
 		{
-			path: '/crew/edit/:crewId/previous-services',
+			path: '/crew/details/:crewId/previous-services',
 			component: PreviousServicesPage
 		},
 		{
-			path: '/crew/edit/:crewId/company-previous-services',
+			path: '/crew/details/:crewId/company-previous-services',
 			component: CompanyPreviousServicesPage
 		},
 		{
-			path: '/crew/edit/:crewId/appraisals',
+			path: '/crew/details/:crewId/appraisals',
 			component: AppraisalsPage
 		},
 		{
-			path: '/crew/edit/:crewId/next-of-kin',
+			path: '/crew/details/:crewId/next-of-kin',
 			component: NOKPage
 		},
 		{
-			path: '/crew/edit/:crewId/allottees',
+			path: '/crew/details/:crewId/allottees',
 			component: AllotteesPage
 		},
 		{
-			path: '/crew/edit/:crewId/trainings',
+			path: '/crew/details/:crewId/trainings',
 			component: TrainingPage
 		},
 		{
-			path: '/crew/edit/:crewId/certificates',
+			path: '/crew/details/:crewId/certificates',
 			component: CertificatesPage
 		}
 	]

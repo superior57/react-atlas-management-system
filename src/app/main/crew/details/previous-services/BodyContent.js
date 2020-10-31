@@ -155,9 +155,7 @@ function BodyContent(props) {
 		},
 	];
 	const EditContent = (props) => {
-		const [state, setState] = React.useState({
-			test: "123"
-		});
+		const [state, setState] = React.useState({});
 		const handleChange = (e) => {
 			setState({
 				...state,
