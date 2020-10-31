@@ -44,6 +44,14 @@ const navigationConfig = [
 						type: 'item',
 						icon: 'whatshot',
 						url: '/crew/details/1/personal-details'
+					},
+					{
+						id: 'crew-list',
+						title: 'List',
+						translate: 'LIST',
+						type: 'item',
+						icon: 'whatshot',
+						url: '/crew/list'
 					}
 				]
 			},

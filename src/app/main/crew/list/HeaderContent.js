@@ -1,20 +1,21 @@
 import { makeStyles } from '@material-ui/core/styles';
 import SplitButton from './SplitButton';
-import { Container, Paper } from '@material-ui/core';
-
-import React, {
-	useState
-} from 'react';
-
 import { 
+	Container, 
+	Paper, 
+	TableContainer, 
 	Grid,
 	TextField,
 	FormControl,
 	InputLabel,
 	Select,
-	MenuItem
-} from '@material-ui/core';
+	MenuItem,
+	Typography,
+	Button } from '@material-ui/core';
+
+import React, {	useState } from 'react';
 import clsx from "clsx";
+import { Search } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
@@ -60,214 +61,69 @@ function HeaderContent(props) {
 		});
 	}
 
-	return <>
-		<Grid container spacing={2} className={clsx(classes.spacingBottom)}>
-			<Grid item xs={12} md={9}>
-				<Container component={Paper}>
-				<Grid container spacing={2} className="px-10 py-10">
-					<Grid item xs={12} md={6}>
-						<TextField							
-							label="Name"
-							variant="outlined"		
-							className={clsx(classes.textField, classes.spacingBottom)} 
-							size='small'
-							value={isEmpty(state.name)}
-							name="name"
+	return <React.Fragment>
+		<TableContainer component={Paper} className="w-full">
+			<div className="flex p-24 items-center">
+				<Grid container className="flex justify-between">
+					<div className="flex">
+						<FormControl variant="outlined" className={clsx(classes.formControl, "md:mr-48 mb-8")} size="small">
+							<InputLabel id={`select-label-vessel`}>Vessel</InputLabel>
+							<Select
+								labelId={`select-label-vessel`}
+								label="Vessel"
+								value={isEmpty(state.vessel)}
+								onChange={handleChange}
+								name="vessel"
+							>
+								<MenuItem value="">
+									<em>None</em>
+								</MenuItem>
+								<MenuItem value={1}>Item 1</MenuItem>
+								<MenuItem value={2}>Item 1</MenuItem>
+							</Select>
+						</FormControl>
+						
+						<TextField 
+							variant="outlined"
+							label="Period"
+							className="mb-8 mr-5"
+							size="small"	
+							value={isEmpty(state[`period_from`])}	
+							name="period_from"
 							onChange={handleChange}
+							type="date"
+							InputLabelProps={{
+								shrink: true,
+								fontSize: '.5rem'
+							}}
 						/>
-						<Grid container spacing={1}>
-							<Grid item xs={6} md={6} >
-								<div>
-									<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size='small'>
-										<InputLabel id="rank-label">Rank</InputLabel>
-										<Select
-											labelId="rank-label"
-											label="Rank"
-											value={isEmpty(state.rank)}
-											name="rank"
-											onChange={handleChange}											
-										>
-										<MenuItem value="">
-											<em>None</em>
-										</MenuItem>
-										<MenuItem value={1}>Rank 1</MenuItem>
-										<MenuItem value={2}>Rank 2</MenuItem>
-										<MenuItem value={3}>Rank 3</MenuItem>
-										</Select>
-									</FormControl>
-								</div>
-							</Grid>
-							<Grid item xs={6} md={6}>
-								<div>
-									<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5",classes.spacingBottomSmall)} size='small'>
-										<InputLabel id="nation">Nation</InputLabel>
-										<Select
-											labelId="nation"
-											label="Nation"
-											value={isEmpty(state.nation)}
-											name="nation"
-											onChange={handleChange}
-										>
-										<MenuItem value="">
-											<em>None</em>
-										</MenuItem>
-										<MenuItem value={1}>Rank 1</MenuItem>
-										<MenuItem value={2}>Rank 2</MenuItem>
-										<MenuItem value={3}>Rank 3</MenuItem>
-										</Select>
-									</FormControl>
-								</div>
-							</Grid>
-						</Grid>
-						<Grid container spacing={1}>
-							<Grid item xs={6} md={6}>
-								
-							</Grid>
-							<Grid item xs={6} md={6}>
-								<div>
-									<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size='small'>
-										<InputLabel id="onlyformanager">Only for Manager</InputLabel>
-										<Select
-											labelId="onlyformanager"
-											label="Only for Manager"											
-											value={isEmpty(state.onlyformanager)}
-											name="onlyformanager"
-											onChange={handleChange}
-											
-										>
-										<MenuItem value="">
-											<em>None</em>
-										</MenuItem>
-										<MenuItem value={1}>Rank 1</MenuItem>
-										<MenuItem value={2}>Rank 2</MenuItem>
-										<MenuItem value={3}>Rank 3</MenuItem>
-										</Select>
-									</FormControl>
-								</div>
-							</Grid>
-						</Grid>
-					</Grid>
-					<Grid item xs={12} md={3} >
-						<div className="w-full">
-							<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5",classes.spacingBottom)} size='small'>
-								<InputLabel id="currentstatus">Current Status</InputLabel>
-								<Select
-									labelId="currentstatus"
-									value={isEmpty(state.currentstatus)}
-									onChange={handleChange}
-									label="Current Status"
-									name="current_status"									
-								>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								<MenuItem value={1}>Rank 1</MenuItem>
-								<MenuItem value={2}>Rank 2</MenuItem>
-								<MenuItem value={3}>Rank 3</MenuItem>
-								</Select>
-							</FormControl>
-						</div>
-						<TextField							
-							label="SGULL Id"
-							variant="outlined"		
-							className={clsx(classes.textField, classes.spacingBottom)} 
-							size='small'
-							value={isEmpty(state.sgull_id)}
-							name="sgull_id"
+						<Typography className="px-8">-</Typography>
+						<TextField 
+							variant="outlined"
+							className="mb-8 mr-5"
+							size="small"	
+							value={isEmpty(state[`period_to`])}
+							name="period_to"
 							onChange={handleChange}
+							type="date"
+							InputLabelProps={{
+								shrink: true,
+							}}
 						/>
-						<div className="w-full">
-							<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5",classes.spacingBottom)} size='small'>
-								<InputLabel id="overalevaluation">Overal Evaluation</InputLabel>
-								<Select
-									labelId="overalevaluation"
-									value={isEmpty(state.overalevaluation)}
-									onChange={handleChange}
-									label="Overal Evaluation"
-									name="overalevaluation"									
-								>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								<MenuItem value={1}>Rank 1</MenuItem>
-								<MenuItem value={2}>Rank 2</MenuItem>
-								<MenuItem value={3}>Rank 3</MenuItem>
-								</Select>
-							</FormControl>
-						</div>
-					</Grid>
-					<Grid item xs={12} md={3}>
-						<div className="w-full">
-							<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5", classes.spacingBottom)} size='small'>
-								<InputLabel id="onb_ofb_with">ONB/OFB with</InputLabel>
-								<Select
-									labelId="onb_ofb_with"
-									label="ONB/OFB with"									
-									value={isEmpty(state.onb_ofb_with)}
-									name="onb_ofb_with"
-									onChange={handleChange}
-									
-								>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								<MenuItem value={1}>Rank 1</MenuItem>
-								<MenuItem value={2}>Rank 2</MenuItem>
-								<MenuItem value={3}>Rank 3</MenuItem>
-								</Select>
-							</FormControl>
-						</div>
-						<div className="w-full">
-							<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5", classes.spacingBottom)} size='small'>
-								<InputLabel id="prserv_with">Prserv with</InputLabel>
-								<Select
-									labelId="prserv_with"
-									label="Prserv with"									
-									value={isEmpty(state.prserv_with)}
-									name="prserv_with"
-									onChange={handleChange}
-									
-								>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								<MenuItem value={1}>Rank 1</MenuItem>
-								<MenuItem value={2}>Rank 2</MenuItem>
-								<MenuItem value={3}>Rank 3</MenuItem>
-								</Select>
-							</FormControl>
-						</div>
-						<div className="w-full">
-							<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5")} size='small'>
-								<InputLabel id="has_appraisal_as">Has Appraisal as</InputLabel>
-								<Select
-									labelId="has_appraisal_as"
-									label="Has Appraisal as"									
-									value={isEmpty(state.has_appraisal_as)}
-									name="has_appraisal_as"
-									onChange={handleChange}
-									
-								>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								<MenuItem value={1}>Rank 1</MenuItem>
-								<MenuItem value={2}>Rank 2</MenuItem>
-								<MenuItem value={3}>Rank 3</MenuItem>
-								</Select>
-							</FormControl>
-						</div>
-					</Grid>					
+					</div>
+					<Button 
+						variant="contained"
+						color="primary"
+						size="small"
+						className="mb-8 mr-5"
+					>
+						<Search />
+						Search
+					</Button>
 				</Grid>
-				</Container>
-			</Grid>
-			<Grid item xs={12} md={3}>
-				<Container component={Paper} className="py-16">
-				<SplitButton/>				
-				</Container>
-			</Grid>
-		</Grid>
-	</>;
+			</div>
+		</TableContainer>
+	</React.Fragment>
 }
 
 export default HeaderContent;

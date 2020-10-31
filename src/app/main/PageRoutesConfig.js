@@ -9,6 +9,7 @@ import NOKPage from './crew/details/nok';
 import AllotteesPage from './crew/details/allottees';
 import TrainingPage from './crew/details/training';
 import CertificatesPage from './crew/details/certificates';
+import List from "./crew/list";
 
 const PagesRouteConfig = {
 	routes: [
@@ -59,6 +60,10 @@ const PagesRouteConfig = {
 		{
 			path: '/crew/details/:crewId/certificates',
 			component: CertificatesPage
+		},
+		{
+			path: '/crew/list',
+			component: List
 		}
 	]
 };

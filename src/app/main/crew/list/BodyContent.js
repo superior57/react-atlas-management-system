@@ -5,87 +5,75 @@ import { useHistory } from "react-router-dom";
 import HeaderContent from './HeaderContent';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
+import { Grid, Typography } from "@material-ui/core";
 
 
   
-function createData( id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action ) {
-	return { id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action };
+function createData( id, num, last_name, first_name, nationality, age, last_rank, wage, status, departure, s_on_date, months_onb, s_off_date, s_off_port, s_off_reason ) {
+	return { id, num, last_name, first_name, nationality, age, last_rank, wage, status, departure, s_on_date, months_onb, s_off_date, s_off_port, s_off_reason };
 }
 
 const columns = [
-	{ field: 'id', headerName: 'ID' },
-	{ field: 'm', headerName: 'M' },
-	{ field: 'last_name', headerName: 'Last name', width: 130 },
-	{ field: 'fist_name', headerName: 'First name', width: 130 },
-	{ field: 'father', headerName: 'Father', width: 130 },
-	{ field: 'mother', headerName: 'Mother', width: 130 },
-	{ field: 'age', headerName: 'Age', width: 130 },
-	{ field: 'lic_rank', headerName: 'Lic Rank', width: 130 },
+	{ field: 'num', headerName: '' },
+	{ field: 'id', headerName: 'Id' },
+	{ field: 'last_name', headerName: 'Lastname', width: 130 },
+	{ field: 'first_name', headerName: 'Firstname', width: 130 },
 	{ field: 'nationality', headerName: 'Nationality', width: 130 },
-	{ field: 'birthdate', headerName: 'Birthdate', width: 130 },
-	{ field: 'av_from', headerName: 'Av.From', width: 130 },
-	{ field: 'av_to', headerName: 'Av.to', width: 130 },
+	{ field: 'age', headerName: 'Age', width: 130 },
 	{ field: 'last_rank', headerName: 'Last Rank', width: 130 },
-	{ field: 'vessel', headerName: 'Vessel', width: 130 },
+	{ field: 'wage', headerName: 'Wage', width: 130 },
 	{ field: 'status', headerName: 'Status', width: 130 },
-	// {
-	// 	field: "",
-	// 	headerName: "Action",
-	// 	disableClickEventBubbling: true,
-	// 	renderCell: (params) => {
-	// 	  const onClick = (e) => {
-	// 		  console.log(e);
-
-	// 	  };
-	
-	// 	  return <Button variant="contained" onClick={event=>onClick(event)}>Edit</Button>;
-	// 	}
-	// }
-
+	{ field: 'departure', headerName: 'Departure', width: 130 },
+	{ field: 's_on_date', headerName: 'S/On Date', width: 130 },
+	{ field: 'months_onb', headerName: 'Months ONB', width: 130 },
+	{ field: 's_off_date', headerName: 'S/Off Date', width: 130 },
+	{ field: 's_off_port', headerName: 'S/Off Port', width: 130 },
+	{ field: 's_off_reason', headerName: 'S/Off Reason', width: 130 },
   ];
   
 const rows = [
-	createData('100001', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100002', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100003', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100004', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100005', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100006', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100007', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100008', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100009', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100010', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100011', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100012', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100013', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100014', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100015', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100016', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100017', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100018', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
+	createData(1, "1001", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test")
 ];
 
 function BodyContent(props) {
 	const history = useHistory();
 
 	function handleClick(row) {
-		// console.log(row);
 		history.push(`/crew/edit/${row.id}/personal-details`);
 	}
-	return <>
-	 	<HeaderContent />		 
-		<TableContainer component={Paper} className="overflow-hidden overflow-x-auto">
-			<div style={{width: '100%', height: 600}}>
-				<DataGrid 
-					rows={rows} 
-					columns={columns} 
-					onRowClick={event => handleClick(event.rowModel)} 
-					rowHeight={25}
-					className="shadow-2xl"
-				/>
-			</div>
-		</TableContainer>		
-	</>;
+	return <React.Fragment>
+		<Grid container spacing={2} className="h-full w-full flex">
+			<Grid item xs={12} className="flex w-full">
+				<HeaderContent />
+			</Grid>		
+			<Grid item xs={12} className="flex h-screen max-h-sm">
+				<TableContainer component={Paper} className="">
+					<DataGrid 
+						rows={rows} 
+						columns={columns} 
+						onRowClick={event => handleClick(event.rowModel)} 
+						rowHeight={25}
+						className="shadow-2xl"
+					/>
+				</TableContainer>
+			</Grid>	
+			<Grid item xs={12}>
+				<TableContainer component={Paper}  className="flex justify-center p-16 ">
+					<div className="flex justify-between">
+						<div className="flex justify-center w-full">
+							<Typography className="px-8 py-4 bg-gray-200 mr-24">35.33</Typography>
+						</div>
+						<div className="flex justify-center w-full">
+							<Typography className="px-8 py-4 bg-gray-200 mr-24">35.33</Typography>
+						</div>
+						<div className="flex justify-center w-full">
+							<Typography className="px-8 py-4 bg-gray-200 mr-24">35.33</Typography>
+						</div>						
+					</div>
+				</TableContainer>
+			</Grid>	
+		</Grid>
+	</React.Fragment>
 }
 
 export default BodyContent;

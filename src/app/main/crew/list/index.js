@@ -17,7 +17,7 @@ function ListPage(props) {
 			}}
 			header={
 				<div className="p-24">
-					<h4>List Crew</h4>
+					<h4>Crew List</h4>
 				</div>
 			}
 			content={
