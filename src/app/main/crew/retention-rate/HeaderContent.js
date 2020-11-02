@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import SplitButton from './SplitButton';
+
 import { 
 	Container, 
 	Paper, 
@@ -62,8 +62,8 @@ function HeaderContent(props) {
 	}
 
 	return <React.Fragment>
-		<TableContainer component={Paper} className="w-full">
-			<div className="flex p-24 items-center">
+		<TableContainer component={Paper} className="flex w-full">
+			<div className="flex px-24 py-16 items-center w-full">
 				<Grid container className="flex justify-between">
 					<div className="flex">
 						<FormControl variant="outlined" className={clsx(classes.formControl, "md:mr-48 mb-8")} size="small">

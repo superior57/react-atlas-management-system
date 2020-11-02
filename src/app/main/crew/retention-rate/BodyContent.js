@@ -91,7 +91,7 @@ function BodyContent(props) {
 		history.push(`/crew/edit/${row.id}/personal-details`);
 	}
 	return <React.Fragment>
-		<Grid container spacing={1} className="h-full w-full flex">
+		<Grid container spacing={2} className="h-full w-full flex">
 			<Grid item xs={12} className="flex w-full">
 				<HeaderContent />
 			</Grid>		
@@ -110,7 +110,7 @@ function BodyContent(props) {
 									<TableCell key={col_index} width={col.width}>
 										{
 											footerValue[`${col.field}`] && 
-											<Typography className="px-8 py-4 bg-gray-300">
+											<Typography className="px-8 py-4 bg-gray-300" align="right">
 												{footerValue[`${col.field}`]}
 											</Typography>
 										}

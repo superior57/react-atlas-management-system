@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+
 import { 
 	Container, 
 	Paper, 
@@ -15,6 +16,22 @@ import {
 import React, {	useState } from 'react';
 import clsx from "clsx";
 import { Search } from "@material-ui/icons";
+import { months } from 'moment';
+
+const MONTHS= [
+	"JAN",
+	"FEB",
+	"MAR",
+	"APR",
+	"MAY",
+	"JUN",
+	"JUL",
+	"AUG",
+	"SEP",
+	"OCT",
+	"NOV",
+	"DEC"
+];
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
@@ -59,10 +76,14 @@ function HeaderContent(props) {
 			[e.target.name]: e.target.value
 		});
 	}
+	const years = [
+		"2020",
+		"2021"
+	];
 
 	return <React.Fragment>
-		<TableContainer component={Paper} className="w-full">
-			<div className="flex p-24 items-center">
+		<TableContainer component={Paper} className="flex w-full">
+			<div className="flex px-24 py-16 items-center w-full">
 				<Grid container className="flex justify-between">
 					<div className="flex">
 						<FormControl variant="outlined" className={clsx(classes.formControl, "md:mr-48 mb-8")} size="small">
@@ -82,33 +103,47 @@ function HeaderContent(props) {
 							</Select>
 						</FormControl>
 						
-						<TextField 
-							variant="outlined"
-							label="Period"
-							className="mb-8 mr-5"
-							size="small"	
-							value={isEmpty(state[`period_from`])}	
-							name="period_from"
-							onChange={handleChange}
-							type="date"
-							InputLabelProps={{
-								shrink: true,
-								fontSize: '.5rem'
-							}}
-						/>
+						<FormControl variant="outlined" className={clsx(classes.formControl, "mb-8")} size="small">
+							<InputLabel id={`select-label-period-month`}>Period</InputLabel>
+							<Select
+								labelId={`select-label-period-month`}
+								label="Period"
+								value={isEmpty(state.period_month)}
+								onChange={handleChange}
+								name="period_month"
+							>
+								<MenuItem value="">
+									<em>None</em>
+								</MenuItem>
+								{
+									MONTHS && MONTHS.map((m, i) => 
+									<MenuItem key={i} value={i+1}>
+										{m}
+									</MenuItem>)
+								}
+							</Select>
+						</FormControl>
 						<Typography className="px-8">-</Typography>
-						<TextField 
-							variant="outlined"
-							className="mb-8 mr-5"
-							size="small"	
-							value={isEmpty(state[`period_to`])}
-							name="period_to"
-							onChange={handleChange}
-							type="date"
-							InputLabelProps={{
-								shrink: true,
-							}}
-						/>
+						<FormControl variant="outlined" className={clsx(classes.formControl, "mb-8")} size="small">
+							<InputLabel id={`select-label-period-year`}></InputLabel>
+							<Select
+								labelId={`select-label-period-year`}
+								label=""
+								value={isEmpty(state.period_year)}
+								onChange={handleChange}
+								name="period_year"
+							>
+								<MenuItem value="">
+									<em>None</em>
+								</MenuItem>
+								{
+									years && years.map((y, i) => 
+									<MenuItem key={i} value={i+1}>
+										{y}
+									</MenuItem>)
+								}
+							</Select>
+						</FormControl>
 					</div>
 					<Button 
 						variant="contained"

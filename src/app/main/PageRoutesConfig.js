@@ -11,6 +11,8 @@ import TrainingPage from './crew/details/training';
 import CertificatesPage from './crew/details/certificates';
 import List from "./crew/list";
 import RetentionRatePage from './crew/retention-rate';
+import WRHListPage from './crew/wrh-list';
+import WorkingArrangementsPage from './crew/working-arrangements';
 
 const PagesRouteConfig = {
 	routes: [
@@ -69,6 +71,14 @@ const PagesRouteConfig = {
 		{
 			path: '/crew/retention-rate',
 			component: RetentionRatePage
+		},
+		{
+			path: '/crew/wrh-list',
+			component: WRHListPage
+		},
+		{
+			path: '/crew/working-arrangements',
+			component: WorkingArrangementsPage
 		}
 	]
 };

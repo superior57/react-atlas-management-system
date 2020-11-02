@@ -60,6 +60,14 @@ const navigationConfig = [
 						type: 'item',
 						icon: 'whatshot',
 						url: '/crew/retention-rate'
+					},
+					{
+						id: 'crew-wrh-list',
+						title: 'WRH List',
+						translate: 'WRH LIST',
+						type: 'item',
+						icon: 'whatshot',
+						url: '/crew/wrh-list'
 					}
 				]
 			},
