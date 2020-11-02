@@ -241,246 +241,33 @@ export const data_head = [
 	},
 ]
 
-export const columns = [
-	{
-		field: "",
-		headerName: "*",
-		width: 10
-	},
-	{
-		field: "status",
-		headerName: "Status",
-		width: 100
-	},
-	{
-		field: "date",
-		headerName: "Date",
-		align: "center",
-		width: 110
-	},
-	...data_head,
-	{
-		field: "hr_rest24_period",
-		headerName: "Hours of rest in 24hour period",
-		align: "center",
-		width: 110
-	},
-	{
-		field: "hr_work24_period",
-		headerName: "Hours of work in 24hour period",
-		align: "center",
-		width: 110
-	},
-	{
-		field: "hr_restany24_period",
-		headerName: "Hours of rest in any 24hours period (at least 10) Y/N",
-		align: "center",
-		width: 130
-	},
-	{
-		field: "hr_restany7day_period",
-		headerName: "Hours of rest in any 7day period",
-		align: "center",
-		width: 100
-	},
-	{
-		field: "notes",
-		headerName: "Notes",
-		width: 200
-	}
-];
-
 export const data = [
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "W",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-green-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},
-	{
-		value: "R",
-		color: "bg-red-300"
-	},	
+	[
+		"ddd", "test",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+	],
+	[
+		"ddd", "test",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+	],
+	[
+		"ddd", "test",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+	],
+	[
+		"ddd", "test",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+		"w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w",
+		"", "", "", "", "", "", "", "", "", "", "", "",
+	],
 ];

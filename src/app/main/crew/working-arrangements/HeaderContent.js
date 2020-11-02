@@ -102,48 +102,6 @@ function HeaderContent(props) {
 								<MenuItem value={2}>Item 1</MenuItem>
 							</Select>
 						</FormControl>
-						
-						<FormControl variant="outlined" className={clsx(classes.formControl, "mb-8")} size="small">
-							<InputLabel id={`select-label-period-month`}>Period</InputLabel>
-							<Select
-								labelId={`select-label-period-month`}
-								label="Period"
-								value={isEmpty(state.period_month)}
-								onChange={handleChange}
-								name="period_month"
-							>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								{
-									MONTHS && MONTHS.map((m, i) => 
-									<MenuItem key={i} value={i+1}>
-										{m}
-									</MenuItem>)
-								}
-							</Select>
-						</FormControl>
-						<Typography className="px-8">-</Typography>
-						<FormControl variant="outlined" className={clsx(classes.formControl, "mb-8")} size="small">
-							<InputLabel id={`select-label-period-year`}></InputLabel>
-							<Select
-								labelId={`select-label-period-year`}
-								label=""
-								value={isEmpty(state.period_year)}
-								onChange={handleChange}
-								name="period_year"
-							>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								{
-									years && years.map((y, i) => 
-									<MenuItem key={i} value={i+1}>
-										{y}
-									</MenuItem>)
-								}
-							</Select>
-						</FormControl>
 					</div>
 					<Button 
 						variant="contained"

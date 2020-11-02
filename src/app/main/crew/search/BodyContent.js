@@ -70,7 +70,7 @@ function BodyContent(props) {
 
 	function handleClick(row) {
 		// console.log(row);
-		history.push(`/crew/edit/${row.id}/personal-details`);
+		history.push(`/crew/details/${row.id}/personal-details`);
 	}
 	return <>
 	 	<HeaderContent />		 

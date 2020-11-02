@@ -17,7 +17,7 @@ function WorkingArrangementsPage(props) {
 			}}
 			header={
 				<div className="p-24">
-					<h4>WRH List</h4>
+					<h4>Crew Working Arrangements</h4>
 				</div>
 			}
 			content={

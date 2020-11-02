@@ -68,6 +68,14 @@ const navigationConfig = [
 						type: 'item',
 						icon: 'whatshot',
 						url: '/crew/wrh-list'
+					},
+					{
+						id: 'crew-working-arrangements',
+						title: 'Working Arrangements',
+						translate: 'WORKING ARRAGEMENTS',
+						type: 'item',
+						icon: 'whatshot',
+						url: '/crew/working-arrangements'
 					}
 				]
 			},

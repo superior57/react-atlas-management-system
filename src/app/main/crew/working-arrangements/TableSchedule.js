@@ -40,6 +40,42 @@ const hours = [
     "23",
 ]
 
+const CTableRow = (props) => {
+    const {row} = props;
+    const temp_loop = [1, 2, 3]
+    const classes = useStyles();
+    return <React.Fragment>
+        <TableRow hover className={classes.tablerow}>
+            <TableCell className="border border-gray-200 p-4" align="center" rowSpan={4}>        
+            </TableCell> 
+            <TableCell className="border border-gray-200 p-4" align="center" rowSpan={4}> 
+                {row.name}     
+            </TableCell>
+            <TableCell className="border border-gray-200 p-4" align="center" rowSpan={4}> 
+                {row.rank}       
+            </TableCell>     
+            {
+                row.data[0].map((item, index) => 
+                <TableCell className={`border border-gray-200 p-4 ${index < 2 ? "font-bold" : ""}`} align="center" key={index} style={{color: `${index == 1 ? "blue" : ""}`}}>  
+                    {item}
+                </TableCell>)
+            } 
+        </TableRow>
+        {
+            temp_loop.map((item, index) => 
+            <TableRow hover className={classes.tablerow} key={index}>  
+            {
+                row.data[item].map((item, index) => 
+                <TableCell className={`border border-gray-200 p-4 ${index < 2 ? "font-bold" : ""}`} align="center" key={index} style={{color: `${index == 1 ? "blue" : ""}`}}>  
+                    {item}
+                </TableCell>)
+            }         
+            </TableRow>)
+        }
+
+    </React.Fragment>
+    
+};
 
 const TableSchedule = (props) => {
     const classes = useStyles();
@@ -51,7 +87,7 @@ const TableSchedule = (props) => {
                 <TableRow>
                     <TableCell className="border border-gray-200 p-4" align="center">*
                     </TableCell>
-                    <TableCell className="border border-gray-200 p-4" colSpan={2} align="center">Hours
+                    <TableCell className="border border-gray-200 p-4" colSpan={4} align="center">Hours
                     </TableCell>
                     {
                         hours && hours.map((hour, index) => 
@@ -59,8 +95,6 @@ const TableSchedule = (props) => {
                             {hour}
                         </TableCell>)
                     }
-                    <TableCell className="border border-gray-200 p-4" colSpan={5} align="center">
-                    </TableCell>                   
                 </TableRow>
                 <TableRow>
                     {
@@ -74,21 +108,23 @@ const TableSchedule = (props) => {
             <TableBody>
                 {
                     rows && rows.map((row, index) =>
-                    <TableRow key={index} hover className={classes.tablerow}>
-                        {
-                            columns && columns.map((col, col_index) => {
-                                if(col_index > 2 && col_index <= 50) {
-                                    return <TableCell key={col_index} align="center" className={`border border-gray-200 p-4 ${row.data[col_index - 3].value == "W" ? "font-bold" : ""} ${row.data[col_index - 3].color}`}>
-                                    {row.data[col_index - 3].value}
-                                </TableCell>
-                                } else {
-                                    return <TableCell key={col_index} align={col.align} className="border border-gray-200 p-4">
-                                    {row[`${col.field}`]}
-                                </TableCell>
-                                }
-                            })
-                        }                        
-                    </TableRow>)
+                    // <TableRow key={index} hover className={classes.tablerow}>
+                    //     {
+                    //         columns && columns.map((col, col_index) => {
+                    //             if(col_index > 4 && col_index <= 52) {
+                    //                 return <TableCell key={col_index} align="center" className={`border border-gray-200 p-4 ${row.data[col_index -5].value == "W" ? "font-bold" : ""} ${row.data[col_index - 5].color}`}>
+                    //                 {row.data[col_index - 5].value}
+                    //             </TableCell>
+                    //             } else {
+                    //                 return <TableCell rowSpan={4} key={col_index} align={col.align} className="border border-gray-200 p-4">
+                    //                     {row[`${col.field}`]}
+                    //                 </TableCell>
+                    //             }
+                    //         })
+                    //     }       
+                    // </TableRow>
+                    <CTableRow row={row} key={index} />
+                    )
                 }
             </TableBody>
         </Table>        
