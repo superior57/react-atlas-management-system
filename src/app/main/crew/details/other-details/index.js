@@ -11,11 +11,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function OtherDetailsPage(props) {
-	console.log(props);
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
-
-	const [ bodyData, setBodyData ] = useState({});
 
 	const handleSave = () => {
 		console.log(state);

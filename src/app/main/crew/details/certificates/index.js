@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React,{ useState } from 'react';
 import BodyContent from './BodyContent';
 import LeftSidebarContent from '../LeftSidebarContent';
-import ToolbarContent from '../../search/ToolbarContent';
+import ToolbarContent from './ToolbarContent';
 import EditContent from "./EditContent";
 import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
 import { AppBar, Toolbar, DialogContent, Button, Dialog, DialogActions, Typography } from "@material-ui/core";

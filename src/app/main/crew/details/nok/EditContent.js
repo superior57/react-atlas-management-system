@@ -3,17 +3,13 @@ import { Grid, makeStyles } from "@material-ui/core";
 import { TextField, Select, InputLabel, MenuItem, FormControl, TableContainer, Paper } from "@material-ui/core";
 import clsx from "clsx";
 import { DataGrid } from "@material-ui/data-grid";
+import { isEmpty } from "app/functions";
 
 const useStyles = makeStyles(theme => ({
     root: {
         minWidth: 300
     }
 }));
-
-function isEmpty(value) {
-    return value ? value : "";
-}
-const minItemWidth = 40;
 
 const EditContent = (props) => {
     const classes = useStyles(props);

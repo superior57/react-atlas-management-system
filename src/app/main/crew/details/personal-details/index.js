@@ -1,10 +1,13 @@
 import FusePageSimple from '@fuse/core/FusePageSimple';
-import FusePageCarded from '@fuse/core/FusePageCarded';
 import { makeStyles } from '@material-ui/core/styles';
 import React,{ useState } from 'react';
 import BodyContent from './BodyContent';
-// import HeaderContent from './HeaderContent';
 import LeftSidebarContent from './../LeftSidebarContent';
+
+import ToolbarContent from "./ToolbarContent";
+import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
+import { AppBar, Toolbar, Typography, Button, DialogActions, DialogContent } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {
@@ -15,11 +18,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function PersonalDetailsPage(props) {
-	// console.log(props);
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
 
 	const [ bodyData, setBodyData ] = useState({});
+
+	const handleEdit = () => {
+
+	}
 
 	return (
 		<FusePageSimple
@@ -29,6 +35,11 @@ function PersonalDetailsPage(props) {
 			header={
 				<div className="px-24 flex items-center">
 					<h4>Edit / View Crew > Personal Details</h4>
+				</div>
+			}
+			contentToolbar={
+				<div className="px-24">
+					<ToolbarContent handleEdit={handleEdit} />
 				</div>
 			}
 			content={

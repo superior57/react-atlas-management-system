@@ -2,7 +2,6 @@ import FusePageSimple from '@fuse/core/FusePageSimple';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import BodyContent from './BodyContent';
-import HeaderContent from './HeaderContent';
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}

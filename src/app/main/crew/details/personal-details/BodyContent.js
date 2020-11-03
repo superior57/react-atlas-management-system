@@ -11,12 +11,11 @@ import {
 	Select,
 	MenuItem,
 	Container,
-	Paper
+	Paper,
+	TableContainer
 } from '@material-ui/core';
 import clsx from "clsx";
-import moment from 'moment';
 import {EditableAvatar} from "app/components/Avatar";
-import HeaderContent from './HeaderContent';
 
 
 const useStyles = makeStyles(theme => ({
@@ -58,12 +57,7 @@ function BodyContent(props) {
 
 	return <Grid container spacing={2}>
 		<Grid item xs={12}>
-			<Container component={Paper} className="p-16">
-				<HeaderContent />
-			</Container>
-		</Grid>
-		<Grid item xs={12}>
-			<Container component={Paper} className="p-16 overflow-x-auto overflow-hidden">
+			<TableContainer component={Paper} className="p-16 overflow-x-auto overflow-hidden">
 				<Grid container spacing={1}>
 					<Grid item xs={12} md={6} className="mb-20">
 						<div className="flex mb-20">
@@ -650,7 +644,7 @@ function BodyContent(props) {
 				
 				</Grid>
 			
-			</Container>		
+			</TableContainer>		
 		</Grid>
 		
 		

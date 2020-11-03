@@ -1,5 +1,5 @@
 import React, {} from "react";
-import { Fab, Icon, IconButton, Button, TableContainer } from "@material-ui/core";
+import { Icon, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
@@ -19,23 +19,22 @@ const useStyles = makeStyles(theme => ({
 
 const ToolbarContent = (props) => {
     const classes = useStyles();
-    const { handleEdit } = props;
     return <React.Fragment>
         <div className={clsx(classes.root, "w-full flex")}>
-            <Button variant="contained" color="secondary" onClick={event => handleEdit(event)}>
-                <Icon>edit</Icon>
+            <Button variant="contained" color="secondary">
+                <Icon>add</Icon> New Crew
             </Button>
             <Button variant="contained" color="secondary">
-                <Icon>save</Icon>
+                <Icon>rate_review</Icon> View
             </Button>
             <Button variant="contained" color="secondary">
-                <Icon>delete</Icon>
+                <Icon>delete</Icon> Delete
             </Button>
             <Button variant="contained" color="secondary">
-                <Icon style={{ transform: 'scaleY(-1)' }}>assignment_returned</Icon>
+                <Icon>print</Icon> Print
             </Button>
             <Button variant="contained" color="secondary">
-                <Icon>search</Icon>
+                <Icon>assignment_returned</Icon> Export
             </Button>
         </div>
     </React.Fragment>

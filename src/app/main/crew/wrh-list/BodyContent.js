@@ -1,5 +1,3 @@
-import { DataGrid} from "@material-ui/data-grid";
-
 import React, {  } from 'react';
 import { useHistory } from "react-router-dom";
 import HeaderContent from './HeaderContent';
@@ -9,7 +7,7 @@ import { Grid, Typography, TableCell, Table, TableRow, TableBody, TableHead } fr
 import TableWRH from "./TableWRH";
 import TableSchedule from "./TableSchedule";
 import { makeStyles } from "@material-ui/core/styles";
-import { data_head, columns, data } from "./demoData";
+import { columns, data } from "./demoData";
 
 const useStyles = makeStyles(theme => ({
     table: {

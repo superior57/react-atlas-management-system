@@ -1,11 +1,8 @@
 import React,{ } from "react";
-import { Table, TableHead, TableBody, TableRow, TableCell, TableFooter } from "@material-ui/core";
+import { Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-    // table: {
-    //     minWidth: 650
-    // },
     tablerow: {
         '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,

@@ -11,10 +11,10 @@ import {
 	Select,
 	MenuItem,
 	Container,
-	Paper
+	Paper,
+	TableContainer
 } from '@material-ui/core';
 import clsx from "clsx";
-import moment from 'moment';
 import {EditableAvatar} from "app/components/Avatar";
 import HeaderContent from './HeaderContent';
 
@@ -58,14 +58,14 @@ function BodyContent(props) {
 
 	return <Grid container spacing={2}>
 		<Grid item xs={12}>
-			<Container component={Paper} className="p-16">
+			<TableContainer component={Paper} className="p-16">
 				<HeaderContent />
-			</Container>
+			</TableContainer>
 		</Grid>		
 		<Grid item xs={12}>
 		{
 			state && 
-			<Container component={Paper} className="p-16">
+			<TableContainer component={Paper} className="p-16">
 				<Grid container spacing={2}>
 				<Grid item xs={12} md={6}>
 					<div className="flex mb-20">
@@ -621,7 +621,7 @@ function BodyContent(props) {
 				</Grid>
 				</Grid>
 			</Grid>
-			</Container>	
+			</TableContainer>	
 		}
 		</Grid>
 	</Grid>

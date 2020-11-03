@@ -8,60 +8,11 @@ import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
 import EditContent from "./EditContent";
 
 
-// const useStyles = makeStyles(theme => ({
-// 	layoutRoot: {},
-// 	textField: {
-// 		width: "100%",
-// 		marginRight: ".5rem",
-// 	},
-// 	formControl: {
-// 		minWidth: 120,
-// 	},
-// 	spacingBottom: {
-// 		marginBottom: "2rem"
-// 	},
-// 	dateField: {
-// 		marginLeft: theme.spacing(1),
-// 		marginRight: theme.spacing(1),
-// 		width: 200,
-// 	},
-// }));
-
 const createData = (id, vessel, rank, agent, departure, s_on, s_off, repatriation, s_off_port, s_off_reason, coe) => {
 	return {id, vessel, rank, agent, departure, s_on, s_off, repatriation, s_off_port, s_off_reason, coe};
 };
 
 function BodyContent(props) {
-	// const classes = useStyles(props);
-	const dispatch = useDispatch();
-
-	const handleEdit = (event, param) => {
-		console.log(param);
-		dispatch(openDialog({
-			children: (
-				<React.Fragment>
-					<AppBar position="static" elevation={1}>
-						<Toolbar className="flex w-full">
-							<Typography variant="subtitle1" color="inherit">
-								Edit Company Previous Services
-							</Typography>
-						</Toolbar>
-					</AppBar>
-					<DialogContent>
-						<EditContent />
-					</DialogContent>
-					<DialogActions>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-green-400 hover:bg-green-500">
-							Save
-						</Button>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-red-400 hover:bg-red-500">
-							Cancel
-						</Button>
-					</DialogActions>
-				</React.Fragment>
-				 )
-			 }))		
-	}	
 	const columns = [
 		{
 			field: "vessel",
@@ -113,18 +64,6 @@ function BodyContent(props) {
 			headerName: "COE",
 			width: 130
 		},
-		{
-			field: "action",
-			headerName: "Action",
-			width: 130,
-			renderCell: (param) =>{
-				return <React.Fragment>
-					<Button  variant="contained" onClick={event => handleEdit(event, param)} >
-						<Edit />
-					</Button>
-				</React.Fragment>
-			}
-		}
 	];
 	const rows = [
 		createData(0, "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test"),
@@ -135,6 +74,7 @@ function BodyContent(props) {
 				rows={rows}
 				columns={columns}		
 				rowHeight={25}	
+				checkboxSelection
 			/>
 		</TableContainer>
 	</React.Fragment>

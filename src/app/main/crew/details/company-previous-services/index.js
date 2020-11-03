@@ -5,21 +5,52 @@ import React,{ useState } from 'react';
 import BodyContent from './BodyContent';
 import HeaderContent from './HeaderContent';
 import LeftSidebarContent from '../LeftSidebarContent';
+import ToolbarContent from "./ToolbarContent";
+import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
+import { AppBar, Toolbar, Typography, Button, DialogActions, DialogContent } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import EditContent from "./EditContent";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
 }));
 
 function CompanyPreviousServicesPage(props) {
-	console.log(props);
+	const dispatch = useDispatch();
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
-
-	const [ bodyData, setBodyData ] = useState({});
 
 	const handleSave = () => {
 		console.log(state);
 	};
+
+	const handleEdit = () => {
+		dispatch(openDialog({
+			children: (
+				<React.Fragment>
+					<AppBar position="static" elevation={1}>
+						<Toolbar className="flex w-full">
+							<Typography variant="subtitle1" color="inherit">
+								Edit Company Previous Services
+							</Typography>
+						</Toolbar>
+					</AppBar>
+					<DialogContent>
+						<EditContent />
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-green-400 hover:bg-green-500">
+							Save
+						</Button>
+						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-red-400 hover:bg-red-500">
+							Cancel
+						</Button>
+					</DialogActions>
+				</React.Fragment>
+				 )
+			 }))
+	};
+
 	return (
 		<FusePageSimple
 			classes={{
@@ -28,6 +59,11 @@ function CompanyPreviousServicesPage(props) {
 			header={
 				<div className="px-24 flex items-center">
 					<h4>Edit / View Crew > Company Previous Services</h4>
+				</div>
+			}
+			contentToolbar={
+				<div className="px-24">
+					<ToolbarContent handleEdit={handleEdit} />
 				</div>
 			}
 			content={

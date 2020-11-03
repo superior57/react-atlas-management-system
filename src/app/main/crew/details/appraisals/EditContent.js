@@ -3,6 +3,7 @@ import { Grid, makeStyles } from "@material-ui/core";
 import { TextField, Select, InputLabel, MenuItem, FormControl, TableContainer, Paper } from "@material-ui/core";
 import clsx from "clsx";
 import { DataGrid } from "@material-ui/data-grid";
+import { isEmpty } from "app/functions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,10 +11,56 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function isEmpty(value) {
-    return value ? value : "";
-}
-const minItemWidth = 40;
+const contents1 = [
+    {
+        type: "select",
+        label: "Vessel",
+        children: [
+            "item 1",
+            "item 1",
+        ]
+    },
+    {
+        type: "select",
+        label: "Type",
+        children: [
+            "item 1",
+            "item 1",
+        ]
+    },
+    {
+        type: "text",
+        label: "Assessor Name"
+    },
+    {
+        type: "date",
+        label: "Assessment Date"
+    },
+    {
+        type: "select",
+        label: "Employment Status",
+        children: [
+            "item 1",
+            "item 1",
+        ]
+    },
+    {
+        type: "text",
+        label: "Bad Habits"
+    },
+    {
+        type: "text",
+        label: "To be Promoted"
+    },
+    {
+        type: "text",
+        label: "Reason for dismissal"
+    },
+    {
+        type: "textarea",
+        label: "Notes"
+    },
+];
 
 const EditContent = (props) => {
     const classes = useStyles(props);
@@ -91,56 +138,6 @@ const EditContent = (props) => {
         };
     };
 
-    const contents1 = [
-        {
-            type: "select",
-            label: "Vessel",
-            children: [
-                "item 1",
-                "item 1",
-            ]
-        },
-        {
-            type: "select",
-            label: "Type",
-            children: [
-                "item 1",
-                "item 1",
-            ]
-        },
-        {
-            type: "text",
-            label: "Assessor Name"
-        },
-        {
-            type: "date",
-            label: "Assessment Date"
-        },
-        {
-            type: "select",
-            label: "Employment Status",
-            children: [
-                "item 1",
-                "item 1",
-            ]
-        },
-        {
-            type: "text",
-            label: "Bad Habits"
-        },
-        {
-            type: "text",
-            label: "To be Promoted"
-        },
-        {
-            type: "text",
-            label: "Reason for dismissal"
-        },
-        {
-            type: "textarea",
-            label: "Notes"
-        },
-    ];
     return <React.Fragment>
         <Grid container spacing={2} className="p-8" >
             <Grid item xs={12} md={5} >

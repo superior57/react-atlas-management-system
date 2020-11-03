@@ -1,4 +1,4 @@
-import React,{} from "react";
+import React, {} from "react";
 import { TextField, FormControl, InputLabel, Select, MenuItem, Grid,  } from "@material-ui/core";
 import clsx from "clsx";
 import { isEmpty } from "app/functions";
@@ -6,31 +6,19 @@ import { isEmpty } from "app/functions";
 const contentsLeft = [
     {
         type: "text",
-        label: "Certification",			
+        label: "Vessel",			
     },
     {
         type: "select",
-        label: "S",
+        label: "Vessel Type",
         children: [
             "Type 1", 
             "Type 2",				
         ]
     },
     {
-        type: "text",
-        label: "Number",			
-    },
-    {
-        type: "date",
-        label: "Issued",			
-    },
-    {
-        type: "date",
-        label: "Expired",			
-    },
-    {
         type: "select",
-        label: "Issue Country",
+        label: "Engine Type",
         children: [
             "Type 1", 
             "Type 2",				
@@ -38,10 +26,89 @@ const contentsLeft = [
     },		
     {
         type: "select",
-        label: "On Vsl",
+        label: "Vessel Flag",
         children: [
             "Type 1", 
             "Type 2",				
+        ]
+    },
+    {
+        type: "text",
+        label: "Vessel NRT",			
+    },
+    {
+        type: "text",
+        label: "Vessel GRT",			
+    },
+    {
+        type: "text",
+        label: "Vessel DWT",			
+    },
+];
+
+const contentsRight = [
+    {
+        type: "text",
+        label: "Manager",			
+    },
+    {
+        type: "text",
+        label: "Agency",			
+    },
+    {
+        type: "select",
+        label: "Rank",
+        children: [
+            "Type 1", 
+            "Type 2",				
+        ]
+    },
+    {
+        type: "date",
+        label: "Departure Date",
+        children: [
+            "Type 1", 
+            "Type 2",				
+        ]
+    },		
+    {
+        type: "date",
+        label: "S/On Date",
+        children: [
+            "Type 1", 
+            "Type 2",				
+        ]
+    },
+    {
+        type: "text",
+        label: "S/On Place"
+    },
+    {
+        type: "date",
+        label: "S/Off Date",
+        children: [
+            "Type 1", 
+            "Type 2",				
+        ]
+    },
+    {
+        type: "date",
+        label: "Repartiation Date",
+        children: [
+            "Type 1", 
+            "Type 2",				
+        ]
+    },
+    {
+        type: "text",
+        label: "S/Off Place",			
+    },
+    {
+        type: "select",
+        label: "S/Off Reason",			
+        children: [
+            "Item 1",
+            "Item 2"
         ]
     },
 ];
@@ -109,15 +176,20 @@ const EditContent = (props) => {
             {
                 state && (
                     <Grid container spacing={1}  style={{ minWidth: '50rem' }}>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     {
                         contentsLeft && contentsLeft.map((content, index) => Contents(content, index, "left"))
+                    }						
+                </Grid>
+                <Grid item xs={6}>
+                    {
+                        contentsRight && contentsRight.map((content, index) => Contents(content, index, "rigth"))
                     }						
                 </Grid>
             </Grid>
                 )
             }
         </React.Fragment>)
-}
+};
 
 export default EditContent;

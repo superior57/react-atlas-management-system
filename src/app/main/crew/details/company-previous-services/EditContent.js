@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import { TextField, Select, InputLabel, MenuItem, FormControl } from "@material-ui/core";
 import clsx from "clsx";
+import { isEmpty } from "app/functions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -9,10 +10,76 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function isEmpty(value) {
-    return value ? value : "";
-}
 const minItemWidth = 20;
+
+const contents1 = [
+    {
+        type: "select",
+        label: "Vessel",
+        children: [
+            "item 1",
+            "item 1",
+        ]
+    },
+    {
+        type: "select",
+        label: "Agency",
+        children: [
+            "item 1",
+            "item 1",
+        ]
+    },
+    {
+        type: "select",
+        label: "Rank",
+        children: [
+            "item 1",
+            "item 1",
+        ]
+    },
+    {
+        type: "date",
+        label: "Departure Date"
+    },
+    {
+        type: "date",
+        label: "S/On Date"
+    },
+    {
+        type: "text",
+        label: "S/On Place"
+    },
+    {
+        type: "select",
+        label: "OFB",
+        children: [
+            "item 1",
+            "item 1",
+        ]
+    },
+];
+const contents2 = [
+    {
+        type: "date",
+        label: "S/Off Date"
+    },
+    {
+        type: "date",
+        label: "Repatriation Date"
+    },
+    {
+        type: "text",
+        label: "S/Off Place"
+    },
+    {
+        type: "select",
+        label: "S/Off Reason",
+        children: [
+            "item 1",
+            "item 2"
+        ]
+    },
+];
 
 const EditContent = (props) => {
     const classes = useStyles(props);
@@ -73,75 +140,7 @@ const EditContent = (props) => {
                 />)
         };
     };
-
-    const contents1 = [
-        {
-            type: "select",
-            label: "Vessel",
-            children: [
-                "item 1",
-                "item 1",
-            ]
-        },
-        {
-            type: "select",
-            label: "Agency",
-            children: [
-                "item 1",
-                "item 1",
-            ]
-        },
-        {
-            type: "select",
-            label: "Rank",
-            children: [
-                "item 1",
-                "item 1",
-            ]
-        },
-        {
-            type: "date",
-            label: "Departure Date"
-        },
-        {
-            type: "date",
-            label: "S/On Date"
-        },
-        {
-            type: "text",
-            label: "S/On Place"
-        },
-        {
-            type: "select",
-            label: "OFB",
-            children: [
-                "item 1",
-                "item 1",
-            ]
-        },
-    ];
-    const contents2 = [
-        {
-            type: "date",
-            label: "S/Off Date"
-        },
-        {
-            type: "date",
-            label: "Repatriation Date"
-        },
-        {
-            type: "text",
-            label: "S/Off Place"
-        },
-        {
-            type: "select",
-            label: "S/Off Reason",
-            children: [
-                "item 1",
-                "item 2"
-            ]
-        },
-    ];
+    
     return <React.Fragment>
         <Grid container spacing={2} className="p-8">
             <Grid item xs={12} md={5} style={{ minWidth: `${minItemWidth}rem` }}>
@@ -206,22 +205,19 @@ const EditContent = (props) => {
                         />
                     </Grid>
                     <Grid item xs={8}> 
-                        <FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-16")} size="small">
-                            <InputLabel id={`select-label-ext-contract`}>Ext.Contract</InputLabel>
-                            <Select
-                                labelId={`select-label-ext-contract`}
-                                value={isEmpty(state[`right_select_ext_contract`])}
-                                onChange={handleChange}
-                                label="Ext.Contract"
-                                name={`right_select_ext_contract`}
-                            >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={1}>item 1</MenuItem>
-                                <MenuItem value={2}>item 2</MenuItem>
-                            </Select>
-                        </FormControl>
+                        <TextField 
+                            variant="outlined"
+                            label="Ext.Contract"
+                            className="w-full mb-16 mr-5"
+                            size="small"
+                            value={isEmpty(state[`right_select_ext_contract`])}	
+                            name={`right_select_ext_contract`}	
+                            onChange={handleChange}
+                            type="date"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
                     </Grid>
                 </Grid>
             </Grid>

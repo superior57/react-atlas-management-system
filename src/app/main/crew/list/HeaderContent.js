@@ -15,6 +15,7 @@ import {
 import React, {	useState } from 'react';
 import clsx from "clsx";
 import { Search } from "@material-ui/icons";
+import { isEmpty } from "app/functions";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
@@ -43,12 +44,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function isEmpty(value) {
-	return value ? value : "";
-}
-
 function HeaderContent(props) {
-	console.log(props);
 	const [state, setState] = useState({});
 
 	const classes = useStyles(props);

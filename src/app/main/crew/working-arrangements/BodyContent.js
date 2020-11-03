@@ -1,11 +1,9 @@
-import { DataGrid} from "@material-ui/data-grid";
-
 import React, {  } from 'react';
 import { useHistory } from "react-router-dom";
 import HeaderContent from './HeaderContent';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
-import { Grid, Typography, TableCell, Table, TableRow, TableBody, TableHead } from "@material-ui/core";
+import { Grid, Typography} from "@material-ui/core";
 import TableSchedule from "./TableSchedule";
 import { makeStyles } from "@material-ui/core/styles";
 import { data_head, data } from "./demoData";

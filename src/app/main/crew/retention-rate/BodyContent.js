@@ -1,5 +1,4 @@
 import { DataGrid} from "@material-ui/data-grid";
-
 import React, {  } from 'react';
 import { useHistory } from "react-router-dom";
 import HeaderContent from './HeaderContent';

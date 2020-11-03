@@ -1,12 +1,9 @@
 import { DataGrid} from "@material-ui/data-grid";
-
 import React, {  } from 'react';
 import { useHistory } from "react-router-dom";
 import HeaderContent from './HeaderContent';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
-
-
   
 function createData( id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action ) {
 	return { id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action };
@@ -56,7 +53,7 @@ function BodyContent(props) {
 
 	function handleClick(row) {
 		// console.log(row);
-		history.push(`/crew/details/${row.id}/personal-details`);
+		// history.push(`/crew/details/${row.id}/personal-details`);
 	}
 	return <>
 	 	<HeaderContent />		 
@@ -68,6 +65,7 @@ function BodyContent(props) {
 					onRowClick={event => handleClick(event.rowModel)} 
 					rowHeight={25}
 					className="shadow-2xl"
+					checkboxSelection
 				/>
 			</div>
 		</TableContainer>		

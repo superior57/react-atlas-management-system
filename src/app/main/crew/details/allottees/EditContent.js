@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
-import { TextField, Select, InputLabel, MenuItem, FormControl, TableContainer, Paper } from "@material-ui/core";
+import { TextField, Select, InputLabel, MenuItem, FormControl} from "@material-ui/core";
 import clsx from "clsx";
-import { DataGrid } from "@material-ui/data-grid";
+import { isEmpty } from "app/functions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,10 +10,52 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function isEmpty(value) {
-    return value ? value : "";
-}
-const minItemWidth = 40;
+const contents1 = [
+    {
+        type: "text",
+        label: "Name"
+    },
+    {
+        type: "text",
+        label: "Phone"
+    },
+    {
+        type: "text",
+        label: "Mobile"
+    },
+    {
+        type: "text",
+        label: "Email"
+    },
+];
+const contents2 = [
+    {
+        type: "select",
+        label: "Relation",
+        children: [
+            "Item 1",
+            "Item 2"
+        ]
+    },
+    {
+        type: "textarea",
+        label: "Home Address"
+    }
+];
+const contents3 = [
+    {
+        type: "text",
+        label: "Bank"
+    },
+    {
+        type: "text",
+        label: "Bank Account"
+    },        
+];
+const amount = {
+    type: "text",
+    label: "Amount"
+};
 
 const EditContent = (props) => {
     const classes = useStyles(props);
@@ -89,54 +131,7 @@ const EditContent = (props) => {
                     }}
                 />)
         };
-    };
-
-    const contents1 = [
-        {
-            type: "text",
-            label: "Name"
-        },
-        {
-            type: "text",
-            label: "Phone"
-        },
-        {
-            type: "text",
-            label: "Mobile"
-        },
-        {
-            type: "text",
-            label: "Email"
-        },
-    ];
-    const contents2 = [
-        {
-            type: "select",
-            label: "Relation",
-            children: [
-                "Item 1",
-                "Item 2"
-            ]
-        },
-        {
-            type: "textarea",
-            label: "Home Address"
-        }
-    ];
-    const contents3 = [
-        {
-            type: "text",
-            label: "Bank"
-        },
-        {
-            type: "text",
-            label: "Bank Account"
-        },        
-    ];
-    const amount = {
-        type: "text",
-        label: "Amount"
-    };
+    };    
 
     return <React.Fragment>
         <Grid container spacing={2} className="p-8" >

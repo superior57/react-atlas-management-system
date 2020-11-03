@@ -1,13 +1,10 @@
-import React, {
-	useState
-} from 'react';
+import React, {} from 'react';
 
 import { 
 	Button,
 	colors
 } from '@material-ui/core';
-import { makeStyles, withStyles, createMuiTheme } from '@material-ui/core/styles';
-import clsx from "clsx";
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import { 
 	Refresh,

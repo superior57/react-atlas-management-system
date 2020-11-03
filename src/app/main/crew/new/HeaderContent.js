@@ -1,13 +1,6 @@
-import React, {
-	useState
-} from 'react';
-
-import { 
-	Button,
-	colors
-} from '@material-ui/core';
-import { makeStyles, withStyles, createMuiTheme } from '@material-ui/core/styles';
-import clsx from "clsx";
+import React, {} from 'react';
+import { Button, colors } from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
