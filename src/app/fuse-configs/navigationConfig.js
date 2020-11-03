@@ -76,6 +76,14 @@ const navigationConfig = [
 						type: 'item',
 						icon: 'whatshot',
 						url: '/crew/working-arrangements'
+					},
+					{
+						id: 'crew-vessel-operation-type',
+						title: 'Vessel Operation Type',
+						translate: 'VESSEL OPERATION TYPE',
+						type: 'item',
+						icon: 'whatshot',
+						url: '/crew/vessel-operation-type'
 					}
 				]
 			},

@@ -13,6 +13,7 @@ import List from "./crew/list";
 import RetentionRatePage from './crew/retention-rate';
 import WRHListPage from './crew/wrh-list';
 import WorkingArrangementsPage from './crew/working-arrangements';
+import VesselOperationTypePage from './crew/vessel-operation-type';
 
 const PagesRouteConfig = {
 	routes: [
@@ -79,6 +80,10 @@ const PagesRouteConfig = {
 		{
 			path: '/crew/working-arrangements',
 			component: WorkingArrangementsPage
+		},
+		{
+			path: '/crew/vessel-operation-type',
+			component: VesselOperationTypePage
 		}
 	]
 };

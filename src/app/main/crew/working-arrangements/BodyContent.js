@@ -76,7 +76,7 @@ function BodyContent(props) {
 
 	console.log(rows);
 	return <React.Fragment>
-		<Grid container spacing={1} className="h-full w-full flex">
+		<Grid container spacing={1} className="h-full w-full block">
 			<Grid item xs={12} className="flex w-full">
 				<HeaderContent />
 			</Grid>		

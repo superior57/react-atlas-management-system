@@ -28,20 +28,6 @@ const columns = [
 	{ field: 'last_rank', headerName: 'Last Rank', width: 130 },
 	{ field: 'vessel', headerName: 'Vessel', width: 130 },
 	{ field: 'status', headerName: 'Status', width: 130 },
-	// {
-	// 	field: "",
-	// 	headerName: "Action",
-	// 	disableClickEventBubbling: true,
-	// 	renderCell: (params) => {
-	// 	  const onClick = (e) => {
-	// 		  console.log(e);
-
-	// 	  };
-	
-	// 	  return <Button variant="contained" onClick={event=>onClick(event)}>Edit</Button>;
-	// 	}
-	// }
-
   ];
   
 const rows = [

@@ -91,7 +91,7 @@ function BodyContent(props) {
 		history.push(`/crew/edit/${row.id}/personal-details`);
 	}
 	return <React.Fragment>
-		<Grid container spacing={2} className="h-full w-full flex">
+		<Grid container spacing={2} className="h-full w-full block">
 			<Grid item xs={12} className="flex w-full">
 				<HeaderContent />
 			</Grid>		
