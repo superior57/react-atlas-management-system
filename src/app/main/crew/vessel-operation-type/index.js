@@ -16,7 +16,7 @@ function VesselOperationTypePage(props) {
 				root: classes.layoutRoot
 			}}
 			header={
-				<div className="p-24">
+				<div className="px-24 flex items-center">
 					<h4>Vessel Operation Type</h4>
 				</div>
 			}

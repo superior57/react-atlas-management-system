@@ -16,7 +16,7 @@ function WorkingArrangementsPage(props) {
 				root: classes.layoutRoot
 			}}
 			header={
-				<div className="p-24">
+				<div className="px-24 flex items-center">
 					<h4>Crew Working Arrangements</h4>
 				</div>
 			}

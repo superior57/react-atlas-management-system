@@ -23,7 +23,7 @@ function NewPage(props) {
 				root: classes.layoutRoot
 			}}
 			header={
-				<div className="p-24">
+				<div className="px-24 flex items-center">
 					<h4>New Crew</h4>
 				</div>
 			}

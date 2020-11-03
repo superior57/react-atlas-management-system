@@ -35,6 +35,9 @@ function NavbarLayout1(props) {
 				position="static"
 				elevation={0}
 				className="flex flex-row items-center flex-shrink h-48 md:h-64 min-h-48 md:min-h-64 px-12"
+				style={{
+					height: 94
+				}}
 			>
 				<div className="flex flex-1 mx-8">
 					<Logo />
@@ -52,7 +55,7 @@ function NavbarLayout1(props) {
 			</AppBar>
 
 			<FuseScrollbars className={clsx(classes.content)} option={{ suppressScrollX: true }}>
-				<UserNavbarHeader />
+				{/* <UserNavbarHeader /> */}
 
 				<Navigation layout="vertical" />
 			</FuseScrollbars>

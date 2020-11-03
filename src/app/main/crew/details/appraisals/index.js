@@ -26,9 +26,8 @@ function AppraisalsPage(props) {
 				root: classes.layoutRoot
 			}}
 			header={
-				<div className="p-24">
-					<h4>Edit / View Crew</h4>
-					<h5>Appraisals</h5>
+				<div className="px-24 flex items-center">
+					<h4>Edit / View Crew > Appraisals</h4>
 				</div>
 			}
 			content={

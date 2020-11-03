@@ -16,7 +16,7 @@ function ListPage(props) {
 				root: classes.layoutRoot
 			}}
 			header={
-				<div className="p-24">
+				<div className="px-24 flex items-center">
 					<h4>Crew List</h4>
 				</div>
 			}
