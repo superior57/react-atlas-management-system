@@ -12,7 +12,7 @@ const routes = [
 	...FuseUtils.generateRoutesFromConfigs(routeConfigs),
 	{
 		path: '/',
-		component: () => <Redirect to="/crew/new" />
+		component: () => <Redirect to="/dashboard" />
 	}
 ];
 
