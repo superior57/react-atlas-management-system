@@ -131,7 +131,8 @@ function CertificatesPage(props) {
 					<BodyContent state={state} setState={setState}/>
 				</div>
 			}
-			leftSidebarContent={<LeftSidebarContent />}			
+			leftSidebarContent={<LeftSidebarContent />}		
+			sidebarInner	
 		/>
 	);
 }

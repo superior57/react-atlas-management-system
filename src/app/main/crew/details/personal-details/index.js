@@ -48,6 +48,7 @@ function PersonalDetailsPage(props) {
 				</div>
 			}
 			leftSidebarContent={<LeftSidebarContent />}	
+			sidebarInner
 		/>
 	);
 }

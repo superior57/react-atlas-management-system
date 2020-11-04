@@ -57,7 +57,7 @@ function CertificatesPage(props) {
 			}}
 			header={
 				<div className="px-24 flex items-center">
-					<h4>Crew Ranks</h4>
+					<h4>Crew Certificates</h4>
 				</div>
 			}
 			contentToolbar={
