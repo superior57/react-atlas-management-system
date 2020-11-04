@@ -14,7 +14,9 @@ import RetentionRatePage from './crew/retention-rate';
 import WRHListPage from './crew/wrh-list';
 import WorkingArrangementsPage from './crew/working-arrangements';
 import VesselOperationTypePage from './crew/vessel-operation-type';
+import RanksPage from "./crew/ranks";
 import DashboardPage from './dashboard';
+import CrewCertificatesPage from "./crew/certificates";
 
 const PagesRouteConfig = {
 	routes: [
@@ -63,10 +65,6 @@ const PagesRouteConfig = {
 			component: TrainingPage
 		},
 		{
-			path: '/crew/details/:crewId/certificates',
-			component: CertificatesPage
-		},
-		{
 			path: '/crew/list',
 			component: List
 		},
@@ -85,6 +83,14 @@ const PagesRouteConfig = {
 		{
 			path: '/crew/vessel-operation-type',
 			component: VesselOperationTypePage
+		},
+		{
+			path: '/crew/ranks',
+			component: RanksPage
+		},
+		{
+			path: '/crew/certificates',
+			component: CrewCertificatesPage
 		},
 		{
 			path: '/dashboard',

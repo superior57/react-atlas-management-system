@@ -85,6 +85,20 @@ const navigationConfig = [
 						translate: 'VESSEL OPERATION TYPE',
 						type: 'item',
 						url: '/crew/vessel-operation-type'
+					},
+					{
+						id: 'crew-ranks',
+						title: 'Ranks',
+						translate: 'RANKS',
+						type: 'item',
+						url: '/crew/ranks'
+					},
+					{
+						id: 'crew-certificates',
+						title: 'Certificates',
+						translate: 'CERTIFICATES',
+						type: 'item',
+						url: '/crew/certificates'
 					}
 				]
 			},		
