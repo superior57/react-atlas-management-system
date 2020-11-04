@@ -17,6 +17,7 @@ import {
 import clsx from "clsx";
 import {EditableAvatar} from "app/components/Avatar";
 import HeaderContent from './HeaderContent';
+import { isEmpty } from "app/functions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -40,10 +41,6 @@ const useStyles = makeStyles(theme => ({
 		
 	}
 }));
-
-function isEmpty(value) {
-	return value ? value : "";
-}
 
 function BodyContent(props) {
 	const {state, setState} = props;

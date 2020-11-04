@@ -16,17 +16,25 @@ const navigationConfig = [
 	// 	icon: 'apps',
 	// 	children: [
 			{
+				id: 'dashboard',
+				title: 'Dashboard',
+				translate: 'DASHBOARD',
+				type: 'item',
+				icon: 'dashboard',
+				url: '/dashboard'
+			},
+			{
 				id: "crew",
 				title: 'Crew',
 				translate: "CREW",
 				type: "collapse",
+				icon: 'whatshot',
 				children: [
 					{
 						id: 'crew-new',
 						title: 'New',
 						translate: 'NEW',
 						type: 'item',
-						icon: 'whatshot',
 						url: '/crew/new'
 					},
 					{
@@ -34,7 +42,6 @@ const navigationConfig = [
 						title: 'Search',
 						translate: 'SEARCH',
 						type: 'item',
-						icon: 'whatshot',
 						url: '/crew/search'
 					},
 					{
@@ -42,7 +49,6 @@ const navigationConfig = [
 						title: 'Edit / View',
 						translate: 'EDIT / VIEW',
 						type: 'item',
-						icon: 'whatshot',
 						url: '/crew/details/1/personal-details'
 					},
 					{
@@ -50,7 +56,6 @@ const navigationConfig = [
 						title: 'List',
 						translate: 'LIST',
 						type: 'item',
-						icon: 'whatshot',
 						url: '/crew/list'
 					},
 					{
@@ -58,7 +63,6 @@ const navigationConfig = [
 						title: 'Retention Rate',
 						translate: 'RETENTION RATE',
 						type: 'item',
-						icon: 'whatshot',
 						url: '/crew/retention-rate'
 					},
 					{
@@ -66,7 +70,6 @@ const navigationConfig = [
 						title: 'WRH List',
 						translate: 'WRH LIST',
 						type: 'item',
-						icon: 'whatshot',
 						url: '/crew/wrh-list'
 					},
 					{
@@ -74,7 +77,6 @@ const navigationConfig = [
 						title: 'Working Arrangements',
 						translate: 'WORKING ARRAGEMENTS',
 						type: 'item',
-						icon: 'whatshot',
 						url: '/crew/working-arrangements'
 					},
 					{
@@ -82,11 +84,10 @@ const navigationConfig = [
 						title: 'Vessel Operation Type',
 						translate: 'VESSEL OPERATION TYPE',
 						type: 'item',
-						icon: 'whatshot',
 						url: '/crew/vessel-operation-type'
 					}
 				]
-			},
+			},		
 			
 	// 	]
 	// }

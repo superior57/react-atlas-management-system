@@ -14,6 +14,7 @@ import RetentionRatePage from './crew/retention-rate';
 import WRHListPage from './crew/wrh-list';
 import WorkingArrangementsPage from './crew/working-arrangements';
 import VesselOperationTypePage from './crew/vessel-operation-type';
+import DashboardPage from './dashboard';
 
 const PagesRouteConfig = {
 	routes: [
@@ -84,6 +85,10 @@ const PagesRouteConfig = {
 		{
 			path: '/crew/vessel-operation-type',
 			component: VesselOperationTypePage
+		},
+		{
+			path: '/dashboard',
+			component: DashboardPage
 		}
 	]
 };
