@@ -2,6 +2,9 @@ import React, {} from "react";
 import { Fab, Icon, IconButton, Button, TableContainer } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
+import { useDispatch, useSelector } from "react-redux";
+import { openDialog } from "./store/dialogSlice";
+import { deleteRank } from "./store/rankSlice";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -19,19 +22,33 @@ const useStyles = makeStyles(theme => ({
 
 const ToolbarContent = (props) => {
     const classes = useStyles();
-    const { handleEdit } = props;
+    const dispatch = useDispatch();
+   const { rank } = useSelector(state => state.rankApp);
+
+    const handleNew = (event) => {
+		dispatch(openDialog({type: "New"}));
+	}
+
+    const handleEdit = (event) => {
+		dispatch(openDialog({type: "Edit"}));
+    }
+    const handleDelete = (event) => {
+        if(window.confirm("Are you sure to delete this item?")){
+            if(rank.recent) {
+                dispatch(deleteRank(rank.recent));
+            }
+        }        
+    }
+
     return <React.Fragment>
         <div className={clsx(classes.root, "w-full flex")}>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={event => handleNew(event)}>
                 <Icon>add</Icon> New
             </Button>
             <Button variant="contained" color="secondary" onClick={event => handleEdit(event)}>
                 <Icon>edit</Icon> Edit
             </Button>
-            <Button variant="contained" color="secondary">
-                <Icon>save</Icon> Save
-            </Button>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={event => handleDelete(event)}>
                 <Icon>delete</Icon>
             </Button>
         </div>

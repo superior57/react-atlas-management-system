@@ -10,7 +10,6 @@ const dialogSlice = createSlice({
 	},
 	reducers: {
 		openDialog: (state, action) => {
-			console.log(action);
 			state.state = true;
 			state.options = action.payload;
 		},

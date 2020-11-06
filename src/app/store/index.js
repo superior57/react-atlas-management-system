@@ -25,7 +25,7 @@ const store = configureStore({
 					'dialog/openDialog',
 					'dialog/closeDialog',
 					'message/showMessage',
-					'message/hideMessage'
+					'message/hideMessage',
 				]
 			}
 		}).concat(middlewares),

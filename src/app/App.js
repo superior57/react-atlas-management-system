@@ -15,6 +15,9 @@ import AppContext from './AppContext';
 import { Auth } from './auth';
 import routes from './fuse-configs/routesConfig';
 import store from './store';
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:8000";
 
 const jss = create({
 	...jssPreset(),
