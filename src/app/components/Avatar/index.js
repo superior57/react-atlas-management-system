@@ -1,11 +1,24 @@
 import React,{ useState } from "react";
 import axios from "axios";
 
-export const EditableAvatar = () =>{ 
+export const EditableAvatar = (props) =>{ 
+
+	const { onChange, name } = props;
 
 	const [ state, setState ] = useState({
 		file: ""
 	});
+
+	React.useEffect(() => {
+		if(state.file) {
+			onChange({
+				target: {
+					value: state.file,
+					name: name
+				}
+			});	
+		}
+	}, [state.file])
 
 	const toBase64 = file => new Promise((resolve, reject) => {
 		const reader = new FileReader();
@@ -16,13 +29,12 @@ export const EditableAvatar = () =>{
 
 	const handleFileChange = async (e) => {
 		const file = e.target.files[0];
-		// console.log(await toBase64(file));
 		if(file) {
 			setState({
 				...state,
 				file: await toBase64(file)
 			});
-		}		
+		}			
 	}
 
 	return 	<>
@@ -44,5 +56,6 @@ export const EditableAvatar = () =>{
 			}}
 			onChange={(event) => handleFileChange(event)}
 		/>
+		<input type="hidden" name={name} value={state.file} />
 	</>;
 }

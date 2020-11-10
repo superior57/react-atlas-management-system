@@ -5,9 +5,7 @@ import BodyContent from './BodyContent';
 import LeftSidebarContent from './../LeftSidebarContent';
 
 import ToolbarContent from "./ToolbarContent";
-import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
 import { AppBar, Toolbar, Typography, Button, DialogActions, DialogContent } from "@material-ui/core";
-import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {
@@ -21,12 +19,6 @@ function PersonalDetailsPage(props) {
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
 
-	const [ bodyData, setBodyData ] = useState({});
-
-	const handleEdit = () => {
-
-	}
-
 	return (
 		<FusePageSimple
 			classes={{
@@ -39,7 +31,7 @@ function PersonalDetailsPage(props) {
 			}
 			contentToolbar={
 				<div className="px-24">
-					<ToolbarContent handleEdit={handleEdit} />
+					<ToolbarContent state={state} setState={setState}/>
 				</div>
 			}
 			content={

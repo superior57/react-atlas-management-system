@@ -44,13 +44,13 @@ const navigationConfig = [
 						type: 'item',
 						url: '/crew/search'
 					},
-					{
-						id: 'crew-edit',
-						title: 'Edit / View',
-						translate: 'EDIT / VIEW',
-						type: 'item',
-						url: '/crew/details/1/personal-details'
-					},
+					// {
+					// 	id: 'crew-edit',
+					// 	title: 'Edit / View',
+					// 	translate: 'EDIT / VIEW',
+					// 	type: 'item',
+					// 	url: '/crew/details/:crewId/personal-details'
+					// },
 					{
 						id: 'crew-list',
 						title: 'List',

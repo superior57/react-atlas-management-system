@@ -55,11 +55,6 @@ function BodyContent(props) {
 
 	return <Grid container spacing={2}>
 		<Grid item xs={12}>
-			<TableContainer component={Paper} className="p-16">
-				<HeaderContent />
-			</TableContainer>
-		</Grid>		
-		<Grid item xs={12}>
 		{
 			state && 
 			<TableContainer component={Paper} className="p-16">
@@ -71,18 +66,18 @@ function BodyContent(props) {
 							label="Last Name"
 							variant="outlined"	
 							className={classes.textField}
-							value={isEmpty(state.l_name)}					
+							value={isEmpty(state.LAST_NAME)}					
 							onChange={handleChange}		
-							name="l_name"
+							name="LAST_NAME"
 							size="small"			
 						/>	
 						<TextField
 							label="Middle Name"
 							variant="outlined"		
 							className={classes.textField}
-							value={isEmpty(state.m_name)}						
+							value={isEmpty(state.MIDDLE_NAME)}						
 							onChange={handleChange}
-							name="m_name"
+							name="MIDDLE_NAME"
 							size="small"
 						/>				
 					</div>
@@ -92,9 +87,9 @@ function BodyContent(props) {
 							label="First Name"
 							variant="outlined"		
 							className={classes.textField}
-							value={isEmpty(state.f_name)}						
+							value={isEmpty(state.FIRST_NAME)}						
 							onChange={handleChange}
-							name="f_name"
+							name="FIRST_NAME"
 							size="small"
 						/>
 						<div className="w-full">
@@ -102,10 +97,10 @@ function BodyContent(props) {
 								<InputLabel id="sex-label">Sex</InputLabel>
 								<Select
 									labelId="sex-label"
-									value={isEmpty(state.sex)}
+									value={isEmpty(state.SEX_TYPE_CODE)}
 									onChange={handleChange}
 									label="Sex"
-									name="sex"
+									name="SEX_TYPE_CODE"
 								>
 								<MenuItem value="">
 									<em>None</em>
@@ -121,18 +116,18 @@ function BodyContent(props) {
 							label="Father Name"
 							variant="outlined"		
 							className={classes.textField}
-							value={isEmpty(state.father_name)}						
+							value={isEmpty(state.FATHER_NAME)}						
 							onChange={handleChange}
-							name="father_name"
+							name="FATHER_NAME"
 							size="small"
 						/>
 						<TextField
 							label="Mother Name"
 							variant="outlined"		
 							className={classes.textField}	
-							value={isEmpty(state.mother_name)}						
+							value={isEmpty(state.MOTHER_NAME)}						
 							onChange={handleChange}
-							name="mother_name"	
+							name="MOTHER_NAME"	
 							size="small"
 						/>
 					</div>
@@ -141,9 +136,9 @@ function BodyContent(props) {
 							label="Wife's Name"
 							variant="outlined"		
 							className={classes.textField}
-							value={isEmpty(state.wife_name)}						
+							value={isEmpty(state.WIFE_NAME)}						
 							onChange={handleChange}
-							name="wife_name"
+							name="WIFE_NAME"
 							size="small"
 						/>
 						<TextField
@@ -151,9 +146,9 @@ function BodyContent(props) {
 							variant="outlined"		
 							className={classes.textField}		
 							type="number"
-							value={isEmpty(state.no_child)}						
+							value={isEmpty(state.NO_OF_CHILDS)}						
 							onChange={handleChange}
-							name="no_child"
+							name="NO_OF_CHILDS"
 							size="small"
 						/>
 					</div>
@@ -166,18 +161,18 @@ function BodyContent(props) {
 							InputLabelProps={{
 								shrink: true,
 							}}
-							value={isEmpty(state.birthday)}
+							value={isEmpty(state.BIRTH_DATE)}
 							onChange={handleChange}
-							name="birthday"
+							name="BIRTH_DATE"
 							size="small"
 						/>
 						<TextField
 							label="Birth Place"
 							variant="outlined"		
 							className={classes.textField}		
-							value={isEmpty(state.birth_place)}						
+							value={isEmpty(state.BIRTH_PLACE)}						
 							onChange={handleChange}
-							name="birth_place"
+							name="BIRTH_PLACE"
 							size="small"
 						/>
 					</div>
@@ -186,18 +181,18 @@ function BodyContent(props) {
 							label="Telephone 1"
 							variant="outlined"		
 							className={classes.textField}
-							value={isEmpty(state.tel_1)}						
+							value={isEmpty(state.TELEPHONE_1)}						
 							onChange={handleChange}
-							name="tel_1"
+							name="TELEPHONE_1"
 							size="small"
 						/>
 						<TextField
 							label="Telephone 2"
 							variant="outlined"		
 							className={classes.textField}
-							value={isEmpty(state.tel_2)}						
+							value={isEmpty(state.TELEPHONE_2)}						
 							onChange={handleChange}
-							name="tel_2"	
+							name="TELEPHONE_2"	
 							size="small"	
 						/>
 					</div>
@@ -206,18 +201,18 @@ function BodyContent(props) {
 							label="Fax"
 							variant="outlined"		
 							className={classes.textField}
-							value={isEmpty(state.fax)}						
+							value={isEmpty(state.FAX_1)}						
 							onChange={handleChange}
-							name="fax"
+							name="FAX_1"
 							size="small"
 						/>
 						<TextField
 							label="Skype"
 							variant="outlined"		
 							className={classes.textField}
-							value={isEmpty(state.skype)}						
+							value={isEmpty(state.SKYPE_ACCOUNT)}						
 							onChange={handleChange}
-							name="skype"	
+							name="SKYPE_ACCOUNT"	
 							size="small"
 						/>
 					</div>
@@ -226,18 +221,18 @@ function BodyContent(props) {
 							label="Mobile 1"
 							variant="outlined"		
 							className={classes.textField}
-							value={isEmpty(state.mobile_1)}						
+							value={isEmpty(state.MOBILE_1)}						
 							onChange={handleChange}
-							name="mobile_1"
+							name="MOBILE_1"
 							size="small"
 						/>
 						<TextField
 							label="Mobile 2"
 							variant="outlined"		
 							className={classes.textField}	
-							value={isEmpty(state.mobile_2)}						
+							value={isEmpty(state.MOBILE_2)}						
 							onChange={handleChange}
-							name="mobile_2"	
+							name="MOBILE_2"	
 							size="small"
 						/>
 					</div>
@@ -247,9 +242,9 @@ function BodyContent(props) {
 							variant="outlined"		
 							className={classes.textField}
 							type="email"
-							value={isEmpty(state.email_1)}						
+							value={isEmpty(state.EMAIL_1)}						
 							onChange={handleChange}
-							name="email_1"
+							name="EMAIL_1"
 							size="small"
 						/>
 						<TextField
@@ -257,9 +252,9 @@ function BodyContent(props) {
 							variant="outlined"	
 							className={classes.textField}	
 							type="email"	
-							value={isEmpty(state.email_2)}						
+							value={isEmpty(state.EMAIL_2)}						
 							onChange={handleChange}
-							name="email_2"
+							name="EMAIL_2"
 							size="small"
 						/>
 					</div>
@@ -270,9 +265,9 @@ function BodyContent(props) {
 							rows={3}
 							variant="outlined"
 							className={classes.textField}
-							value={isEmpty(state.home_address)}						
+							value={isEmpty(state.HOME_ADDRESS)}						
 							onChange={handleChange}
-							name="home_address"
+							name="HOME_ADDRESS"
 							size="small"
 						/>
 					</div>
@@ -283,9 +278,9 @@ function BodyContent(props) {
 							rows={3}
 							variant="outlined"
 							className={classes.textField}
-							value={isEmpty(state.temp_address)}						
+							value={isEmpty(state.TEMP_ADDRESS)}						
 							onChange={handleChange}
-							name="temp_address"
+							name="TEMP_ADDRESS"
 							size="small"
 						/>
 					</div>
@@ -294,10 +289,10 @@ function BodyContent(props) {
 							<InputLabel id="country-label">Country</InputLabel>
 							<Select
 								labelId="country-label"
-								value={isEmpty(state.country)}
+								value={isEmpty(state.COUNTRY_CODE)}
 								onChange={handleChange}
 								label="Country"
-								name="country"
+								name="COUNTRY_CODE"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -314,10 +309,10 @@ function BodyContent(props) {
 							<InputLabel id="nearest-port-label">Nearest Port</InputLabel>
 							<Select
 								labelId="nearest-port-label"
-								value={isEmpty(state.nearest_port)}
+								value={isEmpty(state.NEAREST_PORT_CODE)}
 								onChange={handleChange}
 								label="Nearest Port"
-								name="nearest_port"
+								name="NEAREST_PORT_CODE"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -331,9 +326,9 @@ function BodyContent(props) {
 							label="Nearest Airport"
 							variant="outlined"	
 							className={classes.textField}
-							value={isEmpty(state.nearest_airport)}						
+							value={isEmpty(state.NEAREST_AIRPORT)}						
 							onChange={handleChange}
-							name="nearest_airport"	
+							name="NEAREST_AIRPORT"	
 							size="small"
 						/>
 					</div>
@@ -346,10 +341,10 @@ function BodyContent(props) {
 							<InputLabel id="rank-label">Rank</InputLabel>
 							<Select
 								labelId="rank-label"
-								value={isEmpty(state.rank)}
+								value={isEmpty(state.RANK_CODE)}
 								onChange={handleChange}
 								label="Rank"
-								name="rank"
+								name="RANK_CODE"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -363,10 +358,10 @@ function BodyContent(props) {
 							<InputLabel id="nation-label">Nation</InputLabel>
 							<Select
 								labelId="nation-label"
-								value={isEmpty(state.nation)}
+								value={isEmpty(state.NAT_CODE)}
 								onChange={handleChange}
 								label="Nation"
-								name="nation"
+								name="NAT_CODE"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -380,10 +375,10 @@ function BodyContent(props) {
 							<InputLabel id="religion-label">Religion</InputLabel>
 							<Select
 								labelId="religion-label"
-								value={isEmpty(state.religion)}
+								value={isEmpty(state.RELIGION_CODE)}
 								onChange={handleChange}
 								label="Religion"
-								name="religion"
+								name="RELIGION_CODE"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -397,10 +392,10 @@ function BodyContent(props) {
 							<InputLabel id="nearest-port-label">Marital Status</InputLabel>
 							<Select
 								labelId="nearest-port-label"
-								value={isEmpty(state.marital_status)}
+								value={isEmpty(state.MARITAL_STATUS_CODE)}
 								onChange={handleChange}
 								label="Marital Status"
-								name="marital_status"
+								name="MARITAL_STATUS_CODE"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -416,7 +411,10 @@ function BodyContent(props) {
 							width: "20rem",
 							height: "22rem"
 						}}>
-							<EditableAvatar />
+							<EditableAvatar 
+								onChange={handleChange}
+								name="CREW_PHOTO"
+							/>
 						</div>
 					</Grid>
 					<Grid item xs={7} className="flex">
@@ -424,10 +422,10 @@ function BodyContent(props) {
 							<InputLabel id="manning-agent-label">Manning Agent</InputLabel>
 							<Select
 								labelId="manning-agent-label"
-								value={isEmpty(state.manning_agent)}
+								value={isEmpty(state.M_AGENT_CODE)}
 								onChange={handleChange}
 								label="Manning Agent"
-								name="manning_agent"
+								name="M_AGENT_CODE"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -442,10 +440,10 @@ function BodyContent(props) {
 							<InputLabel id="only-for-manager-label">Only for Manager</InputLabel>
 							<Select
 								labelId="only-for-manager-label"
-								value={isEmpty(state.only_for_manager)}
+								value={isEmpty(state.ONLY_FOR_FLEET_CODE)}
 								onChange={handleChange}
 								label="Only for Manager"
-								name="only_for_manager"
+								name="ONLY_FOR_FLEET_CODE"
 							>
 							<MenuItem value="">
 								<em>None</em>
@@ -461,9 +459,9 @@ function BodyContent(props) {
 						rows={3}
 						variant="outlined"
 						className={clsx(classes.textField, classes.spacingBottom)}
-						value={isEmpty(state.notes)}						
+						value={isEmpty(state.CREW_NOTES)}						
 						onChange={handleChange}
-						name="notes"
+						name="CREW_NOTES"
 						size="small"
 					/>	
 					<TextField
@@ -472,9 +470,9 @@ function BodyContent(props) {
 						rows={3}
 						variant="outlined"
 						className={clsx(classes.textField, classes.spacingBottom)}
-						value={isEmpty(state.bank_acc)}						
+						value={isEmpty(state.BANK_ACCOUNT)}						
 						onChange={handleChange}
-						name="bank_acc"
+						name="BANK_ACCOUNT"
 						size="small"
 					/>
 					<Grid container spacing={1} className={clsx(classes.spacingBottom)}>
@@ -485,9 +483,9 @@ function BodyContent(props) {
 								variant="outlined"	
 								className={classes.textField}
 								type="date"
-								value={isEmpty(state.avail_date_from)}						
+								value={isEmpty(state.AV_FROM)}						
 								onChange={handleChange}
-								name="avail_date_from"
+								name="AV_FROM"
 								InputLabelProps={{
 									shrink: true
 								}}
@@ -501,9 +499,9 @@ function BodyContent(props) {
 								variant="outlined"	
 								className={classes.textField}
 								type="date"
-								value={isEmpty(state.avail_date_to)}						
+								value={isEmpty(state.AV_TO)}						
 								onChange={handleChange}
-								name="avail_date_to"
+								name="AV_TO"
 								InputLabelProps={{
 									shrink: true
 								}}
@@ -519,9 +517,9 @@ function BodyContent(props) {
 								variant="outlined"	
 								className={classes.textField}
 								type="date"
-								value={isEmpty(state.last_app_date)}						
+								value={isEmpty(state.LAST_APPLICATION_DATE)}						
 								onChange={handleChange}
-								name="last_app_date"
+								name="LAST_APPLICATION_DATE"
 								InputLabelProps={{
 									shrink: true
 								}}
@@ -535,9 +533,9 @@ function BodyContent(props) {
 								variant="outlined"	
 								className={classes.textField}
 								type="date"
-								value={isEmpty(state.last_contacted_date)}						
+								value={isEmpty(state.LAST_CONTACTED_DATE)}						
 								onChange={handleChange}
-								name="last_contacted_date"
+								name="LAST_CONTACTED_DATE"
 								InputLabelProps={{
 									shrink: true
 								}}
@@ -551,9 +549,9 @@ function BodyContent(props) {
 								label="Height"
 								variant="outlined"	
 								className={classes.textField}
-								value={isEmpty(state.height)}						
+								value={isEmpty(state.CREW_HEIGHT)}						
 								onChange={handleChange}
-								name="height"
+								name="CREW_HEIGHT"
 								size="small"
 							/>
 						</Grid>
@@ -562,9 +560,9 @@ function BodyContent(props) {
 								label="Weight"
 								variant="outlined"	
 								className={classes.textField}
-								value={isEmpty(state.weigth)}						
+								value={isEmpty(state.CREW_WEIGHT)}						
 								onChange={handleChange}
-								name="weigth"
+								name="CREW_WEIGHT"
 								size="small"
 							/>
 						</Grid>
@@ -573,9 +571,9 @@ function BodyContent(props) {
 								label="Shoes Size"
 								variant="outlined"	
 								className={classes.textField}
-								value={isEmpty(state.shoes_size)}						
+								value={isEmpty(state.SHOES_SIZE)}						
 								onChange={handleChange}
-								name="shoes_size"
+								name="SHOES_SIZE"
 								size="small"
 							/>
 						</Grid>
@@ -586,9 +584,9 @@ function BodyContent(props) {
 								label="Eye Color"
 								variant="outlined"	
 								className={classes.textField}
-								value={isEmpty(state.eye_color)}						
+								value={isEmpty(state.EYE_COLOR)}						
 								onChange={handleChange}
-								name="eye_color"
+								name="EYE_COLOR"
 								size="small"
 							/>
 						</Grid>
@@ -597,9 +595,9 @@ function BodyContent(props) {
 								label="Hair Color"
 								variant="outlined"	
 								className={classes.textField}
-								value={isEmpty(state.hair_color)}						
+								value={isEmpty(state.HAIR_COLOR)}						
 								onChange={handleChange}
-								name="hair_color"
+								name="HAIR_COLOR"
 								size="small"
 							/>
 						</Grid>
@@ -608,9 +606,9 @@ function BodyContent(props) {
 								label="Working Clothes Size"
 								variant="outlined"	
 								className={classes.textField}
-								value={isEmpty(state.working_clothes)}						
+								value={isEmpty(state.WORKING_CLOTHES_SIZE)}						
 								onChange={handleChange}
-								name="working_clothes"
+								name="WORKING_CLOTHES_SIZE"
 								size="small"
 							/>
 						</Grid>

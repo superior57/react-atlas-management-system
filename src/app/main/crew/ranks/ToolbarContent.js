@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { openDialog } from "./store/dialogSlice";
-import { deleteRank } from "./store/rankSlice";
+import { deleteRank, setRank } from "./store/rankSlice";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ToolbarContent = (props) => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
+   const classes = useStyles();
+   const dispatch = useDispatch();
    const { rank } = useSelector(state => state.rankApp);
 
     const handleNew = (event) => {
@@ -30,14 +30,17 @@ const ToolbarContent = (props) => {
 	}
 
     const handleEdit = (event) => {
-		dispatch(openDialog({type: "Edit"}));
+		if(rank.recent) {
+            dispatch(openDialog({type: "Edit"}));
+        }
     }
     const handleDelete = (event) => {
-        if(window.confirm("Are you sure to delete this item?")){
-            if(rank.recent) {
+        if(rank.recent) {
+            if(window.confirm("Are you sure to delete this item?")){
                 dispatch(deleteRank(rank.recent));
-            }
-        }        
+                dispatch(setRank(null));
+            }   
+        }    
     }
 
     return <React.Fragment>

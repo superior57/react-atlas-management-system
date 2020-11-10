@@ -9,59 +9,95 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import _ from "@lodash";
+import { useSelector, useDispatch } from "react-redux";
+import { setCertificate } from "../store";
 
 const useStyles = makeStyles(theme => ({
-	
+	tableRow: {
+		'& selected': {
+			backgroundColor: "blue"
+		}
+	},
+	selected: {
+		backgroundColor: "blue"
+	}
 }));
 
-const columns = [
-	{
-		field: "certification",
-		headerName: "Certification",
-		colSpan: 3,
-		width: 200
-	},
-	{
-		field: "s",
-		headerName: "S"
-	},
-	{
-		field: "number",
-		headerName: "Number"
-	},
-	{
-		field: "issued",
-		headerName: "Issued"
-	},
-	{
-		field: "expired",
-		headerName: "Expired"
-	},
-	{
-		field: "issue_country",
-		headerName: "Issue Country"
-	},
-	{
-		field: "onvsl",
-		headerName: "OnVSL"
-	},
-]
-
 function BodyContent(props) {
-	const classes = useStyles(props);
+	const classes = useStyles();
+	const dispatch = useDispatch();
 	const cellAlign = "left";
-	const {state, setState} = props;
+	const certificates = useSelector(state => state.crewApp.crew_details.certificates.list);
+	const [state, setState] = React.useState({
+		rows: [],
+		selected_row: null,
+		selected_row_data: {}
+	});
 
-	const handleSelectRow = (e, key, row_index, d_i) => {
-		const newValue = e.target.checked;
+	const columns = [
+		{
+			field: "certification",
+			headerName: "Certification",
+			colSpan: 2,
+			width: 200
+		},
+		{
+			field: "s",
+			headerName: "S"
+		},
+		{
+			field: "number",
+			headerName: "Number"
+		},
+		{
+			field: "issued",
+			headerName: "Issued"
+		},
+		{
+			field: "expired",
+			headerName: "Expired"
+		},
+		{
+			field: "issue_country",
+			headerName: "Issue Country"
+		},
+		{
+			field: "onvsl",
+			headerName: "OnVSL"
+		},
+	]
+
+	React.useEffect(() => {
+		if(certificates) {			
+			const c_obj = _.groupBy(certificates, "certificate_details.category.id");
+			const c_obj_keys = Object.keys(c_obj)
+			const data = c_obj_keys.map(key=>({
+				title: c_obj[key][0]['certificate_details']['category']['PCC_DESCR'],
+				data: c_obj[key].map(c=>({
+					id: c['id'],
+					certification: c['certificate_details']['PC_DESCR'],
+					s: "Y",
+					number: c['CC_NUMBER'],
+					issued: c['CC_ISSUED'],
+					expired: c['CC_EXPIRED'],
+					issue_country: c['country'] ? c['country']['PC_DESCR'] : ""
+				}))
+			}));
+			setState({
+				...state,
+				rows: data
+			})
+		}
+	}, [certificates]);
+	
+
+	const handleSelectRow = (data) => {
 		setState({
 			...state,
-			[`selected_${key}`]:{
-				...state[`selected_${key}`],
-				[`${row_index}_${d_i}`]: newValue
-			},
-			[`selected_row_index`]: row_index
+			selected_row: data.id
 		});
+		const c_recent = certificates.find(item=>item.id==data.id);
+		dispatch(setCertificate(c_recent))
 	};
 
 	return <React.Fragment>
@@ -84,17 +120,16 @@ function BodyContent(props) {
 						state.rows && state.rows.map((row, index) => 
 						<React.Fragment key={index}>
 							<TableRow>
-								<TableCell className="p-4" align="left" width="30">
-									<Checkbox size="small" />
-								</TableCell>
-								<TableCell className="p-4 border border-gray-200" colSpan={8}>:{`${index + 1}.${row.title}`}</TableCell>
+								<TableCell className="p-4 border border-gray-200" colSpan={9}>:{`${index + 1}.${row.title}`}</TableCell>
 							</TableRow>
 							{
 								row.data.map((d, i) =>
-									<TableRow hover key={i}>
-										<TableCell className="p-4" align="left" width="30">
-											<Checkbox size="small" onChange={event => handleSelectRow(event, "row_data", index, i)} checked={state.selected_row_data[`${index}_${i}`] ? state.selected_row_data[`${index}_${i}`] : false} />
-										</TableCell>
+									<TableRow 
+										hover key={i} 
+										onClick={event => handleSelectRow(d)} 
+										selected={state.selected_row == d.id}
+										className={classes.tableRow}
+									>
 										{i == 0 && 										
 										<TableCell rowSpan={row.data.length} className="p-4 border border-gray-200" align={cellAlign} width={30} ></TableCell>}
 										{

@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import HeaderContent from './HeaderContent';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
+import { useSelector, useDispatch } from "react-redux";
+import { setCrew } from "../store/crewSlice";
   
 function createData( id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action ) {
 	return { id, m, last_name, fist_name, father, mother, age, lic_rank, nationality, birthdate, av_from, av_to, last_rank, vessel, status, action };
@@ -12,49 +14,31 @@ function createData( id, m, last_name, fist_name, father, mother, age, lic_rank,
 const columns = [
 	{ field: 'id', headerName: 'ID' },
 	{ field: 'm', headerName: 'M' },
-	{ field: 'last_name', headerName: 'Last name', width: 130 },
-	{ field: 'fist_name', headerName: 'First name', width: 130 },
-	{ field: 'father', headerName: 'Father', width: 130 },
-	{ field: 'mother', headerName: 'Mother', width: 130 },
+	{ field: 'LAST_NAME', headerName: 'Last name', width: 130 },
+	{ field: 'FIRST_NAME', headerName: 'First name', width: 130 },
+	{ field: 'FATHER_NAME', headerName: 'Father', width: 130 },
+	{ field: 'MOTHER_NAME', headerName: 'Mother', width: 130 },
 	{ field: 'age', headerName: 'Age', width: 130 },
-	{ field: 'lic_rank', headerName: 'Lic Rank', width: 130 },
-	{ field: 'nationality', headerName: 'Nationality', width: 130 },
-	{ field: 'birthdate', headerName: 'Birthdate', width: 130 },
-	{ field: 'av_from', headerName: 'Av.From', width: 130 },
-	{ field: 'av_to', headerName: 'Av.to', width: 130 },
+	{ field: 'RANK_CODE', headerName: 'Lic Rank', width: 130 },
+	{ field: 'NAT_CODE', headerName: 'Nationality', width: 130 },
+	{ field: 'BIRTH_DATE', headerName: 'Birthdate', width: 130 },
+	{ field: 'AV_FROM', headerName: 'Av.From', width: 130 },
+	{ field: 'AV_TO', headerName: 'Av.to', width: 130 },
 	{ field: 'last_rank', headerName: 'Last Rank', width: 130 },
 	{ field: 'vessel', headerName: 'Vessel', width: 130 },
 	{ field: 'status', headerName: 'Status', width: 130 },
   ];
   
-const rows = [
-	createData('100001', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100002', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100003', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100004', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100005', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100006', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100007', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100008', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100009', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100010', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100011', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100012', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100013', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100014', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100015', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100016', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-	createData('100017', "ETNK", "ABRAMENKO", "VOLODYMYR", "STANISLAV", "n/a", "68", "MASTER", "Ukraine", "25/08/52", "", "", "MASTER", "MARU", "OFB"),
-	createData('100018', "ETNK", "LYKOURIS", "ANTONIOS", "", "", "66", "MASTER", "Greek", "25/09/54", "", "", "MASTER", "URANIA", "OFB"),
-];
 
 function BodyContent(props) {
 	const history = useHistory();
+	const rows = useSelector(state => state.crewApp.crew.list);
+	const dispatch = useDispatch();
 
-	function handleClick(row) {
-		// console.log(row);
-		// history.push(`/crew/details/${row.id}/personal-details`);
+	function handleClick(event) {
+		dispatch(setCrew(event.data));
 	}
+
 	return <>
 	 	<HeaderContent />		 
 		<TableContainer component={Paper} className="overflow-hidden overflow-x-auto">
@@ -62,10 +46,8 @@ function BodyContent(props) {
 				<DataGrid 
 					rows={rows} 
 					columns={columns} 
-					onRowClick={event => handleClick(event.rowModel)} 
+					onRowClick={event => handleClick(event)} 
 					rowHeight={25}
-					className="shadow-2xl"
-					checkboxSelection
 				/>
 			</div>
 		</TableContainer>		

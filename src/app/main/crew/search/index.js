@@ -4,6 +4,10 @@ import React from 'react';
 import BodyContent from './BodyContent';
 import HeaderContent from './HeaderContent';
 import ToolbarContent from "./ToolbarContent";
+import reducer from "../store";
+import withReducer from "app/store/withReducer";
+import { useDispatch } from "react-redux";
+import { getCrews } from "../store/crewSlice";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
@@ -11,6 +15,12 @@ const useStyles = makeStyles(theme => ({
 
 function SearchPage(props) {
 	const classes = useStyles(props);
+	const dispatch = useDispatch();
+
+	React.useEffect(() => {
+		dispatch(getCrews());
+	}, [dispatch]);
+
 	return (
 		<FusePageSimple
 			classes={{
@@ -35,4 +45,4 @@ function SearchPage(props) {
 	);
 }
 
-export default SearchPage;
+export default withReducer("crewApp", reducer)(SearchPage);

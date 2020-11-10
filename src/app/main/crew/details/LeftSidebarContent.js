@@ -8,11 +8,10 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-// import { selectFilters } from './store/filtersSlice';
-// import { selectFolders } from './store/foldersSlice';
-// import { selectLabels } from './store/labelsSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import LeftSidebarConfig from "./LeftSidebarConfig";
+import { useHistory, useParams } from "react-router-dom";
+import { getCrew } from '../store/crewSlice';
 
 const useStyles = makeStyles(theme => ({
 	listItem: {
@@ -44,34 +43,37 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function LeftSidebarContent(props) {
-	const crewId = 1;
+	const { crewId } = useParams();
+	const dispatch = useDispatch();
+
+	React.useEffect(() => {
+		dispatch(getCrew(crewId));
+	}, [dispatch])
 
 	const classes = useStyles();
-	return (
-		// <FuseAnimate animation="transition.slideUpIn" delay={400}>
-			<div className="flex-auto border-l-1">
-				<div>
-					<List>
-						{LeftSidebarConfig &&
-							LeftSidebarConfig.map((label, index) => (
-								<ListItem
-									button
-									component={NavLinkAdapter}
-									to={`/crew/details/${crewId}/${label.handle}`}
-									key={index}
-									className={classes.listItem}
-								>
-									<Icon className="list-item-icon" color="action">
-										label
-									</Icon>
-									<ListItemText primary={label.title} disableTypography />
-								</ListItem>
-							))}
-					</List>
-				</div>
+	return <React.Fragment>
+		<div className="flex-auto border-l-1">
+			<div>
+				<List>
+					{LeftSidebarConfig &&
+						LeftSidebarConfig.map((label, index) => (
+							<ListItem
+								button
+								component={NavLinkAdapter}
+								to={`/crew/details/${crewId}/${label.handle}`}
+								key={index}
+								className={classes.listItem}
+							>
+								<Icon className="list-item-icon" color="action">
+									label
+								</Icon>
+								<ListItemText primary={label.title} disableTypography />
+							</ListItem>
+						))}
+				</List>
 			</div>
-		// </FuseAnimate>
-	);
+		</div>
+	</React.Fragment>
 }
 
 export default LeftSidebarContent;

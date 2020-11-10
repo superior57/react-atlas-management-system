@@ -5,10 +5,12 @@ import React,{ useState } from 'react';
 import BodyContent from './BodyContent';
 import HeaderContent from './HeaderContent';
 import ToolbarContent from "./ToolbarContent";
-import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
 import { AppBar, Toolbar, Typography, Button, DialogActions, DialogContent } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import EditContent from "./EditContent";
+import CertificateDialog from "./CertificateDialog";
+import { getCertCategs } from "./store/certificateSlice";
+import withReducer from "app/store/withReducer";
+import reducer from "./store";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
@@ -17,40 +19,12 @@ const useStyles = makeStyles(theme => ({
 function CertificatesPage(props) {
 	const dispatch = useDispatch();
 	const classes = useStyles(props);
-	const [ state, setState ] = useState({});
 
-	const handleSave = () => {
-		console.log(state);
-	};
+	React.useEffect(() => {
+		dispatch(getCertCategs());
+	}, [dispatch]);
 
-	const handleEdit = (event) => {
-		dispatch(openDialog({
-			children: (
-				<React.Fragment>
-					<AppBar position="static" elevation={1}>
-						<Toolbar className="flex w-full">
-							<Typography variant="subtitle1" color="inherit">
-								Edit Crew Rank
-							</Typography>
-						</Toolbar>
-					</AppBar>
-					<DialogContent>
-						<EditContent />
-					</DialogContent>
-					<DialogActions>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-green-400 hover:bg-green-500">
-							Save
-						</Button>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-red-400 hover:bg-red-500">
-							Cancel
-						</Button>
-					</DialogActions>
-				</React.Fragment>
-				 )
-			 }))
-	};
-
-	return (
+	return (<>
 		<FusePageSimple
 			classes={{
 				root: classes.layoutRoot
@@ -62,16 +36,17 @@ function CertificatesPage(props) {
 			}
 			contentToolbar={
 				<div className="px-24">
-					<ToolbarContent handleEdit={handleEdit} />
+					<ToolbarContent />
 				</div>
 			}
 			content={
 				<div className="p-24 h-full">
-					<BodyContent state={state} setState={setState}/>
+					<BodyContent />
 				</div>
 			}		
 		/>
-	);
+		<CertificateDialog />
+	</>);
 }
 
-export default CertificatesPage;
+export default withReducer("certificateApp", reducer)(CertificatesPage);
