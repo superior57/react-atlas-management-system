@@ -3,6 +3,9 @@ import React, {} from 'react';
 import { DataGrid } from "@material-ui/data-grid";
 import { TableContainer, Paper } from '@material-ui/core';
 
+import { useSelector, useDispatch } from "react-redux";
+import { setPrevServ } from "../store";
+
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
 	textField: {
@@ -22,32 +25,48 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-function createData(id, manager,vessel,vessel_type,rank,departure,s_on,s_off,repatriation,s_off_reason) {
-	return {id, manager,vessel,vessel_type,rank,departure,s_on,s_off,repatriation,s_off_reason};
-}
-
 const columns = [
-	{ field: 'manager', headerName: 'Manager', width: 130 },
-	{ field: 'vessel', headerName: 'First name', width: 130 },
-	{ field: 'vessel_type', headerName: 'Vessel Type', width: 130 },
-	{ field: 'rank', headerName: 'Rank', width: 130 },
-	{ field: 'departure', headerName: 'Departure', width: 130 },
-	{ field: 's_on', headerName: 'S/On', width: 130 },
-	{ field: 's_off', headerName: 'S/Off', width: 130 },
-	{ field: 'repatriation', headerName: 'Repatriation', width: 130 },
-	{ field: 's_off_reason', headerName: 'S/Off Reason', width: 130 },
+	{ field: 'CPR_MANAGER_NAME', headerName: 'Manager', width: 130 },
+	{ field: 'CPR_VESSEL_NAME', headerName: 'First name', width: 130 },
+	{ field: 'vessel_type_desc', headerName: 'Vessel Type', width: 130 },
+	{ field: 'rank_desc', headerName: 'Rank', width: 130 },
+	{ field: 'CPR_START_DATE', headerName: 'Departure', width: 130 },
+	{ field: 'CPR_SON_DATE', headerName: 'S/On', width: 130 },
+	{ field: 'CPR_SOFF_DATE', headerName: 'S/Off', width: 130 },
+	{ field: 'CPR_END_DATE', headerName: 'Repatriation', width: 130 },
+	{ field: 'soff_reason_desc', headerName: 'S/Off Reason', width: 130 },
   ];
-  
-const rows = [
-	createData(0, "manager","vessel","vessel_type","rank","departure","s_on","s_off","repatriation",'s_off_reason'),
-];
 
 
 function BodyContent(props) {
 	const classes = useStyles(props);
+	const dispatch = useDispatch();
+	const cellAlign = "left";
+	const prev_services = useSelector(state => state.crewApp.crew_details.prev_services.list);
+	const [state, setState] = React.useState({
+		rows: []
+	});
+
+	React.useEffect(() => {
+		if (prev_services) {
+			setState({
+				...state,
+				rows: prev_services.map(services => ({
+					...services,
+					vessel_type_desc: services.vessel_type ? services.vessel_type.VT_DESCR : "",
+					rank_desc: services.rank ? services.rank.PR_DESCR : "",
+					soff_reason_desc: services.soff_reason ? services.soff_reason.SR_DESCR : "",
+				}))
+			})
+		}
+	}, [prev_services])
+
+	const handleSelectRow = (event) => {
+		dispatch(setPrevServ(event.data))
+	}
 
 	return <TableContainer component={Paper} style={{ height: '100%', width: '100%' }}>
-			<DataGrid rows={rows} columns={columns} rowHeight={25} checkboxSelection/>
+			<DataGrid rows={state.rows} columns={columns} rowHeight={25} onRowClick={event => handleSelectRow(event)} />
 		</TableContainer>
 }
 

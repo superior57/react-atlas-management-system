@@ -46,15 +46,15 @@ function BodyContent(props) {
 			headerName: "S"
 		},
 		{
-			field: "number",
+			field: "CC_NUMBER",
 			headerName: "Number"
 		},
 		{
-			field: "issued",
+			field: "CC_ISSUED",
 			headerName: "Issued"
 		},
 		{
-			field: "expired",
+			field: "CC_EXPIRED",
 			headerName: "Expired"
 		},
 		{
@@ -62,7 +62,7 @@ function BodyContent(props) {
 			headerName: "Issue Country"
 		},
 		{
-			field: "onvsl",
+			field: "CC_ONVSL",
 			headerName: "OnVSL"
 		},
 	]
@@ -77,10 +77,12 @@ function BodyContent(props) {
 					id: c['id'],
 					certification: c['certificate_details']['PC_DESCR'],
 					s: "Y",
-					number: c['CC_NUMBER'],
-					issued: c['CC_ISSUED'],
-					expired: c['CC_EXPIRED'],
-					issue_country: c['country'] ? c['country']['PC_DESCR'] : ""
+					CC_NUMBER: c['CC_NUMBER'],
+					CC_ISSUED: c['CC_ISSUED'],
+					CC_EXPIRED: c['CC_EXPIRED'],
+					issue_country: c['country'] ? c['country']['PC_DESCR'] : "",
+					CC_ONVSL: c['CC_ONVSL'],
+					CC_ISSUE_CNTR_CODE: c['country'] ? c['country']['id'] : ""
 				}))
 			}));
 			setState({
@@ -96,8 +98,8 @@ function BodyContent(props) {
 			...state,
 			selected_row: data.id
 		});
-		const c_recent = certificates.find(item=>item.id==data.id);
-		dispatch(setCertificate(c_recent))
+		// const c_recent = certificates.find(item=>item.id==data.id);
+		dispatch(setCertificate(data))
 	};
 
 	return <React.Fragment>
@@ -136,8 +138,8 @@ function BodyContent(props) {
 											columns && columns.map((col, index) => 
 											<React.Fragment key={index}>
 												{
-													col.field != "onvsl" ? <TableCell className="p-4 border border-gray-200" width={col.width} >{d[`${col.field}`]}</TableCell> :
-														<TableCell className="p-4 border border-gray-200" align="center"><Checkbox size="small" /> </TableCell>
+													col.field != "CC_ONVSL" ? <TableCell className="p-4 border border-gray-200" width={col.width} >{d[`${col.field}`]}</TableCell> :
+														<TableCell className="p-4 border border-gray-200" align="center"><Checkbox size="small" checked={d[`${col.field}`] == 1} /> </TableCell>
 												}
 											</React.Fragment>)
 										}

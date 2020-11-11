@@ -8,8 +8,10 @@ import LeftSidebarContent from '../LeftSidebarContent';
 import ToolbarContent from "./ToolbarContent";
 import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
 import { AppBar, Toolbar, Typography, Button, DialogActions, DialogContent } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import EditContent from "./EditContent";
+import { useDispatch, useSelector } from "react-redux";
+import PrevServDialog from "./PrevServDialog";
+import { getPrevServs, getVesselTypes, getEngTypes, getNationalities, getSoffReasons } from "../store";
+import { getRanks } from "app/main/crew/ranks/store/rankSlice";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
@@ -17,41 +19,21 @@ const useStyles = makeStyles(theme => ({
 
 function PreviousServicesPage(props) {
 	const dispatch = useDispatch();
+	const crew = useSelector(state => state.crewApp.crew.recent);
 	const classes = useStyles(props);
-	const [ state, setState ] = useState({});
+	
+	React.useEffect(() => {
+		if(crew) {
+			dispatch(getPrevServs());
+			dispatch(getVesselTypes());
+			dispatch(getEngTypes());
+			dispatch(getNationalities());
+			dispatch(getRanks());
+			dispatch(getSoffReasons());
+		}
+	}, [dispatch, crew]);
 
-	const handleSave = () => {
-		console.log(state);
-	};
-
-	const handleEdit = (event) => {
-		dispatch(openDialog({
-			children: (
-				<React.Fragment>
-					<AppBar position="static" elevation={1}>
-						<Toolbar className="flex w-full">
-							<Typography variant="subtitle1" color="inherit">
-								Edit Previous Services
-							</Typography>
-						</Toolbar>
-					</AppBar>
-					<DialogContent>
-						<EditContent />
-					</DialogContent>
-					<DialogActions>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-green-400 hover:bg-green-500">
-							Save
-						</Button>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-red-400 hover:bg-red-500">
-							Cancel
-						</Button>
-					</DialogActions>
-				</React.Fragment>
-				 )
-			 }))
-	};
-
-	return (
+	return <>
 		<FusePageSimple
 			classes={{
 				root: classes.layoutRoot
@@ -63,18 +45,19 @@ function PreviousServicesPage(props) {
 			}
 			contentToolbar={
 				<div className="px-24">
-					<ToolbarContent handleEdit={handleEdit} />
+					<ToolbarContent />
 				</div>
 			}
 			content={
 				<div className="p-24 h-full">
-					<BodyContent state={state} setState={setState}/>
+					<BodyContent/>
 				</div>
 			}
 			leftSidebarContent={<LeftSidebarContent />}		
 			sidebarInner	
 		/>
-	);
+		<PrevServDialog />
+	</>
 }
 
 export default PreviousServicesPage;

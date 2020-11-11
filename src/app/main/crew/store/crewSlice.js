@@ -42,6 +42,15 @@ export const updateCrew = createAsyncThunk('crew/updateCrew', async (crew, { dis
 	return data;
 });
 
+export const deleteCrew = createAsyncThunk('crew/deleteCrew', async (crew, { dispatch, getState }) => {
+	const response = await axios.delete(`/api/crew/crews/${crew.id}`);
+	const data = await response.data;
+
+	dispatch(getCrews());
+	dispatch(setCrew(null));
+	return data;
+});
+
 const crewSlice = createSlice({
 	name: 'crew/crews',
 	initialState: {

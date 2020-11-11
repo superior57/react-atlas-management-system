@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
+import { deleteCertificate, setCertificate } from "../store";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,24 +23,24 @@ const useStyles = makeStyles(theme => ({
 const ToolbarContent = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    // const { rank } = useSelector(state => state.rankApp);
+    const { certificates } = useSelector(state => state.crewApp.crew_details);
  
      const handleNew = (event) => {
          dispatch(openDialog({type: "New"}));
      }
  
      const handleEdit = (event) => {
-        //  if(rank.recent) {
+         if(certificates.recent) {
              dispatch(openDialog({type: "Edit"}));
-        //  }
+         }
      }
      const handleDelete = (event) => {
-        //  if(rank.recent) {
-        //      if(window.confirm("Are you sure to delete this item?")){
-        //          dispatch(deleteRank(rank.recent));
-        //          dispatch(setRank(null));
-        //      }   
-        //  }    
+         if(certificates.recent) {
+             if(window.confirm("Are you sure to delete this item?")){
+                 dispatch(deleteCertificate(certificates.recent));
+                 dispatch(setCertificate(null));
+             }   
+         }    
      }
 
     return <React.Fragment>
@@ -47,10 +48,10 @@ const ToolbarContent = (props) => {
             <Button variant="contained" color="secondary" onClick={event => handleEdit(event)}>
                 <Icon>edit</Icon>
             </Button>
-            <Button variant="contained" color="secondary">
+            {/* <Button variant="contained" color="secondary">
                 <Icon>save</Icon>
-            </Button>
-            <Button variant="contained" color="secondary">
+            </Button> */}
+            <Button variant="contained" color="secondary" onClick={event => handleDelete(event)}>
                 <Icon>delete</Icon>
             </Button>
             <Button variant="contained" color="secondary">

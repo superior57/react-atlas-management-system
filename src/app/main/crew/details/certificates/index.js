@@ -8,7 +8,7 @@ import CertDialog from "./CertDialog";
 import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
 import { AppBar, Toolbar, DialogContent, Button, Dialog, DialogActions, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { getCrewCerts } from "../store";
+import { getCrewCerts, getCountries } from "../store";
 
 
 const useStyles = makeStyles(theme => ({
@@ -27,6 +27,7 @@ function CertificatesPage(props) {
 	React.useEffect(() => {
 		if(crew) {
 			dispatch(getCrewCerts());
+			dispatch(getCountries());
 		}
 	}, [dispatch, crew]);
 
