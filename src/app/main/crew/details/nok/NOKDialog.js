@@ -1,63 +1,39 @@
-import React,{} from "react";
-import { TextField, FormControl, InputLabel, Select, MenuItem, Grid, Button, Dialog, DialogContent, DialogActions, Toolbar, Typography, AppBar, Checkbox } from "@material-ui/core";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { TextField, Paper, TableContainer, FormControl, InputLabel, Select, MenuItem, Grid, Button, Dialog, DialogContent, DialogActions, Toolbar, Typography, AppBar, Checkbox, Table, TableBody, TableRow, TableCell, TableHead, TableFooter } from "@material-ui/core";
 import clsx from "clsx";
+import { DataGrid } from "@material-ui/data-grid";
 import { isEmpty } from "app/functions";
 import { useDispatch, useSelector } from "react-redux";
 import { closeDialog } from "app/store/fuse/dialogSlice";
-import { updateCertificate, setCertificate } from "../store";
-import { getFormDataFromObject } from "app/functions";
+import { updateNOK, addNOK } from "../store";
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        minWidth: 300
+    }
+}));
 
-const CertDialog = (props) => {
-    const { dialog } = useSelector(state => state.fuse);
-    const {certificates, countries} = useSelector(state => state.crewApp.crew_details);
-
+const NOKDialog = (props) => {
+    const classes = useStyles(props);
     const dispatch = useDispatch();
+    const { dialog } = useSelector(state => state.fuse);
+    const nok = useSelector(state=>state.crewApp.crew_details.nok.recent);
+    const {relations} = useSelector(state => state.crewApp.crew_details);
     const [state, setState] = React.useState({});
-
-    const contentsLeft = [
-        {
-            type: "text",
-            label: "Certification",		
-            name: "certification",
-            editDisabled: true
-        },
-        {
-            type: "file",    
-            label: "File upload",
-            name: "CC_FILENAME"
-        },
-        {
-            type: "text",
-            label: "Number",			
-            name: "CC_NUMBER"
-        },
-        {
-            type: "date",
-            label: "Issued",	
-            name: "CC_ISSUED"		
-        },
-        {
-            type: "date",
-            label: "Expired",		
-            name: "CC_EXPIRED"	
-        },
-        {
-            type: "select",
-            label: "Issue Country",
-            children: countries.map(c => ({
-                label: c.PC_DESCR,
-                key: c.id
-            })),
-            name: "CC_ISSUE_CNTR_CODE"
-        },	
-    ];
 
     React.useEffect(() => {
         if( dialog.options.type == "Edit" ) {
-            setState(certificates.recent);
-        } 
-    }, [dialog, certificates]);
+            if(nok) {
+                setState({
+                    ...nok,
+                    CN_RELATION_CODE: nok.relation ? nok.relation.id : "",	
+                });
+            }
+        } else {
+            setState({})
+        }
+    }, [dialog, nok]);    
 
     const handleChange = (e) => {        
         const type = e.target.type;
@@ -67,32 +43,64 @@ const CertDialog = (props) => {
                         ...state,
                         [e.target.name]: e.target.checked ? 1 : 0
                     }); break;
-            case 'file':
-                    setState({
-                        ...state,
-                        [e.target.name]: e.target.files[0]
-                    }); break;
             default: 
                     setState({
                         ...state,
                         [e.target.name]: e.target.value
                     });
-        }     
+        }        
     };
-
     const handleSave = () => {
-        const formData = getFormDataFromObject(state);
-        dispatch(updateCertificate({
-            id: state.id,
-            data: formData
-        }));
-        dispatch(setCertificate(null))
+        if(dialog.options.type == "New") {
+            dispatch(addNOK(state));
+        } 
+        if(dialog.options.type == "Edit") {
+            dispatch(updateNOK(state));
+        }
         handleClose();
 	};
-
     const handleClose = () => {
         dispatch(closeDialog())
     }
+
+    const contents1 = [
+        {
+            type: "text",
+            label: "Name",
+            name: "CN_FULLNAME"
+        },
+        {
+            type: "text",
+            label: "Phone",
+            name: "CN_PHONE"
+        },
+        {
+            type: "text",
+            label: "Mobile",
+            name: "CN_MOBILE"
+        },
+        {
+            type: "text",
+            label: "Email",
+            name: "CN_EMAIL"
+        },
+    ];
+    const contents2 = [
+        {
+            type: "select",
+            label: "Relation",
+            children: relations.list.map(relation => ({
+                label: relation.PR_DESCR,
+                key: relation.id
+            })),
+            name: "CN_RELATION_CODE"
+        },
+        {
+            type: "textarea",
+            label: "Home Address",
+            name: "CN_HOME_ADDRESS"
+        }
+    ];
 
     const Contents = (content, index, contentId) => {
         switch (content.type) {
@@ -150,18 +158,33 @@ const CertDialog = (props) => {
                     className="w-full mb-16 mr-5"
                     size="small"
                     key={index}	
-                    // value={isEmpty(state[`${content.name}`])}	
+                    value={isEmpty(state[`${content.name}`])}	
                     name={`${content.name}`}
                     onChange={handleChange}
                     type="file"
                     InputLabelProps={{
                         shrink: true,
                     }}
-                />)
+                />
+            )
+            case 'textarea' : return (
+                <TextField 
+                    variant="outlined"
+                    label={content.label}
+                    className="w-full mb-16 mr-5"
+                    size="small"
+                    key={index}	
+                    value={isEmpty(state[`${content.name}`])}	
+                    name={`${content.name}`}
+                    onChange={handleChange}
+                    type="text"
+                    rows={3}
+                    multiline
+                />
+            )
         };
     };
 
-    
     return (
         <Dialog
             open={dialog.state}
@@ -177,22 +200,21 @@ const CertDialog = (props) => {
                     <AppBar position="static" elevation={1}>
                         <Toolbar className="flex w-full">
                             <Typography variant="subtitle1" color="inherit">
-                                {dialog.options.type} Certificate
+                                {dialog.options.type} Next Of Kin Details
                             </Typography>
                         </Toolbar>
                     </AppBar>
                     <DialogContent>
-                        <Grid container spacing={1}  style={{ minWidth: '50rem' }}>
-                            <Grid item xs={12}>
+                        <Grid container spacing={2} className="p-8" >
+                            <Grid item xs={12} md={6} >
                                 {
-                                    contentsLeft && contentsLeft.map((content, index) => Contents(content, index, "left"))
-                                }	
-                                <Checkbox 
-                                    checked={isEmpty(state['CC_ONVSL']) == 1}
-                                    onChange={handleChange}
-                                    name="CC_ONVSL"
-                                />
-                                On VSL	
+                                    contents1 && contents1.map((content, index) => Contents(content, index, "left"))
+                                }
+                            </Grid>
+                            <Grid item xs={12} md={6} >
+                                {
+                                    contents2 && contents2.map((content, index) => Contents(content, index, "right"))
+                                }
                             </Grid>
                         </Grid>
                     </DialogContent>
@@ -207,6 +229,5 @@ const CertDialog = (props) => {
                 </>
             }
         </Dialog>)
-}
-
-export default CertDialog;
+};
+export default NOKDialog;

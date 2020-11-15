@@ -37,7 +37,6 @@ const contentsLeft = [
 ];
 const CertificateDialog = (props) => {
     const { dialog, certificate } = useSelector(state => state.certificateApp);
-    console.log("recet => ", certificate.recent);    
 
     const dispatch = useDispatch();
     const [state, setState] = React.useState({
@@ -54,7 +53,6 @@ const CertificateDialog = (props) => {
     }, [certificate.recent, dialog]);
 
     const handleChange = (e) => {
-        console.log(e.target.name);
         setState({
             ...state,
             [e.target.name]: e.target.value

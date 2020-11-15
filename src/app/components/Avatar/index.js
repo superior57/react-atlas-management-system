@@ -1,19 +1,27 @@
 import React,{ useState } from "react";
 import axios from "axios";
+import { getImageURL } from "app/functions";
 
 export const EditableAvatar = (props) =>{ 
-
-	const { onChange, name } = props;
-
+	const { onChange, name, src } = props;
 	const [ state, setState ] = useState({
 		file: ""
 	});
 
 	React.useEffect(() => {
+		if(src) {
+			setState({
+				...state,
+				src: src
+			})
+		}
+	}, [src])
+
+	React.useEffect(() => {
 		if(state.file) {
 			onChange({
 				target: {
-					value: state.file,
+					value: state.data,
 					name: name
 				}
 			});	
@@ -32,14 +40,15 @@ export const EditableAvatar = (props) =>{
 		if(file) {
 			setState({
 				...state,
-				file: await toBase64(file)
+				file: await toBase64(file),
+				data: file
 			});
 		}			
 	}
 
 	return 	<>
 		<img 
-			src={state.file}
+			src={state.file ? state.file : state.src && getImageURL(src)}
 		/>
 		<input
 			type="file"

@@ -30,8 +30,7 @@ const contentsLeft = [
     },
 ];
 const RankDialog = (props) => {
-    const { dialog, rank } = useSelector(state => state.rankApp);
-    console.log("recet => ", rank.recent);    
+    const { dialog, rank } = useSelector(state => state.rankApp);   
 
     const dispatch = useDispatch();
     const [state, setState] = React.useState({
@@ -40,7 +39,6 @@ const RankDialog = (props) => {
     React.useEffect(() => {
         if( dialog.type == "Edit" ) {
             setState(rank.recent);
-            console.log(state);
         } 
 
         if( dialog.type == "New" ) {
@@ -49,7 +47,6 @@ const RankDialog = (props) => {
     }, [rank.recent, dialog]);
 
     const handleChange = (e) => {
-        console.log(e.target.name);
         setState({
             ...state,
             [e.target.name]: e.target.value

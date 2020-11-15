@@ -13,7 +13,7 @@ function NewPage(props) {
 	const [ state, setState ] = useState({});
 
 	const handleSave = () => {
-		console.log(state);
+		// console.log(state);
 	};
 	return (
 		<FusePageSimple

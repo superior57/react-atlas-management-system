@@ -1,16 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const getValideData = (object) => {
-	var res = {};
-	Object.keys(object).map(key => {
-		if(object[key]) {
-			res[key] = object[key]
-		}		
-	});
-	return res;
-}
-
 // crews....
 export const getCrews = createAsyncThunk('crew/getCrews', async (params) => {
 	const response = await axios.get(`/api/crew/crews`, { params });
@@ -20,7 +10,11 @@ export const getCrews = createAsyncThunk('crew/getCrews', async (params) => {
 });
 
 export const getCrew = createAsyncThunk('crew/getCrew', async (crewId) => {
-	const response = await axios.get(`/api/crew/crews/${crewId}`);
+	const response = await axios.get(`/api/crew/crews/${crewId}`, {
+		headers: {
+			'content-type': 'multipart/form-data'
+		}
+	});
 	const data = await response.data;
 
 	return data;
@@ -35,7 +29,7 @@ export const addCrew = createAsyncThunk('crew/addCrew', async (crew, {dispatch})
 });
 
 export const updateCrew = createAsyncThunk('crew/updateCrew', async (crew, { dispatch, getState }) => {
-	const response = await axios.put(`/api/crew/crews/${crew.id}`, getValideData(crew));
+	const response = await axios.put(`/api/crew/crews/${crew.id}`, crew.data);
 	const data = await response.data;
 
 	dispatch(getCrew(crew.id));
@@ -51,11 +45,22 @@ export const deleteCrew = createAsyncThunk('crew/deleteCrew', async (crew, { dis
 	return data;
 });
 
+// crews....
+export const getSearchCrews = createAsyncThunk('crew/getSearchCrews', async (params) => {
+	const response = await axios.get(`/api/crew/crew-search`, { 
+		params
+	 });
+	const data = await response.data;
+
+	return data;
+});
+
 const crewSlice = createSlice({
 	name: 'crew/crews',
 	initialState: {
 		list: [],
 		recent: null,
+		searchlist: []
 	},
 	reducers: {
 		setCrew: (state, action) => {
@@ -71,6 +76,9 @@ const crewSlice = createSlice({
 		},
 		[addCrew.fulfilled]: (state, action) => {
 			state.recent = action.payload;
+		},
+		[getSearchCrews.fulfilled]: (state, action) => {
+			state.searchlist = action.payload;
 		}
 	}
 });

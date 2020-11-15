@@ -49,7 +49,7 @@ function isEmpty(value) {
 }
 
 function HeaderContent(props) {
-	console.log(props);
+	// console.log(props);
 	const [state, setState] = useState({});
 
 	const classes = useStyles(props);

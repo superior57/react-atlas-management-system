@@ -46,14 +46,28 @@ function BodyContent(props) {
 	const {state, setState} = props;
 	const classes = useStyles(props);
 	const crew = useSelector(state => state.crewApp.crew.recent);
+	const { rank } = useSelector(state => state.rankApp);
+	const {nationalities, religions, sextypes, marital_status, mng_agents, managers, countries, port, employ_status} = useSelector(state => state.crewApp.crew_details);
+	
 
 	React.useEffect(() => {
 		if(crew) {
-			setState(crew);
+			setState({
+				...crew,
+				RANK_CODE: crew.rank ? crew.rank.id : "",
+				SEX_TYPE_CODE: crew.sex_type ? crew.sex_type.id : "",
+				MARITAL_STATUS_CODE: crew.marital_status ? crew.marital_status.id : "",
+				RELIGION_CODE: crew.religion ? crew.religion.id : "",
+				NEAREST_PORT_CODE: crew.port ? crew.port.id : "",
+				COUNTRY_CODE: crew.country ? crew.country.id : "",
+				M_AGENT_CODE: crew.m_agent ? crew.m_agent.id : "",
+				NAT_CODE: crew.nationality ? crew.nationality.id : "",				
+				ONLY_FOR_FLEET_CODE: crew.manager ? crew.manager.id : "",			
+			});
 		}
 	}, [crew]);
 
-	const handleChange = (e) => {
+	const handleChange = (e) => {		
 		setState({
 			...state,
 			[e.target.name]: e.target.value
@@ -110,8 +124,9 @@ function BodyContent(props) {
 									<MenuItem value="">
 										<em>None</em>
 									</MenuItem>
-									<MenuItem value={1}>Man</MenuItem>
-									<MenuItem value={2}>Woman</MenuItem>
+									{
+										sextypes.list && sextypes.list.map((s, i) => <MenuItem value={s.id} key={i}>{s.PST_DESCR}</MenuItem>)
+									}
 									</Select>
 								</FormControl>
 							</div>
@@ -302,9 +317,9 @@ function BodyContent(props) {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={1}>United States</MenuItem>
-								<MenuItem value={2}>China</MenuItem>
-								<MenuItem value={3}>Greece</MenuItem>
+								{
+									countries && countries.map((c, i) => <MenuItem value={c.id} key={i}>{c.PC_DESCR}</MenuItem>)
+								}
 								</Select>
 							</FormControl>
 							<div className="w-full mr-5"></div>
@@ -322,9 +337,9 @@ function BodyContent(props) {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={1}>Port 1</MenuItem>
-								<MenuItem value={2}>Port 2</MenuItem>
-								<MenuItem value={3}>Port 3</MenuItem>
+								{
+									port.list && port.list.map((p, i) => <MenuItem value={p.id} key={i}>{p.PP_DESCR}</MenuItem>)
+								}
 								</Select>
 							</FormControl>
 							<TextField
@@ -365,9 +380,9 @@ function BodyContent(props) {
 									<MenuItem value="">
 										<em>None</em>
 									</MenuItem>
-									<MenuItem value={1}>Rank 1</MenuItem>
-									<MenuItem value={2}>Rank 2</MenuItem>
-									<MenuItem value={3}>Rank 3</MenuItem>
+									{
+										rank.list && rank.list.map((r, i) => <MenuItem value={r.id} key={i}>{r.PR_DESCR}</MenuItem>)
+									}
 									</Select>
 								</FormControl>
 								<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
@@ -382,9 +397,9 @@ function BodyContent(props) {
 									<MenuItem value="">
 										<em>None</em>
 									</MenuItem>
-									<MenuItem value={1}>Nation 1</MenuItem>
-									<MenuItem value={2}>Nation 2</MenuItem>
-									<MenuItem value={3}>Nation 3</MenuItem>
+									{
+										nationalities.list && nationalities.list.map((n, i) => <MenuItem value={n.id} key={i}>{n.PN_DESCR}</MenuItem>)
+									}
 									</Select>
 								</FormControl>
 								<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
@@ -399,9 +414,9 @@ function BodyContent(props) {
 									<MenuItem value="">
 										<em>None</em>
 									</MenuItem>
-									<MenuItem value={1}>Religion 1</MenuItem>
-									<MenuItem value={2}>Religion 2</MenuItem>
-									<MenuItem value={3}>Religion 3</MenuItem>
+									{
+										religions.list && religions.list.map((r, i) => <MenuItem value={r.id} key={i}>{r.PR_DESCR}</MenuItem>)
+									}
 									</Select>
 								</FormControl>
 								<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
@@ -416,8 +431,9 @@ function BodyContent(props) {
 									<MenuItem value="">
 										<em>None</em>
 									</MenuItem>
-									<MenuItem value={1}>Married</MenuItem>
-									<MenuItem value={2}>Not yet</MenuItem>
+									{
+										marital_status.list && marital_status.list.map((m, i) => <MenuItem value={m.id} key={i}>{m.PMS_DESCR}</MenuItem>)
+									}
 									</Select>
 								</FormControl>
 							</Grid>
@@ -427,7 +443,11 @@ function BodyContent(props) {
 									width: "20rem",
 									height: "22rem"
 								}}>
-									<EditableAvatar />
+									<EditableAvatar 
+										onChange={handleChange}
+										name="CREW_PHOTO"
+										src={state['CREW_PHOTO']}
+									/>
 								</div>
 							</Grid>
 							<Grid item xs={7} className="flex">
@@ -443,8 +463,9 @@ function BodyContent(props) {
 									<MenuItem value="">
 										<em>None</em>
 									</MenuItem>
-									<MenuItem value={1}>Agent 1</MenuItem>
-									<MenuItem value={2}>Agent 2</MenuItem>
+									{
+										mng_agents.list && mng_agents.list.map((m, i) => <MenuItem value={m.id} key={i}>{m.PMA_DESCR}</MenuItem>)
+									}
 									</Select>
 								</FormControl>	
 							</Grid>	
@@ -461,8 +482,9 @@ function BodyContent(props) {
 									<MenuItem value="">
 										<em>None</em>
 									</MenuItem>
-									<MenuItem value={1}>Manager 1</MenuItem>
-									<MenuItem value={2}>Manager 2</MenuItem>
+									{
+										managers.list && managers.list.map((m, i) => <MenuItem value={m.id} key={i}>{m.M_COMPANY_NAME}</MenuItem>)
+									}
 									</Select>
 								</FormControl>	
 							</Grid>
@@ -471,16 +493,17 @@ function BodyContent(props) {
 									<InputLabel id="overal-evaluation-label">Overal Evaluation</InputLabel>
 									<Select
 										labelId="overal-evaluation-label"
-										value={isEmpty(state.overal_evaluation)}
+										value={isEmpty(state.FL_NOT_REC)}
 										onChange={handleChange}
 										label="Overal Evaluation"
-										name="overal_evaluation"
+										name="FL_NOT_REC"
 									>
 									<MenuItem value="">
 										<em>None</em>
 									</MenuItem>
-									<MenuItem value={1}>Item 1</MenuItem>
-									<MenuItem value={2}>Item 2</MenuItem>
+									{
+										employ_status.list && employ_status.list.map((e, i) => <MenuItem value={e.id} key={i}>{e.ES_DESCR}</MenuItem>)
+									}
 									</Select>
 								</FormControl>	
 							</Grid>

@@ -3,9 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import React,{ useState } from 'react';
 import BodyContent from './BodyContent';
 import ToolbarContent from "./ToolbarContent";
-
 import reducer from "./../store";
 import withReducer from "app/store/withReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { getRanks } from "app/main/crew/ranks/store/rankSlice";
+import { getNationalities, getReligions, getSexTypes, getMaritalStatus, getMngAgents, getManagers, getCountries, getPort } from "app/main/crew/details/store";
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -13,8 +16,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function NewPage(props) {
+	const dispatch = useDispatch();
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
+
+	React.useEffect(() => {
+		dispatch(getNationalities());
+		dispatch(getRanks());
+		dispatch(getReligions());
+		dispatch(getSexTypes());
+		dispatch(getMaritalStatus());
+		dispatch(getMngAgents());
+		dispatch(getManagers());
+		dispatch(getCountries());
+		dispatch(getPort());
+	}, [dispatch]);
 
 	return (
 		<FusePageSimple

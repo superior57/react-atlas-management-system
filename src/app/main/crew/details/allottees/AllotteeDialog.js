@@ -1,63 +1,40 @@
-import React,{} from "react";
-import { TextField, FormControl, InputLabel, Select, MenuItem, Grid, Button, Dialog, DialogContent, DialogActions, Toolbar, Typography, AppBar, Checkbox } from "@material-ui/core";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { TextField, FormControl, InputLabel, Select, MenuItem, Grid, Button, Dialog, DialogContent, DialogActions, Toolbar, Typography, AppBar, Checkbox, Table, TableBody, TableRow, TableCell, TableHead, TableFooter } from "@material-ui/core";
 import clsx from "clsx";
 import { isEmpty } from "app/functions";
 import { useDispatch, useSelector } from "react-redux";
 import { closeDialog } from "app/store/fuse/dialogSlice";
-import { updateCertificate, setCertificate } from "../store";
-import { getFormDataFromObject } from "app/functions";
+import { updateAllottee, addAllottee } from "../store";
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        minWidth: 300
+    }
+}));
 
 
-const CertDialog = (props) => {
-    const { dialog } = useSelector(state => state.fuse);
-    const {certificates, countries} = useSelector(state => state.crewApp.crew_details);
 
+const AllotteeDialog = (props) => {
+    const classes = useStyles(props);
     const dispatch = useDispatch();
+    const { dialog } = useSelector(state => state.fuse);
+    const allottees = useSelector(state=>state.crewApp.crew_details.allottees.recent);
+    const {relations} = useSelector(state => state.crewApp.crew_details);
     const [state, setState] = React.useState({});
-
-    const contentsLeft = [
-        {
-            type: "text",
-            label: "Certification",		
-            name: "certification",
-            editDisabled: true
-        },
-        {
-            type: "file",    
-            label: "File upload",
-            name: "CC_FILENAME"
-        },
-        {
-            type: "text",
-            label: "Number",			
-            name: "CC_NUMBER"
-        },
-        {
-            type: "date",
-            label: "Issued",	
-            name: "CC_ISSUED"		
-        },
-        {
-            type: "date",
-            label: "Expired",		
-            name: "CC_EXPIRED"	
-        },
-        {
-            type: "select",
-            label: "Issue Country",
-            children: countries.map(c => ({
-                label: c.PC_DESCR,
-                key: c.id
-            })),
-            name: "CC_ISSUE_CNTR_CODE"
-        },	
-    ];
 
     React.useEffect(() => {
         if( dialog.options.type == "Edit" ) {
-            setState(certificates.recent);
-        } 
-    }, [dialog, certificates]);
+            if(allottees) {
+                setState({
+                    ...allottees,
+                    CA_RELATION_CODE: allottees.relation ? allottees.relation.id : ""	
+                });
+            }
+        } else {
+            setState({})
+        }
+    }, [dialog, allottees]);    
 
     const handleChange = (e) => {        
         const type = e.target.type;
@@ -67,32 +44,81 @@ const CertDialog = (props) => {
                         ...state,
                         [e.target.name]: e.target.checked ? 1 : 0
                     }); break;
-            case 'file':
-                    setState({
-                        ...state,
-                        [e.target.name]: e.target.files[0]
-                    }); break;
             default: 
                     setState({
                         ...state,
                         [e.target.name]: e.target.value
                     });
-        }     
+        }        
     };
-
     const handleSave = () => {
-        const formData = getFormDataFromObject(state);
-        dispatch(updateCertificate({
-            id: state.id,
-            data: formData
-        }));
-        dispatch(setCertificate(null))
+        if(dialog.options.type == "New") {
+            dispatch(addAllottee(state));
+        } 
+        if(dialog.options.type == "Edit") {
+            dispatch(updateAllottee(state));
+        }
         handleClose();
 	};
-
     const handleClose = () => {
         dispatch(closeDialog())
     }
+
+    const contents1 = [
+        {
+            type: "text",
+            label: "Name",
+            name: "CA_FULLNAME"
+        },
+        {
+            type: "text",
+            label: "Phone",
+            name: "CA_PHONE"
+        },
+        {
+            type: "text",
+            label: "Mobile",
+            name: "CA_MOBILE"
+        },
+        {
+            type: "text",
+            label: "Email",
+            name: "CA_EMAIL"
+        },
+    ];
+    const contents2 = [
+        {
+            type: "select",
+            label: "Relation",
+            children: relations.list.map(relation => ({
+                label: relation.PR_DESCR,
+                key: relation.id
+            })),
+            name: "CA_RELATION_CODE"
+        },
+        {
+            type: "textarea",
+            label: "Home Address",
+            name: "CA_HOME_ADDRESS"
+        }
+    ];
+    const contents3 = [
+        {
+            type: "text",
+            label: "Bank",
+            name: "CA_BANK"
+        },
+        {
+            type: "text",
+            label: "Bank Account",
+            name: "CA_BANK_ACCOUNT"
+        },        
+    ];
+    const amount = {
+        type: "text",
+        label: "Amount",
+        name: "CA_AMOUNT"
+    };
 
     const Contents = (content, index, contentId) => {
         switch (content.type) {
@@ -150,7 +176,7 @@ const CertDialog = (props) => {
                     className="w-full mb-16 mr-5"
                     size="small"
                     key={index}	
-                    // value={isEmpty(state[`${content.name}`])}	
+                    value={isEmpty(state[`${content.name}`])}	
                     name={`${content.name}`}
                     onChange={handleChange}
                     type="file"
@@ -161,7 +187,6 @@ const CertDialog = (props) => {
         };
     };
 
-    
     return (
         <Dialog
             open={dialog.state}
@@ -177,22 +202,29 @@ const CertDialog = (props) => {
                     <AppBar position="static" elevation={1}>
                         <Toolbar className="flex w-full">
                             <Typography variant="subtitle1" color="inherit">
-                                {dialog.options.type} Certificate
+                                {dialog.options.type} Allottees Details
                             </Typography>
                         </Toolbar>
                     </AppBar>
                     <DialogContent>
-                        <Grid container spacing={1}  style={{ minWidth: '50rem' }}>
-                            <Grid item xs={12}>
+                        <Grid container spacing={2} className="p-8" >
+                            <Grid item xs={12} md={6} >
                                 {
-                                    contentsLeft && contentsLeft.map((content, index) => Contents(content, index, "left"))
-                                }	
-                                <Checkbox 
-                                    checked={isEmpty(state['CC_ONVSL']) == 1}
-                                    onChange={handleChange}
-                                    name="CC_ONVSL"
-                                />
-                                On VSL	
+                                    contents1 && contents1.map((content, index) => Contents(content, index, "left"))
+                                }
+                            </Grid>
+                            <Grid item xs={12} md={6} >
+                                {
+                                    contents2 && contents2.map((content, index) => Contents(content, index, "right"))
+                                }
+                            </Grid>
+                            <Grid item xs={12} >
+                                {
+                                    contents3 && contents3.map((content, index) => Contents(content, index, "3"))
+                                }
+                            </Grid>
+                            <Grid item xs={6}>
+                                {Contents(amount, 0, "amount")}
                             </Grid>
                         </Grid>
                     </DialogContent>
@@ -206,7 +238,7 @@ const CertDialog = (props) => {
                     </DialogActions>
                 </>
             }
-        </Dialog>)
-}
+        </Dialog>)  
 
-export default CertDialog;
+};
+export default AllotteeDialog;

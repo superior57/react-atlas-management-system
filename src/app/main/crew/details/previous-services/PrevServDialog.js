@@ -18,20 +18,50 @@ const PrevServDialog = (props) => {
 
     React.useEffect(() => {
         if( dialog.options.type == "Edit" ) {
-            setState({
-                ...prev_services,
-                CPR_VESSEL_TYPE_CODE: prev_services.vessel_type ? prev_services.vessel_type.id : "",
-                CPR_ENG_TYPE_CODE: prev_services.eng_type ? prev_services.eng_type.id : "",
-                CPR_VESSEL_FLAG_CODE: prev_services.nationality ? prev_services.nationality.id : "",
-                CPR_RANK_CODE: prev_services.rank ? prev_services.rank.id : "",
-                CPR_SOFF_REASON_CODE: prev_services.soff_reason ? prev_services.soff_reason.id : ""
-                // rank: services.rank ? services.rank.PR_DESCR : "",
-                // soff_reason: services.soff_reason ? services.soff_reason.SR_DESCR : "",
-            });
+            if(prev_services) {
+                setState({
+                    ...prev_services,
+                    CPR_VESSEL_TYPE_CODE: prev_services.vessel_type ? prev_services.vessel_type.id : "",
+                    CPR_ENG_TYPE_CODE: prev_services.eng_type ? prev_services.eng_type.id : "",
+                    CPR_VESSEL_FLAG_CODE: prev_services.nationality ? prev_services.nationality.id : "",
+                    CPR_RANK_CODE: prev_services.rank ? prev_services.rank.id : "",
+                    CPR_SOFF_REASON_CODE: prev_services.soff_reason ? prev_services.soff_reason.id : ""
+                });
+            }
         } else {
             setState({})
         }
-    }, [dialog, prev_services]);
+    }, [dialog, prev_services]);    
+
+    const handleChange = (e) => {        
+        const type = e.target.type;
+        switch(type) {
+            case 'checkbox': 
+                    setState({
+                        ...state,
+                        [e.target.name]: e.target.checked ? 1 : 0
+                    }); break;
+            default: 
+                    setState({
+                        ...state,
+                        [e.target.name]: e.target.value
+                    });
+        }        
+    };
+
+    const handleSave = () => {
+        
+        if(dialog.options.type == "New") {
+            dispatch(addPrevServ(state));
+        } else if(dialog.options.type == "Edit") {
+            dispatch(updatePrevServ(state));
+        }
+        handleClose();
+	};
+
+    const handleClose = () => {
+        dispatch(closeDialog())
+    }
 
     const contentsLeft = [
         {
@@ -143,37 +173,6 @@ const PrevServDialog = (props) => {
             name: "CPR_SOFF_REASON_CODE"
         },
     ];
-
-    const handleChange = (e) => {        
-        const type = e.target.type;
-        switch(type) {
-            case 'checkbox': 
-                    setState({
-                        ...state,
-                        [e.target.name]: e.target.checked ? 1 : 0
-                    }); break;
-            default: 
-                    setState({
-                        ...state,
-                        [e.target.name]: e.target.value
-                    });
-        }        
-    };
-
-    const handleSave = () => {
-        console.log("123123123", state);
-        if(dialog.options.type == "New") {
-            dispatch(addPrevServ(state));
-        } else if(dialog.options.type == "Edit") {
-            dispatch(updatePrevServ(state));
-        }
-        handleClose();
-	};
-
-    const handleClose = () => {
-        dispatch(closeDialog())
-    }
-
 
     const Contents = (content, index, contentId) => {
         switch (content.type) {

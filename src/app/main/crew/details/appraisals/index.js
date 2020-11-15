@@ -5,10 +5,9 @@ import BodyContent from './BodyContent';
 import HeaderContent from './HeaderContent';
 import LeftSidebarContent from '../LeftSidebarContent';
 import ToolbarContent from "./ToolbarContent";
-import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
-import { AppBar, Toolbar, Typography, Button, DialogActions, DialogContent } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import EditContent from "./EditContent";
+import AppraisalDialog from "./AppraisalDialog";
+import { useDispatch, useSelector } from "react-redux";
+import { getAppraisals, getVessels, getEmpStatus } from "../store";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
@@ -18,45 +17,18 @@ function AppraisalsPage(props) {
 	const dispatch = useDispatch();
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
+	const crew = useSelector(state => state.crewApp.crew.recent);
 
-	const handleSave = () => {
-		console.log(state);
-	};
+	React.useEffect(() => {
+		if(crew) {
+			dispatch(getAppraisals());
+			dispatch(getVessels());
+			dispatch(getEmpStatus());
+		}
+	}, [dispatch, crew]);
 
-	const handleEdit = () => {
-		dispatch(openDialog({
-			children: (
-				<React.Fragment>
-					<div className="" style={{ maxWidth: '900px' }}>
-
-					<AppBar position="static" elevation={1}>
-						<Toolbar className="flex w-full">
-							<Typography variant="subtitle1" color="inherit">
-								Edit Appraisals
-							</Typography>
-						</Toolbar>
-					</AppBar>
-					<DialogContent>
-						<EditContent />
-					</DialogContent>
-					<DialogActions>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-green-400 hover:bg-green-500">
-							Save
-						</Button>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-red-400 hover:bg-red-500">
-							Cancel
-						</Button>
-					</DialogActions>
-					</div>
-				</React.Fragment>
-					),
-				classes: {
-					paper: 'max-w-full rounded-8'
-				}
-				}))
-	}
-
-	return (
+	
+	return <>
 		<FusePageSimple
 			classes={{
 				root: classes.layoutRoot
@@ -68,18 +40,19 @@ function AppraisalsPage(props) {
 			}
 			contentToolbar={
 				<div className="px-24">
-					<ToolbarContent handleEdit={handleEdit} />
+					<ToolbarContent />
 				</div>
 			}
 			content={
 				<div className="p-24 h-full">
-					<BodyContent state={state} setState={setState}/>
+					<BodyContent/>
 				</div>
 			}
 			leftSidebarContent={<LeftSidebarContent />}
 			sidebarInner			
 		/>
-	);
+		<AppraisalDialog />
+	</>
 }
 
 export default AppraisalsPage;

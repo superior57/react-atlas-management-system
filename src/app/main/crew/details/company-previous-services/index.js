@@ -8,8 +8,10 @@ import LeftSidebarContent from '../LeftSidebarContent';
 import ToolbarContent from "./ToolbarContent";
 import { openDialog, closeDialog } from "app/store/fuse/dialogSlice";
 import { AppBar, Toolbar, Typography, Button, DialogActions, DialogContent } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import EditContent from "./EditContent";
+import { useDispatch, useSelector } from "react-redux";
+import CPrevServDialog from "./CPrevServDialog";
+import { getCPrevServs, getVessels, getMngAgents, getSoffReasons, getCurrencies } from "../store";
+import { getRanks } from "app/main/crew/ranks/store/rankSlice";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
@@ -19,39 +21,20 @@ function CompanyPreviousServicesPage(props) {
 	const dispatch = useDispatch();
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
+	const crew = useSelector(state => state.crewApp.crew.recent);
 
-	const handleSave = () => {
-		console.log(state);
-	};
+	React.useEffect(() => {
+		if(crew) {
+			dispatch(getCPrevServs());
+			dispatch(getVessels());
+			dispatch(getMngAgents());
+			dispatch(getRanks());
+			dispatch(getSoffReasons());
+			dispatch(getCurrencies());
+		}
+	}, [dispatch, crew]);
 
-	const handleEdit = () => {
-		dispatch(openDialog({
-			children: (
-				<React.Fragment>
-					<AppBar position="static" elevation={1}>
-						<Toolbar className="flex w-full">
-							<Typography variant="subtitle1" color="inherit">
-								Edit Company Previous Services
-							</Typography>
-						</Toolbar>
-					</AppBar>
-					<DialogContent>
-						<EditContent />
-					</DialogContent>
-					<DialogActions>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-green-400 hover:bg-green-500">
-							Save
-						</Button>
-						<Button onClick={()=> dispatch(closeDialog())} variant="contained" className="text-white bg-red-400 hover:bg-red-500">
-							Cancel
-						</Button>
-					</DialogActions>
-				</React.Fragment>
-				 )
-			 }))
-	};
-
-	return (
+	return <>
 		<FusePageSimple
 			classes={{
 				root: classes.layoutRoot
@@ -63,18 +46,19 @@ function CompanyPreviousServicesPage(props) {
 			}
 			contentToolbar={
 				<div className="px-24">
-					<ToolbarContent handleEdit={handleEdit} />
+					<ToolbarContent/>
 				</div>
 			}
 			content={
 				<div className="p-24 h-full">
-					<BodyContent state={state} setState={setState}/>
+					<BodyContent/>
 				</div>
 			}
 			leftSidebarContent={<LeftSidebarContent />}	
 			sidebarInner		
 		/>
-	);
+		<CPrevServDialog />
+	</>
 }
 
 export default CompanyPreviousServicesPage;

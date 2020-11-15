@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useDispatch } from "react-redux";
 import { updateCrew } from "../../store/crewSlice";
+import { getFormDataFromObject } from "app/functions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,8 +27,11 @@ const ToolbarContent = (props) => {
 
     //handles ...
     const handleSave = (event) => {
-        dispatch(updateCrew(state));
-        alert("Updated successfully");
+        const formData = getFormDataFromObject(state);
+        dispatch(updateCrew({
+            id: state.id,
+            data: formData
+        }));
     }
 
     return <React.Fragment>
