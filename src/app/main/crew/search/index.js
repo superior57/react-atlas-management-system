@@ -8,6 +8,8 @@ import reducer from "../store";
 import withReducer from "app/store/withReducer";
 import { useDispatch } from "react-redux";
 import { getCrews } from "../store/crewSlice";
+import { getNationalities, getManagers, getVessels, getEmpStatus } from "app/main/crew/details/store";
+import { getRanks } from "app/main/crew/ranks/store/rankSlice";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
@@ -18,7 +20,11 @@ function SearchPage(props) {
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		dispatch(getCrews());
+		dispatch(getNationalities());
+		dispatch(getRanks());
+		dispatch(getVessels());
+		dispatch(getEmpStatus());
+		dispatch(getManagers());
 	}, [dispatch]);
 
 	return (

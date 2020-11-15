@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { addCrew } from "./../store/crewSlice";
+import { getFormDataFromObject } from "app/functions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,7 +27,12 @@ const ToolbarContent = (props) => {
 
     const handleSave = (event) => {
         if(state) {
-            dispatch(addCrew(state));
+
+            const formData = getFormDataFromObject(state);
+
+            dispatch(addCrew(
+                formData
+            ));
             setState({});
         }
     }

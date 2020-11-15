@@ -12,6 +12,7 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from "clsx";
 
+
 const useStyles = makeStyles(theme => ({
     
 }));
@@ -23,28 +24,24 @@ export default function SplitButton(props) {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const { onClick, handleClear } = props;
 
     const handleClick = () => {
-        console.info(`You clicked ${options[selectedIndex]}`);
+        onClick();
     };
-
     const handleMenuItemClick = (event, index) => {
         setSelectedIndex(index);
         setOpen(false);
     };
-
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
-
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
         }
-
         setOpen(false);
     };
-
     return (
         <Grid container>
             <Grid item>
@@ -89,7 +86,10 @@ export default function SplitButton(props) {
                     )}
                 </Popper>
             </Grid>
-            <Button variant="outlined">Clear</Button>
+            <Button 
+                variant="outlined"
+                onClick={handleClear}
+            >Clear</Button>
         </Grid>
     );
 }

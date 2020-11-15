@@ -1,11 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import SplitButton from './SplitButton';
 import { Container, Paper } from '@material-ui/core';
-
-import React, {
-	useState
-} from 'react';
-
+import React, {useState} from 'react';
 import { 
 	Grid,
 	TextField,
@@ -15,6 +11,8 @@ import {
 	MenuItem
 } from '@material-ui/core';
 import clsx from "clsx";
+import { getSearchCrews } from "../store/crewSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
@@ -48,16 +46,23 @@ function isEmpty(value) {
 }
 
 function HeaderContent(props) {
-	console.log(props);
 	const [state, setState] = useState({});
-
 	const classes = useStyles(props);
+	const dispatch = useDispatch();
+	const { rank } = useSelector(state => state.rankApp);
+	const {nationalities, managers, vessels, employ_status} = useSelector(state => state.crewApp.crew_details);
 
 	const handleChange = (e) => {
 		setState({
 			...state,
 			[e.target.name]: e.target.value
 		});
+	}
+	const handleClickSearch = (event) => {
+		dispatch(getSearchCrews(state));
+	}
+	const handleClear = () => {
+		setState({})
 	}
 
 	return <>
@@ -90,9 +95,9 @@ function HeaderContent(props) {
 										<MenuItem value="">
 											<em>None</em>
 										</MenuItem>
-										<MenuItem value={1}>Rank 1</MenuItem>
-										<MenuItem value={2}>Rank 2</MenuItem>
-										<MenuItem value={3}>Rank 3</MenuItem>
+										{
+											rank.list && rank.list.map((r, i) => <MenuItem value={r.id} key={i}>{r.PR_DESCR}</MenuItem>)
+										}
 										</Select>
 									</FormControl>
 								</div>
@@ -111,9 +116,9 @@ function HeaderContent(props) {
 										<MenuItem value="">
 											<em>None</em>
 										</MenuItem>
-										<MenuItem value={1}>Rank 1</MenuItem>
-										<MenuItem value={2}>Rank 2</MenuItem>
-										<MenuItem value={3}>Rank 3</MenuItem>
+										{
+											nationalities.list && nationalities.list.map((n, i) => <MenuItem value={n.id} key={i}>{n.PN_DESCR}</MenuItem>)
+										}
 										</Select>
 									</FormControl>
 								</div>
@@ -138,9 +143,9 @@ function HeaderContent(props) {
 										<MenuItem value="">
 											<em>None</em>
 										</MenuItem>
-										<MenuItem value={1}>Rank 1</MenuItem>
-										<MenuItem value={2}>Rank 2</MenuItem>
-										<MenuItem value={3}>Rank 3</MenuItem>
+										{
+											managers.list && managers.list.map((m, i) => <MenuItem value={m.id} key={i}>{m.M_COMPANY_NAME}</MenuItem>)
+										}
 										</Select>
 									</FormControl>
 								</div>
@@ -148,7 +153,8 @@ function HeaderContent(props) {
 						</Grid>
 					</Grid>
 					<Grid item xs={12} md={3} >
-						<div className="w-full">
+						{/* <div className="w-full">
+
 							<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5",classes.spacingBottom)} size='small'>
 								<InputLabel id="currentstatus">Current Status</InputLabel>
 								<Select
@@ -156,7 +162,7 @@ function HeaderContent(props) {
 									value={isEmpty(state.currentstatus)}
 									onChange={handleChange}
 									label="Current Status"
-									name="current_status"									
+									name="currentstatus"									
 								>
 								<MenuItem value="">
 									<em>None</em>
@@ -166,7 +172,16 @@ function HeaderContent(props) {
 								<MenuItem value={3}>Rank 3</MenuItem>
 								</Select>
 							</FormControl>
-						</div>
+						</div> */}
+						<TextField							
+							label="Phone"
+							variant="outlined"		
+							className={clsx(classes.textField, classes.spacingBottom)} 
+							size='small'
+							value={isEmpty(state.phone)}
+							name="phone"
+							onChange={handleChange}
+						/>
 						<TextField							
 							label="SGULL Id"
 							variant="outlined"		
@@ -189,9 +204,9 @@ function HeaderContent(props) {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={1}>Rank 1</MenuItem>
-								<MenuItem value={2}>Rank 2</MenuItem>
-								<MenuItem value={3}>Rank 3</MenuItem>
+								{
+									employ_status.list && employ_status.list.map((e, i) => <MenuItem value={e.id} key={i}>{e.ES_DESCR}</MenuItem>)
+								}
 								</Select>
 							</FormControl>
 						</div>
@@ -199,10 +214,10 @@ function HeaderContent(props) {
 					<Grid item xs={12} md={3}>
 						<div className="w-full">
 							<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5", classes.spacingBottom)} size='small'>
-								<InputLabel id="onb_ofb_with">ONB/OFB with</InputLabel>
+								<InputLabel id="onb_ofb_with">ONB with</InputLabel>
 								<Select
 									labelId="onb_ofb_with"
-									label="ONB/OFB with"									
+									label="ONB with"									
 									value={isEmpty(state.onb_ofb_with)}
 									name="onb_ofb_with"
 									onChange={handleChange}
@@ -211,9 +226,9 @@ function HeaderContent(props) {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={1}>Rank 1</MenuItem>
-								<MenuItem value={2}>Rank 2</MenuItem>
-								<MenuItem value={3}>Rank 3</MenuItem>
+								{
+									vessels.list && vessels.list.map((v, i) => <MenuItem value={v.id} key={i}>{v.VESSEL_NAME}</MenuItem>)
+								}
 								</Select>
 							</FormControl>
 						</div>
@@ -231,9 +246,9 @@ function HeaderContent(props) {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={1}>Rank 1</MenuItem>
-								<MenuItem value={2}>Rank 2</MenuItem>
-								<MenuItem value={3}>Rank 3</MenuItem>
+								{
+									vessels.list && vessels.list.map((v, i) => <MenuItem value={v.id} key={i}>{v.VESSEL_NAME}</MenuItem>)
+								}
 								</Select>
 							</FormControl>
 						</div>
@@ -251,9 +266,9 @@ function HeaderContent(props) {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={1}>Rank 1</MenuItem>
-								<MenuItem value={2}>Rank 2</MenuItem>
-								<MenuItem value={3}>Rank 3</MenuItem>
+								{
+									employ_status.list && employ_status.list.map((e, i) => <MenuItem value={e.id} key={i}>{e.ES_DESCR}</MenuItem>)
+								}
 								</Select>
 							</FormControl>
 						</div>
@@ -263,7 +278,7 @@ function HeaderContent(props) {
 			</Grid>
 			<Grid item xs={12} md={3}>
 				<Container component={Paper} className="py-16">
-				<SplitButton/>				
+					<SplitButton onClick={handleClickSearch} handleClear={handleClear} />				
 				</Container>
 			</Grid>
 		</Grid>

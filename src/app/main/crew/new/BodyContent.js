@@ -16,8 +16,8 @@ import {
 } from '@material-ui/core';
 import clsx from "clsx";
 import {EditableAvatar} from "app/components/Avatar";
-import HeaderContent from './HeaderContent';
 import { isEmpty } from "app/functions";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +45,9 @@ const useStyles = makeStyles(theme => ({
 function BodyContent(props) {
 	const {state, setState} = props;
 	const classes = useStyles(props);
+	const { rank } = useSelector(state => state.rankApp);
+	const {nationalities, religions, sextypes, marital_status, mng_agents, managers, countries, port} = useSelector(state => state.crewApp.crew_details);
+	
 
 	const handleChange = (e) => {
 		setState({
@@ -105,8 +108,9 @@ function BodyContent(props) {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={1}>Man</MenuItem>
-								<MenuItem value={2}>Woman</MenuItem>
+								{
+									sextypes.list && sextypes.list.map((s, i) => <MenuItem value={s.id} key={i}>{s.PST_DESCR}</MenuItem>)
+								}
 								</Select>
 							</FormControl>
 						</div>
@@ -297,9 +301,9 @@ function BodyContent(props) {
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={1}>United States</MenuItem>
-							<MenuItem value={2}>China</MenuItem>
-							<MenuItem value={3}>Greece</MenuItem>
+							{
+								countries && countries.map((c, i) => <MenuItem value={c.id} key={i}>{c.PC_DESCR}</MenuItem>)
+							}
 							</Select>
 						</FormControl>
 						<div className="w-full mr-5"></div>
@@ -317,9 +321,9 @@ function BodyContent(props) {
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={1}>Port 1</MenuItem>
-							<MenuItem value={2}>Port 2</MenuItem>
-							<MenuItem value={3}>Port 3</MenuItem>
+							{
+								port.list && port.list.map((p, i) => <MenuItem value={p.id} key={i}>{p.PP_DESCR}</MenuItem>)
+							}
 							</Select>
 						</FormControl>
 						<TextField
@@ -349,9 +353,9 @@ function BodyContent(props) {
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={1}>Rank 1</MenuItem>
-							<MenuItem value={2}>Rank 2</MenuItem>
-							<MenuItem value={3}>Rank 3</MenuItem>
+							{
+								rank.list && rank.list.map((r, i) => <MenuItem value={r.id} key={i}>{r.PR_DESCR}</MenuItem>)
+							}
 							</Select>
 						</FormControl>
 						<FormControl required variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
@@ -366,9 +370,9 @@ function BodyContent(props) {
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={1}>Nation 1</MenuItem>
-							<MenuItem value={2}>Nation 2</MenuItem>
-							<MenuItem value={3}>Nation 3</MenuItem>
+							{
+								nationalities.list && nationalities.list.map((n, i) => <MenuItem value={n.id} key={i}>{n.PN_DESCR}</MenuItem>)
+							}
 							</Select>
 						</FormControl>
 						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
@@ -383,9 +387,9 @@ function BodyContent(props) {
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={1}>Religion 1</MenuItem>
-							<MenuItem value={2}>Religion 2</MenuItem>
-							<MenuItem value={3}>Religion 3</MenuItem>
+							{
+								religions.list && religions.list.map((r, i) => <MenuItem value={r.id} key={i}>{r.PR_DESCR}</MenuItem>)
+							}
 							</Select>
 						</FormControl>
 						<FormControl variant="outlined" className={clsx(classes.formControl, "w-full mr-5 mb-20")} size="small">
@@ -400,8 +404,9 @@ function BodyContent(props) {
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={1}>Married</MenuItem>
-							<MenuItem value={2}>Not yet</MenuItem>
+							{
+								marital_status.list && marital_status.list.map((m, i) => <MenuItem value={m.id} key={i}>{m.PMS_DESCR}</MenuItem>)
+							}
 							</Select>
 						</FormControl>
 					</Grid>
@@ -430,8 +435,9 @@ function BodyContent(props) {
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={1}>Agent 1</MenuItem>
-							<MenuItem value={2}>Agent 2</MenuItem>
+							{
+								mng_agents.list && mng_agents.list.map((m, i) => <MenuItem value={m.id} key={i}>{m.PMA_DESCR}</MenuItem>)
+							}
 							</Select>
 						</FormControl>	
 					</Grid>	
@@ -448,8 +454,9 @@ function BodyContent(props) {
 							<MenuItem value="">
 								<em>None</em>
 							</MenuItem>
-							<MenuItem value={1}>Manager 1</MenuItem>
-							<MenuItem value={2}>Manager 2</MenuItem>
+							{
+								managers.list && managers.list.map((m, i) => <MenuItem value={m.id} key={i}>{m.M_COMPANY_NAME}</MenuItem>)
+							}
 							</Select>
 						</FormControl>	
 					</Grid>
