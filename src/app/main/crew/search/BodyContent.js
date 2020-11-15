@@ -6,8 +6,8 @@ import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
 import { useSelector, useDispatch } from "react-redux";
 import { setCrew } from "../store/crewSlice";
-const CURRENT = new Date();
-const CUR_YEAR = CURRENT.getFullYear();
+import { CUR_YEAR } from "app/functions";
+
 
 const columns = [
 	{ field: 'SGULL_CODE', headerName: 'ID' },

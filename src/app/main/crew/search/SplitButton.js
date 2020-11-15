@@ -59,7 +59,7 @@ export default function SplitButton(props) {
                         <ArrowDropDownIcon />
                     </Button>
                 </ButtonGroup>               
-                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                {/* <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow
                             {...TransitionProps}
@@ -84,7 +84,7 @@ export default function SplitButton(props) {
                             </Paper>
                         </Grow>
                     )}
-                </Popper>
+                </Popper> */}
             </Grid>
             <Button 
                 variant="outlined"

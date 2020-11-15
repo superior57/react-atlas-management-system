@@ -45,9 +45,19 @@ export const deleteCrew = createAsyncThunk('crew/deleteCrew', async (crew, { dis
 	return data;
 });
 
-// crews....
+// Search....
 export const getSearchCrews = createAsyncThunk('crew/getSearchCrews', async (params) => {
 	const response = await axios.get(`/api/crew/crew-search`, { 
+		params
+	 });
+	const data = await response.data;
+
+	return data;
+});
+
+// Crew List....
+export const getCrewTrans = createAsyncThunk('crew/getCrewTrans', async (params) => {
+	const response = await axios.get(`/api/crew/crew-trans`, { 
 		params
 	 });
 	const data = await response.data;
@@ -60,7 +70,8 @@ const crewSlice = createSlice({
 	initialState: {
 		list: [],
 		recent: null,
-		searchlist: []
+		searchlist: [],
+		crew_trans_list: [],
 	},
 	reducers: {
 		setCrew: (state, action) => {
@@ -79,6 +90,9 @@ const crewSlice = createSlice({
 		},
 		[getSearchCrews.fulfilled]: (state, action) => {
 			state.searchlist = action.payload;
+		},
+		[getCrewTrans.fulfilled]: (state, action) => {
+			state.crew_trans_list = action.payload;
 		}
 	}
 });

@@ -11,11 +11,12 @@ import {
 	MenuItem,
 	Typography,
 	Button } from '@material-ui/core';
-
 import React, {	useState } from 'react';
 import clsx from "clsx";
 import { Search } from "@material-ui/icons";
 import { isEmpty } from "app/functions";
+import { useSelector, useDispatch } from "react-redux";
+import { getCrewTrans } from "../store/crewSlice";
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {},
@@ -45,15 +46,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function HeaderContent(props) {
+	const { vessels } = useSelector(state => state.crewApp.crew_details);
 	const [state, setState] = useState({});
-
 	const classes = useStyles(props);
+	const dispatch = useDispatch();
 
 	const handleChange = (e) => {
 		setState({
 			...state,
 			[e.target.name]: e.target.value
 		});
+	}
+	const handleSearch = (e) => {
+		dispatch(getCrewTrans(state))
 	}
 
 	return <React.Fragment>
@@ -73,8 +78,9 @@ function HeaderContent(props) {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={1}>Item 1</MenuItem>
-								<MenuItem value={2}>Item 1</MenuItem>
+								{
+									vessels.list && vessels.list.map((v, i) => <MenuItem value={v.id} key={i}>{v.VESSEL_NAME}</MenuItem>)
+								}
 							</Select>
 						</FormControl>
 						
@@ -111,6 +117,7 @@ function HeaderContent(props) {
 						color="primary"
 						size="small"
 						className="mb-8 mr-5"
+						onClick={handleSearch}
 					>
 						<Search />
 						Search

@@ -11,6 +11,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import _ from "@lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { setCertificate } from "../store";
+import { getImageURL } from "app/functions";
+import { Link, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
 	tableRow: {
@@ -62,6 +64,14 @@ function BodyContent(props) {
 			headerName: "Issue Country"
 		},
 		{
+			field: "CC_FILENAME",
+			headerName: "File",
+			width: 130,
+			renderCell: (param) => {
+				return param ? <Link href={param}>Download File</Link> : <Typography variant="subtitle2" >No File</Typography>
+			}
+		},
+		{
 			field: "CC_ONVSL",
 			headerName: "OnVSL"
 		},
@@ -82,7 +92,8 @@ function BodyContent(props) {
 					CC_EXPIRED: c['CC_EXPIRED'],
 					issue_country: c['country'] ? c['country']['PC_DESCR'] : "",
 					CC_ONVSL: c['CC_ONVSL'],
-					CC_ISSUE_CNTR_CODE: c['country'] ? c['country']['id'] : ""
+					CC_ISSUE_CNTR_CODE: c['country'] ? c['country']['id'] : "",
+					CC_FILENAME: c.CC_FILENAME ? getImageURL(c.CC_FILENAME) : "",
 				}))
 			}));
 			setState({
@@ -138,9 +149,18 @@ function BodyContent(props) {
 											columns && columns.map((col, index) => 
 											<React.Fragment key={index}>
 												{
-													col.field != "CC_ONVSL" ? <TableCell className="p-4 border border-gray-200" width={col.width} >{d[`${col.field}`]}</TableCell> :
-														<TableCell className="p-4 border border-gray-200" align="center"><Checkbox size="small" checked={d[`${col.field}`] == 1} /> </TableCell>
-												}
+													col.renderCell ? <>
+														<TableCell className="p-4 border border-gray-200" width={col.width} >
+															{col.renderCell(d[`${col.field}`])}
+														</TableCell>
+													</> : <>
+													{
+														col.field != "CC_ONVSL" ? <TableCell className="p-4 border border-gray-200" width={col.width} >{d[`${col.field}`]}</TableCell> :
+															<TableCell className="p-4 border border-gray-200" align="center"><Checkbox size="small" checked={d[`${col.field}`] == 1} /> </TableCell>
+													}
+													</>
+												}												
+												
 											</React.Fragment>)
 										}
 										

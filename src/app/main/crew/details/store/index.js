@@ -283,13 +283,8 @@ export const getAppraisals = createAsyncThunk('crew/getAppraisals', async (param
 export const addAppraisals = createAsyncThunk('crew/addAppraisals', async (appraisal, { dispatch, getState }) => {
 	const curState = getState();	
     const curCrew = curState.crewApp.crew.recent;
-    const crewId = curCrew.id;
-    
-    // params = {
-	// 	...params,
-    //     crew_id: crewId
-	// };
-
+	const crewId = curCrew.id;
+	
 	const params = {
 		crewId: crewId
 	}
