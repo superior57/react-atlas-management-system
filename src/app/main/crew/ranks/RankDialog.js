@@ -16,7 +16,8 @@ const contentsLeft = [
     {
         type: "text",
         label: "Description",
-        name: "PR_DESCR"
+        name: "PR_DESCR",
+        required: true
     },
     {
         type: "text",
@@ -31,6 +32,7 @@ const contentsLeft = [
 ];
 const RankDialog = (props) => {
     const { dialog, rank } = useSelector(state => state.rankApp);   
+    const form = React.useRef(null);
 
     const dispatch = useDispatch();
     const [state, setState] = React.useState({
@@ -54,11 +56,13 @@ const RankDialog = (props) => {
     };
 
     const handleSave = () => {
-		if(dialog.type == "New")
-            dispatch(addRank(state));
-        else if (dialog.type == "Edit")
-            dispatch(updateRank(state));
-        handleClose();
+		if(form.current.reportValidity()) {
+            if(dialog.type == "New")
+                dispatch(addRank(state));
+            else if (dialog.type == "Edit")
+                dispatch(updateRank(state));
+            handleClose();
+        }
 	};
 
     const handleClose = () => {
@@ -77,6 +81,7 @@ const RankDialog = (props) => {
                     value={isEmpty(state[`${content.name}`])}	
                     name={`${content.name}`}
                     onChange={handleChange}
+                    required={content.required}
                 />)
             case 'select' : return (
                 <FormControl variant="outlined" className={clsx("w-full mr-5 mb-16")} size="small" key={index}>
@@ -87,6 +92,7 @@ const RankDialog = (props) => {
                         onChange={handleChange}
                         label={content.label}
                         name={`${content.name}`}
+                        required={content.required}
                     >
                         <MenuItem value="">
                             <em>None</em>
@@ -110,6 +116,7 @@ const RankDialog = (props) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    required={content.required}
                 />)
         };
     };
@@ -126,6 +133,7 @@ const RankDialog = (props) => {
 		>
             {
                 state && <>
+                    <form ref={form}>
                     <AppBar position="static" elevation={1}>
                         <Toolbar className="flex w-full">
                             <Typography variant="subtitle1" color="inherit">
@@ -156,6 +164,7 @@ const RankDialog = (props) => {
                             Cancel
                         </Button>
                     </DialogActions>
+                    </form>
                 </>
             }
         </Dialog>)

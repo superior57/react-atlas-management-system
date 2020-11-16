@@ -24,6 +24,7 @@ const AppraisalDialog = (props) => {
     const appraisals = useSelector(state=>state.crewApp.crew_details.appraisals.recent);
     const {vessels, employ_status} = useSelector(state => state.crewApp.crew_details);
     const [state, setState] = React.useState({});
+    const form = React.useRef(null);
 
     React.useEffect(() => {
         if( dialog.options.type == "Edit" ) {
@@ -60,17 +61,19 @@ const AppraisalDialog = (props) => {
         }        
     };
     const handleSave = () => {
-        const formData = getFormDataFromObject(state)
-        if(dialog.options.type == "New") {
-            dispatch(addAppraisals(formData));
-        } 
-        if(dialog.options.type == "Edit") {
-            dispatch(updateAppraisals({
-                id: state.id,
-                data: formData
-            }));
+        if(form.current.reportValidity()) {
+            const formData = getFormDataFromObject(state)
+            if(dialog.options.type == "New") {
+                dispatch(addAppraisals(formData));
+            } 
+            if(dialog.options.type == "Edit") {
+                dispatch(updateAppraisals({
+                    id: state.id,
+                    data: formData
+                }));
+            }
+            handleClose();
         }
-        handleClose();
 	};
     const handleClose = () => {
         dispatch(closeDialog())
@@ -84,7 +87,8 @@ const AppraisalDialog = (props) => {
                 label: vessel.VESSEL_NAME,
                 key: vessel.id
             })),
-            name: "CA_VESSEL_CODE"
+            name: "CA_VESSEL_CODE",
+            required: true
         },
         {
             type: "select",
@@ -93,7 +97,8 @@ const AppraisalDialog = (props) => {
                 { label: "Appraisal", key: "1" },
                 { label: "Discharge", key: "2" },                
             ],
-            name: "CA_TYPE"
+            name: "CA_TYPE",
+            required: true
         },
         {
             type: "text",
@@ -103,7 +108,8 @@ const AppraisalDialog = (props) => {
         {
             type: "date",
             label: "Assessment Date",
-            name: "CA_ASSESSMENT_DATE"
+            name: "CA_ASSESSMENT_DATE",
+            required: true
         },
         {
             type: "select",
@@ -112,7 +118,8 @@ const AppraisalDialog = (props) => {
                 label: emp_s.ES_DESCR,
                 key: emp_s.id
             })),
-            name: "CA_EMPLOY_STATUS"
+            name: "CA_EMPLOY_STATUS",
+            required: true
         },
         {
             type: "text",
@@ -150,7 +157,8 @@ const AppraisalDialog = (props) => {
                     onChange={handleChange}
                     InputProps={{
                         readOnly: content.editDisabled
-                    }}                    
+                    }}       
+                    required={content.required}             
                 />)
             case 'select' : return (
                 <FormControl variant="outlined" className={clsx("w-full mr-5 mb-16")} size="small" key={index}>
@@ -161,6 +169,7 @@ const AppraisalDialog = (props) => {
                         onChange={handleChange}
                         label={content.label}
                         name={`${content.name}`}
+                        required={content.required}
                     >
                         <MenuItem value="">
                             <em>None</em>
@@ -184,6 +193,7 @@ const AppraisalDialog = (props) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    required={content.required}
                 />)
             case 'file' : return (
                 <TextField 
@@ -199,6 +209,7 @@ const AppraisalDialog = (props) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    required={content.required}
                 />
             )
             case 'textarea' : return (
@@ -214,6 +225,7 @@ const AppraisalDialog = (props) => {
                     type="text"
                     rows={3}
                     multiline
+                    required={content.required}
                 />
             )
         };
@@ -239,6 +251,7 @@ const AppraisalDialog = (props) => {
                         </Toolbar>
                     </AppBar>
                     <DialogContent>
+                        <form ref={form}>
                         <Grid container spacing={2} className="p-8" >
                             <Grid item xs={12} md={12} >
                                 {
@@ -301,6 +314,7 @@ const AppraisalDialog = (props) => {
                                 </Grid>
                             </Grid> */}
                         </Grid> 
+                        </form>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => handleSave()} variant="contained" className="text-white bg-green-400 hover:bg-green-500">

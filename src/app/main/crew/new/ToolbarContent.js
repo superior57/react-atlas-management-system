@@ -22,12 +22,11 @@ const useStyles = makeStyles(theme => ({
 
 const ToolbarContent = (props) => {
     const classes = useStyles();
-    const { state, setState } = props;
+    const { state, setState, form } = props;
     const dispatch = useDispatch();
 
     const handleSave = (event) => {
-        if(state) {
-
+        if(state && form.current.reportValidity()) {
             const formData = getFormDataFromObject(state);
 
             dispatch(addCrew(

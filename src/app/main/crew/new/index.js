@@ -19,6 +19,7 @@ function NewPage(props) {
 	const dispatch = useDispatch();
 	const classes = useStyles(props);
 	const [ state, setState ] = useState({});
+	const form = React.useRef(null);
 
 	React.useEffect(() => {
 		dispatch(getNationalities());
@@ -44,12 +45,12 @@ function NewPage(props) {
 			}
 			contentToolbar={
 				<div className="px-24">
-					<ToolbarContent state={state} setState={setState}/>
+					<ToolbarContent state={state} setState={setState} form={form}/>
 				</div>
 			}
 			content={
 				<div className="p-24">
-					<BodyContent state={state} setState={setState}/>
+					<BodyContent state={state} setState={setState} form={form}/>
 				</div>
 			}
 		/>
