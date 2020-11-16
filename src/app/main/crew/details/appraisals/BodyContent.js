@@ -1,8 +1,9 @@
 import React, {} from 'react';
 import { DataGrid } from "@material-ui/data-grid";
-import { Paper, TableContainer } from "@material-ui/core";
+import { Paper, TableContainer, Link, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { setAppraisals } from "../store";
+import { getImageURL } from 'app/functions';
 
 const columns = [
 	{
@@ -30,6 +31,15 @@ const columns = [
 		headerName: "Employment Status",
 		width: 230
 	},
+	{
+		field: "file",
+		headerName: "File",
+		width: 230,
+		renderCell: (params) => {
+			const url = params.value;
+			return url ? <Link href={url}>Download File</Link> : <Typography variant="subtitle2" >No File</Typography>
+		}
+	},
 ];
 function BodyContent(props) {		
 	const dispatch = useDispatch();
@@ -46,7 +56,8 @@ function BodyContent(props) {
 					...appraisal,	
 					vessel_name: appraisal.vessel ? appraisal.vessel.VESSEL_NAME : "",
 					employment_status: appraisal.employ_status ? appraisal.employ_status.ES_DESCR : "",		
-					type: appraisal.CA_TYPE == 1 ? "Appraisal" : appraisal.CA_TYPE == 2 ? "Discharge" : ""
+					type: appraisal.CA_TYPE == 1 ? "Appraisal" : appraisal.CA_TYPE == 2 ? "Discharge" : "",
+					file: getImageURL(appraisal.CA_FILENAME),
 				}))
 			})
 		}

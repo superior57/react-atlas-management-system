@@ -22,16 +22,18 @@ const useStyles = makeStyles(theme => ({
 
 const ToolbarContent = (props) => {
     const classes = useStyles();
-    const { state, setState } = props;
+    const { state, setState, form} = props;
     const dispatch = useDispatch();
 
     //handles ...
     const handleSave = (event) => {
-        const formData = getFormDataFromObject(state);
-        dispatch(updateCrew({
-            id: state.id,
-            data: formData
-        }));
+        if(form.current.reportValidity()) {
+            const formData = getFormDataFromObject(state);
+            dispatch(updateCrew({
+                id: state.id,
+                data: formData
+            }));
+        }
     }
 
     return <React.Fragment>

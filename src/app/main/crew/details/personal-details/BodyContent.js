@@ -43,7 +43,7 @@ function isEmpty(value) {
 }
 
 function BodyContent(props) {
-	const {state, setState} = props;
+	const {state, setState, form} = props;
 	const classes = useStyles(props);
 	const crew = useSelector(state => state.crewApp.crew.recent);
 	const { rank } = useSelector(state => state.rankApp);
@@ -76,6 +76,7 @@ function BodyContent(props) {
 
 	return <Grid container spacing={2}>
 		<Grid item xs={12}>
+			<form ref={form}>
 			<TableContainer component={Paper} className="p-16 overflow-x-auto overflow-hidden">
 				<Grid container spacing={1}>
 					<Grid item xs={12} md={6} className="mb-20">
@@ -88,7 +89,8 @@ function BodyContent(props) {
 								value={isEmpty(state.LAST_NAME)}						
 								onChange={handleChange}		
 								name="LAST_NAME"
-								size="small"			
+								size="small"		
+								required	
 							/>	
 							<TextField
 								label="Middle Name"
@@ -110,6 +112,7 @@ function BodyContent(props) {
 								onChange={handleChange}
 								name="FIRST_NAME"
 								size="small"
+								required
 							/>
 							<div className="w-full">
 								<FormControl variant="outlined" className={classes.formControl}  size="small">
@@ -185,6 +188,7 @@ function BodyContent(props) {
 								onChange={handleChange}
 								name="BIRTH_DATE"
 								size="small"
+								required
 							/>
 							<TextField
 								label="Birth Place"
@@ -376,6 +380,7 @@ function BodyContent(props) {
 										onChange={handleChange}
 										label="Rank"
 										name="RANK_CODE"
+										required
 									>
 									<MenuItem value="">
 										<em>None</em>
@@ -393,6 +398,7 @@ function BodyContent(props) {
 										onChange={handleChange}
 										label="Nation"
 										name="NAT_CODE"
+										required
 									>
 									<MenuItem value="">
 										<em>None</em>
@@ -672,7 +678,8 @@ function BodyContent(props) {
 				
 				</Grid>
 			
-			</TableContainer>		
+			</TableContainer>	
+			</form>	
 		</Grid>
 		
 		
