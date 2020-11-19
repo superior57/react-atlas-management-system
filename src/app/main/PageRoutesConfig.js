@@ -17,8 +17,10 @@ import VesselOperationTypePage from './crew/vessel-operation-type';
 import RanksPage from "./crew/ranks";
 import DashboardPage from './dashboard';
 import CrewCertificatesPage from "./crew/certificates";
+import authRoles from "app/auth/authRoles";
 
 const PagesRouteConfig = {
+	// auth: authRoles.admin,
 	routes: [
 		{
 			path: '/crew/new',

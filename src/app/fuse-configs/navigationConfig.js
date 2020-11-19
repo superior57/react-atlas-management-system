@@ -2,6 +2,7 @@ import i18next from 'i18next';
 import ar from './navigation-i18n/ar';
 import en from './navigation-i18n/en';
 import tr from './navigation-i18n/tr';
+import authRoles from "app/auth/authRoles";
 
 i18next.addResourceBundle('en', 'navigation', en);
 i18next.addResourceBundle('tr', 'navigation', tr);
@@ -21,7 +22,8 @@ const navigationConfig = [
 				translate: 'DASHBOARD',
 				type: 'item',
 				icon: 'dashboard',
-				url: '/dashboard'
+				url: '/dashboard',
+				// auth: authRoles.admin,
 			},
 			{
 				id: "crew",

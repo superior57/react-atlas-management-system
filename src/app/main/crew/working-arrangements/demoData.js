@@ -1,273 +1,35 @@
-export const data_head = [
-	{
-		field: "0_1",
-		headerName: "00",
-		width: 5
-	},
-	{
-		field: "0_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "1_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "1_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "2_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "2_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "3_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "3_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "4_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "4_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "5_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "5_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "6_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "6_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "7_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "7_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "8_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "8_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "9_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "9_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "10_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "10_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "11_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "11_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "12_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "12_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "13_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "13_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "14_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "14_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "15_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "15_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "16_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "16_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "17_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "17_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "18_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "18_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "19_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "19_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "20_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "2_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "21_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "21_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "22_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "22_2",
-		headerName: "30",
-		width: 10
-	},
-	{
-		field: "23_1",
-		headerName: "00",
-		width: 10
-	},
-	{
-		field: "23_2",
-		headerName: "30",
-		width: 10
-	},
+
+
+export const header_keys = [
+	'H00_00', 'H00_30', 'H01_00', 'H01_30', 'H02_00', 'H02_30', 'H03_00', 'H03_30', 'H04_00', 'H04_30', 'H05_00', 'H05_30', 
+	'H06_00', 'H06_30', 'H07_00', 'H07_30', 'H08_00', 'H08_30', 'H09_00', 'H09_30', 'H10_00', 'H10_30', 'H11_00', 'H11_30', 
+	'H12_00', 'H12_30', 'H13_00', 'H13_30', 'H14_00', 'H14_30', 'H15_00', 'H15_30', 'H16_00', 'H16_30', 'H17_00', 'H17_30', 
+	'H18_00', 'H18_30', 'H19_00', 'H19_30', 'H20_00', 'H20_30', 'H21_00', 'H21_30', 'H22_00', 'H22_30', 'H23_00', 'H23_30',
 ]
 
-export const data = [
-	[
-		"ddd", "test",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-	],
-	[
-		"ddd", "test",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-	],
-	[
-		"ddd", "test",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-	],
-	[
-		"ddd", "test",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-		"w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w",
-		"", "", "", "", "", "", "", "", "", "", "", "",
-	],
-];
+export const hours = [
+    "00",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+]

@@ -7,59 +7,24 @@ import { Grid, Typography, TableCell, Table, TableRow, TableBody, TableHead, Con
 import TableVesselOperation from "./TableVesselOperation";
 import { makeStyles } from "@material-ui/core/styles";
 import { ArrowRight, ArrowForwardIos, DoubleArrow, ArrowBackIos } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import _ from "@lodash";
+import { setVostype, getAssignedRanksByVosTypeID, assignRank2VosType, removeAssignedRanks } from "../store/vostypeSlice";
 
 const useStyles = makeStyles(theme => ({
 	tablerow: {
         '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
         },
-    },
+	},
+	selectedRow: {
+		backgroundColor: theme.palette.action.hover,
+	}
 }));
 
 const createData = (id, description, color, notes, aa) => {
     return {id, description, color, notes, aa};
 }
-
-const columns = [
-	{
-		field: "description",
-		headerName: "Description"
-	},
-	{
-		field: "color",
-		headerName: "Color",
-		align: "left"
-	},
-	{
-		field: "notes",
-		headerName: "Notes",
-		align: "left"
-	},
-	{
-		field: "aa",
-		headerName: "AA",
-		align: "right"
-	},
-];
-
-const rows = [
-	createData(1, "test", "red", "test", "test"),
-	createData(2, "test", "blue", "test", "test"),
-	createData(3, "test", "blue", "test", "test"),
-	createData(4, "test", "blue", "test", "test"),
-	createData(5, "test", "blue", "test", "test"),
-	createData(6, "test", "blue", "test", "test"),
-	createData(7, "test", "blue", "test", "test"),
-	createData(8, "test", "blue", "test", "test"),
-	createData(9, "test", "blue", "test", "test"),
-	createData(10, "test", "blue", "test", "test"),
-	createData(11, "test", "blue", "test", "test"),
-	createData(12, "test", "blue", "test", "test"),
-	createData(13, "test", "blue", "test", "test"),
-	createData(14, "test", "blue", "test", "test"),
-	createData(15, "test", "blue", "test", "test"),
-	createData(16, "test", "blue", "test", "test"),
-];
 
 const rank_rows = [
 	"MASTER",
@@ -77,18 +42,135 @@ const rank_rows = [
 function BodyContent(props) {
 	const history = useHistory();
 	const classes = useStyles();
+	const {vostype } = useSelector(state => state.crewApp);
+	const {rank} = useSelector(state => state.rankApp)
+	const assigned_ranks = vostype.assigned_ranks;
+	const vostypes = vostype.list;
+	const ranks = _.orderBy(rank.list, ['PR_AA']);
+	
+	const [state, setState] = React.useState({
+		ranks: [],
+		rankSelected: null,
+		asrSelected: null,
+	});
+
+	const dispatch = useDispatch();
+
+	React.useEffect(() => {
+		var remain_ranks = ranks;
+		assigned_ranks.map(as_rank => {
+			remain_ranks = remain_ranks.filter(rank => rank.id != as_rank.rank.id )
+		})	
+		setState({
+			...state,
+			ranks: remain_ranks
+		})
+	}, [assigned_ranks])
+
+	const vostypeCol = [
+		{
+			field: "VOST_DESCR",
+			headerName: "Description"
+		},
+		{
+			field: "VOST_COLOR",
+			headerName: "Color",
+			align: "left",
+			color: true
+		},
+		{
+			field: "VOST_NOTES",
+			headerName: "Notes",
+			align: "left"
+		},
+		{
+			field: "VOST_AA",
+			headerName: "AA",
+			align: "right"
+		},
+	];
+
 
 	function handleClick(row) {
 		history.push(`/crew/edit/${row.id}/personal-details`);
+	}
+	const handleRankSelect = (rank) => {
+		setState({
+			...state,
+			rankSelected: rank.id
+		})
+	}
+	const handleSelectVosType = (row) => {
+		dispatch(setVostype(row));
+		dispatch(getAssignedRanksByVosTypeID({
+			vostypeId: row.id
+		}));
+		setState({
+			...state,
+			rankSelected: null,
+		})
+	}
+	const handleAsrSelect = (row) => {
+		setState({
+			...state,
+			asrSelected: row.id
+		})
+	}
+	const handleOneAssignClick = () => {
+		if(vostype.recent && state.rankSelected) {
+			dispatch(assignRank2VosType({
+				ranks: [state.rankSelected],
+				VOST_CODE: vostype.recent.id
+			}));
+			setState({
+				...state,
+				rankSelected: null,
+			})
+		}
+	}
+	const handleAllAssignClick = () => {
+		if(vostype.recent && state.ranks.length > 0) {
+			dispatch(assignRank2VosType({
+				VOST_CODE: vostype.recent.id,
+				ranks: state.ranks.map(rank => (rank.id))
+			}));
+			setState({
+				...state,
+				rankSelected: null,
+			})
+		}
+	}
+	const handleRemoveOneAsrClick = () => {
+		if(vostype.recent && state.asrSelected) {
+			dispatch(removeAssignedRanks({
+				ids: [state.asrSelected]
+			}));
+			setState({
+				...state,
+				asrSelected: null,
+			})
+		}
+	}
+	const handleRemoveAllAsrClick = () => {
+		if(vostype.recent && assigned_ranks.length > 0) {
+			dispatch(removeAssignedRanks({
+				ids: assigned_ranks.map(rank => (rank.id))
+			}));
+			setState({
+				...state,
+				asrSelected: null,
+			})
+		}
 	}
 	return <React.Fragment>
 		<Grid container spacing={2} className="h-full w-full">	
 			<Grid item xs={12} md={6} className="flex">
 				<TableContainer component={Paper} className="">
-					<TableVesselOperation rows={rows} columns={columns} />
+					<TableVesselOperation rows={vostypes} columns={vostypeCol} onRowClick={handleSelectVosType} />
 				</TableContainer>
 			</Grid>	
-			<Grid item xs={12} md={6} className="flex">
+			{
+				vostype.recent && <Grid item xs={12} md={6} className="flex">
 				<TableContainer component={Paper} className="flex">
 					<TableContainer className="w-full">
 						<Table>
@@ -99,9 +181,9 @@ function BodyContent(props) {
 							</TableHead>
 							<TableBody>
 								{
-									rank_rows && rank_rows.map((row, index)=>
-									<TableRow key={index} hover className={classes.tablerow}>
-										<TableCell className="p-6 border border-gray-200" >row</TableCell>
+									state.ranks && state.ranks.map((row, index)=>
+									<TableRow key={index} hover className={row.id == state.rankSelected ? classes.selectedRow : ""} onClick={event => handleRankSelect(row)}>
+										<TableCell className="p-6 border border-gray-200">{row.PR_DESCR}</TableCell>
 									</TableRow>)
 								}
 							</TableBody>
@@ -111,12 +193,12 @@ function BodyContent(props) {
 						<div className="w-full flex items-end">
 							<div className="w-full">
 								<div className="justify-center w-full flex">
-									<IconButton>
+									<IconButton onClick={event => handleOneAssignClick()}>
 										<ArrowForwardIos />
 									</IconButton>	
 								</div>	
 								<div className="w-full justify-center flex">
-									<IconButton>
+									<IconButton onClick={event => handleAllAssignClick()}>
 										<DoubleArrow />
 									</IconButton>
 								</div>
@@ -125,12 +207,12 @@ function BodyContent(props) {
 						<div className="w-full">
 							<div className="w-full">
 								<div className="justify-center w-full flex">
-									<IconButton>
+									<IconButton onClick={event => handleRemoveOneAsrClick()}>
 										<ArrowForwardIos style={{transform: "scaleX(-1)"}} />
 									</IconButton>	
 								</div>	
 								<div className="w-full justify-center flex">
-									<IconButton>
+									<IconButton onClick={event => handleRemoveAllAsrClick()}>
 										<DoubleArrow style={{transform: "scaleX(-1)"}} />
 									</IconButton>
 								</div>
@@ -146,9 +228,9 @@ function BodyContent(props) {
 							</TableHead>
 							<TableBody>
 								{
-									rank_rows && rank_rows.map((row, index)=>
-									<TableRow key={index} hover className={classes.tablerow}>
-										<TableCell className="p-6 border border-gray-200" >row</TableCell>
+									assigned_ranks && assigned_ranks.map((row, index)=>
+									<TableRow key={index} hover className={row.id == state.asrSelected ? classes.selectedRow : ""} onClick={() => handleAsrSelect(row)} >
+										<TableCell className="p-6 border border-gray-200" >{row.rank ? row.rank.PR_DESCR : ""}</TableCell>
 									</TableRow>)
 								}
 							</TableBody>
@@ -156,6 +238,7 @@ function BodyContent(props) {
 					</TableContainer>
 				</TableContainer>
 			</Grid>
+			}
 		</Grid>
 	</React.Fragment>
 }

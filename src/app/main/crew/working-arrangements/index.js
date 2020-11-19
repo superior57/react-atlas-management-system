@@ -3,13 +3,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import BodyContent from './BodyContent';
 import HeaderContent from './HeaderContent';
+import { getVessels } from "app/main/crew/details/store";
+import { useDispatch } from "react-redux";
+import { getCrewTransRH } from '../store/workingarrSlice';
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
 }));
 
 function WorkingArrangementsPage(props) {
+	const dispatch = useDispatch();
 	const classes = useStyles(props);
+	React.useEffect(() => {
+		dispatch(getVessels());
+		dispatch(getCrewTransRH())
+	}, [dispatch])
 	return (
 		<FusePageSimple
 			classes={{

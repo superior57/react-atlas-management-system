@@ -25,49 +25,49 @@ function BodyContent(props) {
 
 	return <React.Fragment>
 		<Grid container spacing={1}>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<TableCard 
 					title="Unread PMS WO Acklq"
 					columns={columns}
 					rows={rows}
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<TableCard 
 					title="Work Orders last 7days"
 					columns={work_order_last_7days_columns}
 					rows={work_order_last_7days_rows}
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<TableCard 
 					title="Work Orders last 30days"
 					columns={work_order_last_7days_columns}
 					rows={work_order_last_7days_rows}
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<TableCard 
 					title="Last Sync from vessel"
 					columns={last_sync_from_vessel_columns}
 					rows={last_sync_from_vessel_rows}
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<TableCard 
 					title="new Requisition(s) from vessel"
 					columns={new_requisition_columns}
 					rows={new_requisition_rows}
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<TableCard 
 					title="Stores Action Status"
 					columns={stores_action_status_columns}
 					rows={stores_action_status_rows}
 				/>
 			</Grid>			
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<BarChartCard 
 					title="Stores Action Status"
 					label="Cases"
@@ -78,7 +78,7 @@ function BodyContent(props) {
 					}}				
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<BarChartCard 
 					title="Vessel Certificates Expiring next two (2) Months."
 					label="Vessel Certs"
@@ -88,7 +88,7 @@ function BodyContent(props) {
 					}}			
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<NotesCard 
 					title="Noets (3)"
 					rows={[
@@ -98,7 +98,7 @@ function BodyContent(props) {
 					]}
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<BarChartCard 
 					title="Crew Certificates Expiring next two (2) Months"
 					label="Crew Certs"
@@ -108,14 +108,14 @@ function BodyContent(props) {
 					}}			
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<CollapseTableCard 
 					title="Crew Certificates Expiring next two (2) Months"
 					columns={crew_certs_next2months_columns}
 					rows={crew_certs_next2months_rows}
 				/>
 			</Grid>
-			<Grid item xs={6} md={3} className="p-16">
+			<Grid item xs={12} md={3} className="p-16">
 				<CollapseTableCard 
 					title="Vessel Certificates Expiring next two (2) Months"
 					columns={vessel_certs_next2months_columns}

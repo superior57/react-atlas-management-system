@@ -1,6 +1,11 @@
 import React,{ } from "react";
-import { Table, TableHead, TableBody, TableRow, TableCell, TableFooter } from "@material-ui/core";
+import { Table, TableHead, TableBody, TableRow, TableCell, TableFooter, Select, MenuItem, Checkbox } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { isEmpty } from "app/functions";
+import {hours} from "./demoData";
+import { updateCrewTransRHValue } from "../store/workingarrSlice";
+import { useDispatch } from "react-redux";
+import { header_keys } from "./demoData";
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -11,76 +16,150 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.action.hover,
         },
     },
+    selectedRow: {
+        backgroundColor: theme.palette.action.hover,
+    }
 }));
 
-const hours = [
-    "00",
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-]
+
+
+const SelectValue = (props) => {
+    const { value, name, row_id } = props;
+    const [state, setState] = React.useState(value);
+    const dispatch = useDispatch();
+
+    const handleChange = (event) => {
+        dispatch(updateCrewTransRHValue({
+            id: row_id,
+            [name]: event.target.value
+        }))
+        setState(event.target.value);        
+    }
+
+    return <>
+        <Select
+            value={state}
+            onChange={handleChange}
+            name={name}
+            size="small"            
+        >
+            <MenuItem value="">
+                <em>None</em>
+            </MenuItem>
+            <MenuItem value='w' >W</MenuItem>
+            <MenuItem value='r' >R</MenuItem>
+        </Select>
+    </>
+}
 
 const CTableRow = (props) => {
-    const {row} = props;
-    const temp_loop = [1, 2, 3]
+    const {row, columns, onRowClick, selectedRow} = props;
+    var data_cnt = row.data.length;
     const classes = useStyles();
-    return <React.Fragment>
-        <TableRow hover className={classes.tablerow}>
-            <TableCell className="border border-gray-200 p-4" align="center" rowSpan={4}>        
-            </TableCell> 
-            <TableCell className="border border-gray-200 p-4" align="center" rowSpan={4}> 
-                {row.name}     
-            </TableCell>
-            <TableCell className="border border-gray-200 p-4" align="center" rowSpan={4}> 
-                {row.rank}       
-            </TableCell>     
-            {
-                row.data[0].map((item, index) => 
-                <TableCell className={`border border-gray-200 p-4 ${index < 2 ? "font-bold" : ""}`} align="center" key={index} style={{color: `${index == 1 ? "blue" : ""}`}}>  
-                    {item}
-                </TableCell>)
-            } 
-        </TableRow>
-        {
-            temp_loop.map((item, index) => 
-            <TableRow hover className={classes.tablerow} key={index}>  
-            {
-                row.data[item].map((item, index) => 
-                <TableCell className={`border border-gray-200 p-4 ${index < 2 ? "font-bold" : ""}`} align="center" key={index} style={{color: `${index == 1 ? "blue" : ""}`}}>  
-                    {item}
-                </TableCell>)
-            }         
-            </TableRow>)
-        }
+    const [state, setState] = React.useState(false)
 
+    return <React.Fragment>
+        {
+            row.data && row.data.map((row_data, row_i) => (
+                <TableRow hover className={selectedRow == row_data.id ? classes.selectedRow : ""} key={row_i} onClick={event => onRowClick(row_data)}>
+                    {
+                        columns && columns.map((col, col_i) => {
+                            switch(col_i) {
+                                case 0: if(row_i == 0) {
+                                        return (
+                                            <TableCell 
+                                                className="border border-gray-200 p-4" 
+                                                align="center" 
+                                                rowSpan={data_cnt}
+                                                key={col_i}
+                                            > 
+                                                {row[`${col.field}`]}     
+                                            </TableCell>)
+                                    };break;
+                                case 1: if(row_i == 0) {
+                                        return (
+                                            <TableCell 
+                                                className="border border-gray-200 p-4" 
+                                                align="center" 
+                                                rowSpan={data_cnt}
+                                                key={col_i}
+                                            > 
+                                                {row[`${col.field}`]}     
+                                            </TableCell>)
+                                    };break;
+                                case 2: if(row_i == 0) {
+                                        return (
+                                            <TableCell 
+                                                className="border border-gray-200 p-4" 
+                                                align="center" 
+                                                rowSpan={data_cnt}
+                                                key={col_i}
+                                            > 
+                                                {row[`${col.field}`]}     
+                                            </TableCell>)
+                                    };break;
+                                case 3: return (
+                                    <TableCell 
+                                        className="border border-gray-200 p-4" 
+                                        align="center" 
+                                        key={col_i}
+                                    > 
+                                        <Checkbox 
+                                            checked={row_data[`${col.field}`] == "1"}
+                                            size="small"
+                                        />     
+                                    </TableCell>)
+                                case 4: return (
+                                    <TableCell 
+                                        className="border border-gray-200 p-4" 
+                                        align="center" 
+                                        key={col_i}
+                                    >    
+                                        {row_data[`${col.field}`]}  
+                                    </TableCell>)
+                                default: return (
+                                    <TableCell 
+                                        className="border border-gray-200 p-4" 
+                                        align="center" 
+                                        key={col_i}
+                                    > 
+                                        <SelectValue 
+                                            value={isEmpty(row_data[`${col.field}`])}
+                                            name={`${col.field}`}
+                                            row_id={row_data.id}
+                                        />    
+                                    </TableCell>)
+                            }
+                        })
+                    }
+                </TableRow>
+            ))
+        }
     </React.Fragment>
     
 };
 
 const TableSchedule = (props) => {
     const classes = useStyles();
-    const { rows, columns } = props;
-
+    const { state, setState, columns } = props;
+    const rows = state.rows;
+    // const [state, setState] = React.useState({
+    //     selectedRow: null,
+    //     workingHours: 0
+    // })
+    const handleRowSelect = (row) => {
+        var workingHours = 0;
+        header_keys.map(h => {
+            if(row[h] == "w") {
+                workingHours += 0.5
+            }
+        });
+        setState({
+            ...state,
+            selectedRow: row.id,
+            workingHours
+        })
+    }
     return <React.Fragment>
         <Table className={classes.table} size="small" aria-label="Retention Rate Table">
             <TableHead>
@@ -108,22 +187,7 @@ const TableSchedule = (props) => {
             <TableBody>
                 {
                     rows && rows.map((row, index) =>
-                    // <TableRow key={index} hover className={classes.tablerow}>
-                    //     {
-                    //         columns && columns.map((col, col_index) => {
-                    //             if(col_index > 4 && col_index <= 52) {
-                    //                 return <TableCell key={col_index} align="center" className={`border border-gray-200 p-4 ${row.data[col_index -5].value == "W" ? "font-bold" : ""} ${row.data[col_index - 5].color}`}>
-                    //                 {row.data[col_index - 5].value}
-                    //             </TableCell>
-                    //             } else {
-                    //                 return <TableCell rowSpan={4} key={col_index} align={col.align} className="border border-gray-200 p-4">
-                    //                     {row[`${col.field}`]}
-                    //                 </TableCell>
-                    //             }
-                    //         })
-                    //     }       
-                    // </TableRow>
-                    <CTableRow row={row} key={index} />
+                        <CTableRow row={row} key={index} columns={columns} onRowClick={handleRowSelect} selectedRow={state.selectedRow} />
                     )
                 }
             </TableBody>

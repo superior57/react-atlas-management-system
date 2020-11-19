@@ -37,7 +37,7 @@ const columns = [
 		width: 230,
 		renderCell: (params) => {
 			const url = params.value;
-			return url ? <Link href={url}>Download File</Link> : <Typography variant="subtitle2" >No File</Typography>
+			return url ? <Link href={url} target="blank" >Download File</Link> : <Typography variant="subtitle2" >No File</Typography>
 		}
 	},
 ];
@@ -57,7 +57,7 @@ function BodyContent(props) {
 					vessel_name: appraisal.vessel ? appraisal.vessel.VESSEL_NAME : "",
 					employment_status: appraisal.employ_status ? appraisal.employ_status.ES_DESCR : "",		
 					type: appraisal.CA_TYPE == 1 ? "Appraisal" : appraisal.CA_TYPE == 2 ? "Discharge" : "",
-					file: getImageURL(appraisal.CA_FILENAME),
+					file: appraisal.CA_FILENAME ? getImageURL(appraisal.CA_FILENAME) : "",
 				}))
 			})
 		}

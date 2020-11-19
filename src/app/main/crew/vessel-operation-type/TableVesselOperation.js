@@ -11,12 +11,26 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.action.hover,
         },
     },
+    selectedRow: {
+        backgroundColor: theme.palette.action.hover,
+    }
 }));
 
 
 const TableVesselOperation = (props) => {
     const classes = useStyles();
-    const { rows, columns } = props;
+    const { rows, columns, onRowClick } = props;
+    const [state, setState] = React.useState({
+        selectedRow: null
+    })
+
+    const handleRowClick = (row) => {
+        onRowClick(row);
+        setState({
+            ...state,
+            selectedRow: row.id
+        });
+    }
 
     return <React.Fragment>
         <Table className={classes.table} size="small" aria-label="Retention Rate Table">
@@ -33,10 +47,10 @@ const TableVesselOperation = (props) => {
             <TableBody>
                 {
                     rows && rows.map((row, index) =>
-                    <TableRow key={index} hover className={classes.tablerow}>
+                    <TableRow key={index} hover className={row.id == state.selectedRow ? classes.selectedRow : "" } onClick={event => handleRowClick(row)} >
                         {
                             columns && columns.map((col, col_index) =>{
-                                if(col.field == "color") 
+                                if(col.color) 
                                     return <TableCell key={col_index} align={col.align} className="border border-gray-200" style={{backgroundColor: `${row[`${col.field}`]}`}}>
                                     </TableCell>
                                 else

@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-
 import { 
 	Container, 
 	Paper, 
@@ -17,6 +16,8 @@ import React, {	useState } from 'react';
 import clsx from "clsx";
 import { Search } from "@material-ui/icons";
 import { months } from 'moment';
+import { useDispatch, useSelector } from "react-redux";
+import { filterCrewTransRH } from "../store/workingarrSlice";
 
 const MONTHS= [
 	"JAN",
@@ -65,10 +66,10 @@ function isEmpty(value) {
 }
 
 function HeaderContent(props) {
-	// console.log(props);
+	const { vessels } = useSelector(state => state.crewApp.crew_details);
 	const [state, setState] = useState({});
-
 	const classes = useStyles(props);
+	const dispatch = useDispatch();
 
 	const handleChange = (e) => {
 		setState({
@@ -80,7 +81,12 @@ function HeaderContent(props) {
 		"2020",
 		"2021"
 	];
-
+	const handleSearch = () => {
+		dispatch(filterCrewTransRH({
+			vessel: state.vessel
+		}));
+		
+	}
 	return <React.Fragment>
 		<TableContainer component={Paper} className="flex w-full">
 			<div className="flex px-24 py-16 items-center w-full">
@@ -98,8 +104,9 @@ function HeaderContent(props) {
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
-								<MenuItem value={1}>Item 1</MenuItem>
-								<MenuItem value={2}>Item 1</MenuItem>
+								{
+									vessels.list && vessels.list.map((vessel, index) => (<MenuItem value={vessel.id} key={index}>{vessel.VESSEL_NAME}</MenuItem>))
+								}
 							</Select>
 						</FormControl>
 					</div>
@@ -108,6 +115,7 @@ function HeaderContent(props) {
 						color="primary"
 						size="small"
 						className="mb-8 mr-5"
+						onClick={handleSearch}
 					>
 						<Search />
 						Search

@@ -7,8 +7,52 @@ import { setUserData } from './userSlice';
 export const submitLogin = ({ email, password }) => async dispatch => {
 	return jwtService
 		.signInWithEmailAndPassword(email, password)
-		.then(user => {
-			dispatch(setUserData(user));
+		.then(user => {		
+			
+			const user_data = {
+				uuid: user.uuid,
+				from: 'custom-db',
+				// password: 'admin',
+				role: 'admin',
+				data: {
+					displayName: '',
+					photoURL: '',
+					email: user.email,
+					settings: {
+						layout: {
+							style: 'layout1',
+							config: {
+								scroll: 'content',
+								navbar: {
+									display: true,
+									folded: false,
+									position: 'left'
+								},
+								toolbar: {
+									display: true,
+									style: 'fixed',
+									position: 'below'
+								},
+								footer: {
+									display: true,
+									style: 'fixed',
+									position: 'below'
+								},
+								mode: 'fullwidth'
+							}
+						},
+						customScrollbars: true,
+						theme: {
+							main: 'light5',
+							navbar: 'light5',
+							toolbar: 'light5',
+							footer: 'light5'
+						}
+					},
+					shortcuts: ['calendar', 'mail', 'contacts']
+				}
+			}
+			dispatch(setUserData(user_data));
 
 			return dispatch(loginSuccess());
 		})

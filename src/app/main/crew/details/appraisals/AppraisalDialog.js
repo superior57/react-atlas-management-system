@@ -32,7 +32,7 @@ const AppraisalDialog = (props) => {
                 setState({
                     ...appraisals,
                     CA_VESSEL_CODE: appraisals.vessel ? appraisals.vessel.id : "",
-					employment_status: appraisals.employ_status ? appraisals.employ_status.id : "",		
+                    CA_EMPLOY_STATUS: appraisals.employ_status ? appraisals.employ_status.id : "",		
                 });
             }
         } else {

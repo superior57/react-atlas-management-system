@@ -68,7 +68,7 @@ function BodyContent(props) {
 			headerName: "File",
 			width: 130,
 			renderCell: (param) => {
-				return param ? <Link href={param}>Download File</Link> : <Typography variant="subtitle2" >No File</Typography>
+				return param ? <Link href={param} target="blank" >Download File</Link> : <Typography variant="subtitle2" >No File</Typography>
 			}
 		},
 		{
